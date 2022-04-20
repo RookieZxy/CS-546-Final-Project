@@ -1,7 +1,7 @@
 {
   "name": "cs-546-final-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "This our Final Project of CS 546 in SIT.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RookieZxy/CS-546-Final-Project.git"
+    "url": "https://github.com/RookieZxy/CS-546-Final-Project.git"
   },
-  "author": "??",
+  "author": "Junjie Chen, Xiangyu Zhou, An Sun, Yuankai Ma, Ming Tang",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/RookieZxy/CS-546-Final-Project/issues"
   },
-  "homepage": "https://github.com/RookieZxy/CS-546-Final-Project#readme",
+  "homepage": "https://github.com/RookieZxy/CS-546-Final-Project",
   "dependencies": {
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
