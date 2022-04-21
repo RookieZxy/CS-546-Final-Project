@@ -24,11 +24,20 @@ function checkPassword(p) {
         throw `${password} is not a string`
     if (password.indexOf(" ") != -1)
         throw 'password should not have spaces'
-    if (password.length < 8)
+    if (password.length < 6)
         throw 'password should not be empty spaces and should be at least 6 characters'
     if (password.length > 16)
         throw 'The length of password should not be more than 16'   
 }
+
+router.get('/', async (req, res) => {
+    // if (req.session.user) {
+    //     return res.redirect('/private');
+    // }
+    res.render('users/login', {
+        login_flag: 'login'
+    })
+});
 
 router.post('/', async (req, res) => {
     try {

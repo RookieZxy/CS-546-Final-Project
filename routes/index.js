@@ -1,5 +1,6 @@
 const movieRoutes = require("./movieRoutes");
 const loginRoutes = require('./loginRoutes');
+const signupRoutes = require('./signupRoutes');
 const path = require('path');
 
 const constructorMethod = (app) => {
@@ -16,11 +17,12 @@ const constructorMethod = (app) => {
     // if(req.session.user){
     //   return res.redirect('/home');
     // }
-    res.render('users/index', {document_title: 'login'});
+    res.render('users/login', {document_title: 'login'});
   })
 
   //login
   app.use('/login', loginRoutes);
+  app.use('/signup', signupRoutes);
 };
 
 module.exports = constructorMethod;

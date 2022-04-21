@@ -25,7 +25,7 @@ async function createUser(username, password, firstName, lastName) {
         throw `${password} is not a string`
     if (password.indexOf(" ") != -1)
         throw `password shouln'd have spaces`
-    if (password.length < 8)
+    if (password.length < 6)
         throw `password shouldn't be empty spaces and should be at least 6 characters`
     if (password.length > 16)
         throw `password shouldn't be more than 16 characters`
@@ -52,6 +52,8 @@ async function createUser(username, password, firstName, lastName) {
         lastName: lastName,
     }
 
+    console.log(newuser);
+
     const insertInfo = await userCollection.insertOne(newuser);
     if (insertInfo.insertedCount == 0)
         throw `Could not add a new user`
@@ -77,8 +79,8 @@ async function checkUser(account, password) {
         throw `${username} is not a string`
     if(password.length == 0)
         throw `password shouldn't be empty spaces`;
-    if(password.length < 8 || password.length > 16)
-        throw `password should be at least 8 characters and do not more than 16`;
+    if(password.length < 6 || password.length > 16)
+        throw `password should be at least 6 characters and do not more than 16`;
     
     // let hasPwd = bcryptjs.hashSync(password, 10);
     const userCollection = await getAllUser();

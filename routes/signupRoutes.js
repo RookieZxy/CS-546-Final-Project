@@ -24,13 +24,10 @@ function checkPassword(password) {
         throw `${password} is not a string`
     if (password.indexOf(" ") != -1)
         throw `password shouln'd have spaces`
-    if (password.length < 8)
+    if (password.length < 6)
         throw `password shouldn't be empty spaces and should be at least 6 characters`
     if (password.length > 16)
         throw `password shouldn't be more than 16 characters`
-
-    if (typeof firstName !== 'string' || typeof lastName !== 'string')
-        throw `firstName and lastName should be string`;
 }
 
 function checkName(firstName, lastName) {
@@ -54,13 +51,18 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        if (!req.body || !req.body.account || !req.body.password || !req.body.firstname || !req.body.lastname)
+        console.log(req.body.account);
+        console.log(req.body.confirm);
+        console.log(req.body.password);
+        if (!req.body || !req.body.account || !req.body.confirm|| !req.body.password || !req.body.firstname || !req.body.lastname)
             throw 'Missing username or password'
+        if (!req.body.password != !req.body.confirm)
+            throw `The two passwords are inconsistent`;
         checkAccount(req.body.account);
         checkPassword(req.body.password);
         checkName(req.body.firstname, req.body.lastname)
 
-        const isAdmin = false;
+
         const newUser = await usersData.createUser(
             req.body.account,
             req.body.password,
@@ -69,13 +71,13 @@ router.post('/', async (req, res) => {
         );
 
         if (newUser.userInserted == true)
-            res.redirect('/');
+            res.redirect('/users/login');
         else
             res.status(500).send({
                 message: 'Internal Server Error'
             })
     } catch (e) {
-        res.status(400).render('signup', {
+        res.status(400).render('users/signup', {
             login_flag: 'signup',
             status: 'HTTP 400',
             error: e
