@@ -2,5 +2,8 @@
     "mongoConfig": {
         "serverUrl": "mongodb://localhost:27017",
         "database": "CS546_A_GROUP_13"
+    },
+    "imdb": {
+        "apiKey": "k_o8ajco4w"
     }
 }
