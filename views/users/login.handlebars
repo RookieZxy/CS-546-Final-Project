@@ -1,0 +1,14 @@
+<h1>Login</h1>
+<form action = "/login" method = "POST" id = "login-form">
+    <label for = "username">user name</label>
+    <input type = "text" name = "username" id = "username" >
+    <label for = "password" >password</label>
+    <input type = "password" name = "password" id = "password">
+    <button type="Submit" class="button">Submit</button>
+</form>
+
+<a href="/signup">Click here to sign-up</a>
+
+{{#if error}}
+    <p class = "error_info">{{error}}</p>
+{{/if}}
