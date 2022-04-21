@@ -51,13 +51,11 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        console.log(req.body.account);
-        console.log(req.body.confirm);
-        console.log(req.body.password);
         if (!req.body || !req.body.account || !req.body.confirm|| !req.body.password || !req.body.firstname || !req.body.lastname)
             throw 'Missing username or password'
-        if (!req.body.password != !req.body.confirm)
+        if (req.body.password != req.body.confirm)
             throw `The two passwords are inconsistent`;
+
         checkAccount(req.body.account);
         checkPassword(req.body.password);
         checkName(req.body.firstname, req.body.lastname)
@@ -67,16 +65,18 @@ router.post('/', async (req, res) => {
             req.body.account,
             req.body.password,
             req.body.firstname,
-            rea.body.lastname,
+            req.body.lastname,
         );
 
+        console.log(newUser);
         if (newUser.userInserted == true)
-            res.redirect('/users/login');
+            res.redirect('/login');
         else
             res.status(500).send({
                 message: 'Internal Server Error'
             })
     } catch (e) {
+        console.log(e);
         res.status(400).render('users/signup', {
             login_flag: 'signup',
             status: 'HTTP 400',

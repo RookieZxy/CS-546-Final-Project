@@ -17,9 +17,10 @@ const constructorMethod = (app) => {
     // if(req.session.user){
     //   return res.redirect('/home');
     // }
-    res.render('users/login', {document_title: 'login'});
+    res.render('home/home', {document_title: 'login'});
   })
 
+  
   //login
   app.use('/login', loginRoutes);
   app.use('/signup', signupRoutes);

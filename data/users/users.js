@@ -40,12 +40,12 @@ async function createUser(username, password, firstName, lastName) {
     let hasPwd = await bcryptjs.hash(password, 10);
     const userCollection = await users();
 
-    let check = await userCollection.findOne({account: account});
+    let check = await userCollection.findOne({account: username});
     if(check != null)
-        throw `${account} is existed, please change the username`
+        throw `${username} is existed, please change the username`
 
     let newuser = {
-        account: account,
+        account: username,
         password: hasPwd,
         isAdmin: false,
         firstName: firstName,
@@ -69,21 +69,21 @@ async function checkUser(account, password) {
         throw `account and password should not be empty!`
     if(account.length == 0)
         throw `account shouldn't be empty spaces`;
-    if (typeof username !== 'string')
-        throw `${username} is not a string`
+    if (typeof account !== 'string')
+        throw `${account} is not a string`
     if(account.length < 4 || account.length > 16)
         throw `account should be at least 4 characters and do not more than 16`;
     
     password = password.trim();
-    if (typeof username !== 'string')
-        throw `${username} is not a string`
+    if (typeof password !== 'string')
+        throw `${password} is not a string`
     if(password.length == 0)
         throw `password shouldn't be empty spaces`;
     if(password.length < 6 || password.length > 16)
         throw `password should be at least 6 characters and do not more than 16`;
     
     // let hasPwd = bcryptjs.hashSync(password, 10);
-    const userCollection = await getAllUser();
+    const userCollection = await users();
 
     let userInfo = await userCollection.findOne({account: account});
     if(userInfo == null)
