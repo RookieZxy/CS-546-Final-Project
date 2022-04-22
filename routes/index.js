@@ -21,10 +21,18 @@ const constructorMethod = (app) => {
     res.render('home/home', {document_title: 'home'});
   })
 
+  //log out
+  app.get('/logout', async (req, res) => {
+    req.session.destroy();
+    res.clearCookie('AuthCookie');
+    res.render('home/home', {login_flag: 'logout'});
+  });
   
   //login
   app.use('/login', loginRoutes);
+  //home page
   app.use('/home', homeRoutes);
+  //sign up
   app.use('/signup', signupRoutes);
 };
 
