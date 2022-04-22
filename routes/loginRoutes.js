@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
             // req.session.user = {
             //     account: req.body.account
             // };
-            res.redirect('../home');
+            res.redirect('/home');
         }
     } catch (e) {
         console.log(e);
