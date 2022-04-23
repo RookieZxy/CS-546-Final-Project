@@ -1,5 +1,6 @@
 const mongoConnections = require("../config/mongoCollections");
 const mongoConnection = require("../config/mongoConnection");
+const movieData = require("../data/movie/movie");
 const { ObjectId } = require("mongodb");
 
 async function main() {
@@ -11,6 +12,7 @@ async function main() {
   const db = await mongoConnection.connectToDb();
   await db.dropDatabase();
 
+  //user
   const user1 = {
     account: "mayuankai",
     password: "123123",
@@ -52,67 +54,30 @@ async function main() {
   await users.insertOne(user4);
   await users.insertOne(user5);
 
-  const movie1 = {
-    IMDBid: "123123123",
-    rate: 9.3,
-    date: new Date("<1994-10-14>"),
-    type: ["123123123"],
-    name: "The Shawshank Redemption",
-    casts: ["Tim Robbins", "Morgan Freeman", "Bob Gunton"],
-    director: "Frank Darabont",
-    introduce:
-      "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-  };
-  const movie2 = {
-    IMDBid: "123123123",
-    rate: 9.2,
-    date: new Date("<1972-10-14>"),
-    type: ["123123123"],
-    name: "The Godfather",
-    casts: ["Marlon Brando", "Al Pacino", "James Caan"],
-    director: "Francis Ford Coppola",
-    introduce:
-      "The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.",
-  };
-  const movie3 = {
-    IMDBid: "123123123",
-    rate: 9.3,
-    date: new Date("<2008-10-14>"),
-    type: ["123123123"],
-    name: "The Dark Knight",
-    casts: ["Christian Bale", "Heath Ledger", "Aaron Eckhart"],
-    director: "Christopher Nolan",
-    introduce:
-      "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
-  };
-  const movie4 = {
-    IMDBid: "123123123",
-    rate: 8.6,
-    date: new Date("<1977-10-14>"),
-    type: ["123123123"],
-    name: "Star Wars",
-    casts: ["Mark Hamill", "Harrison Ford"],
-    director: "eorge Lucas",
-    introduce:
-      "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
-  };
-  const movie5 = {
-    IMDBid: "123123123",
-    rate: 9.0,
-    date: new Date("<1957-10-14>"),
-    type: ["123123123"],
-    name: "12 Angry Men",
-    casts: ["Martin Balsam", "John Fiedler"],
-    director: "Sidney Lumet",
-    introduce:
-      "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
-  };
-  await movies.insertOne(movie1);
-  await movies.insertOne(movie2);
-  await movies.insertOne(movie3);
-  await movies.insertOne(movie4);
-  await movies.insertOne(movie5);
+  //movie
+  const movie1 = await movieData.queryFromImdb("tt0111161");
+  const movie2 = await movieData.queryFromImdb("tt2948356");
+  const movie3 = await movieData.queryFromImdb("tt6966692");
+  const movie4 = await movieData.queryFromImdb("tt0110413");
+  const movie5 = await movieData.queryFromImdb("tt0120338");
+  const movie6 = await movieData.queryFromImdb("tt0120382");
+  const movie7 = await movieData.queryFromImdb("tt0817177");
+  const movie8 = await movieData.queryFromImdb("tt1375666");
+  const movie9 = await movieData.queryFromImdb("tt0816692");
+  const movie10 = await movieData.queryFromImdb("tt1877830");
 
+  await movieData.add(movie1);
+  await movieData.add(movie2);
+  await movieData.add(movie3);
+  await movieData.add(movie4);
+  await movieData.add(movie5);
+  await movieData.add(movie6);
+  await movieData.add(movie7);
+  await movieData.add(movie8);
+  await movieData.add(movie9);
+  await movieData.add(movie10);
+
+  //comment
   const comment1 = {
     userId: "123123123",
     movieId: "123123123",
@@ -124,6 +89,7 @@ async function main() {
   };
   await comments.insertOne(comment1);
 
+  //type
   const types = [
     {
       name: "Comedy",
