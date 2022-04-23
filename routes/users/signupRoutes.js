@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const data = require('../data');
+const data = require('../../data');
 const usersData = data.users;
 
 function checkAccount(username) {
@@ -41,9 +41,9 @@ function checkName(firstName, lastName) {
 
 
 router.get('/', async (req, res) => {
-    // if (req.session.user) {
-    //     return res.redirect('/private');
-    // }
+    if (req.session.user) {
+        return res.redirect('/home');
+    }
     res.render('users/signup', {
         login_flag: 'signup'
     })

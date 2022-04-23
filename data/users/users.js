@@ -2,7 +2,9 @@ const mongoCollections = require('../../config/mongoCollections');
 const users = mongoCollections.users
 const bcryptjs = require('bcrypt');
 const axios = require("axios");
+const { hash } = require('bcrypt');
 
+//create a new account
 async function createUser(username, password, firstName, lastName) {
     username = username.trim();
     if (!username || !password)
@@ -62,7 +64,7 @@ async function createUser(username, password, firstName, lastName) {
     }
 }
 
-
+//find whether the user is in database
 async function checkUser(account, password) {
     account = account.trim();
     if(!account || !password)
@@ -82,7 +84,6 @@ async function checkUser(account, password) {
     if(password.length < 6 || password.length > 16)
         throw `password should be at least 6 characters and do not more than 16`;
     
-    // let hasPwd = bcryptjs.hashSync(password, 10);
     const userCollection = await users();
 
     let userInfo = await userCollection.findOne({account: account});
@@ -95,18 +96,35 @@ async function checkUser(account, password) {
         authenticated: true
     }
 }
-async function getAllUser(){
-    try {
-        const { data } = await axios.get(
-            `../../task/seed`
-        );
-        return data;
-    } catch (error) {
-        return error;
-    }
+
+//find the user's information
+async function get(account){
+    account = account.trim();
+    if(!account)
+        throw `account should not be empty!`
+    if(account.length == 0)
+        throw `account shouldn't be empty spaces`;
+    if (typeof account !== 'string')
+        throw `${account} is not a string`
+    if(account.length < 4 || account.length > 16)
+        throw `account should be at least 4 characters and do not more than 16`;
+    
+    const userCollection = await users();
+    let userInfo = await userCollection.findOne({account: account});
+    if(userInfo == null)
+        throw `account is not existed`;
+
+    return userInfo;
+}
+
+//update the information about user
+async function update(account, password, firstName, lastName){
+
 }
 
 module.exports = {
+    get,
+    update,
     createUser,
     checkUser
 }

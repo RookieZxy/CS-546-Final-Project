@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const data = require('../data');
+const data = require('../../data');
 const usersData = data.users;
 
 function checkName(account) {
@@ -31,9 +31,9 @@ function checkPassword(p) {
 }
 
 router.get('/', async (req, res) => {
-    // if (req.session.user) {
-    //     return res.redirect('/private');
-    // }
+    if (req.session.user) {
+        return res.redirect('/home');
+    }
     res.render('users/login', {
         login_flag: 'login'
     })
@@ -51,9 +51,9 @@ router.post('/', async (req, res) => {
             req.body.password
         );
         if (newUser.authenticated == true) {
-            // req.session.user = {
-            //     account: req.body.account
-            // };
+            req.session.user = {
+                account: req.body.account
+            };
             res.redirect('/home');
         }
     } catch (e) {

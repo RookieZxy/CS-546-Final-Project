@@ -1,7 +1,8 @@
 const movieRoutes = require("./movieRoutes");
-const loginRoutes = require('./loginRoutes');
-const signupRoutes = require('./signupRoutes');
+const loginRoutes = require('./users/loginRoutes');
+const signupRoutes = require('./users/signupRoutes');
 const homeRoutes = require('./homeRoutes');
+const usersRoutes = require('./users/usersRoutes');
 const path = require('path');
 
 const constructorMethod = (app) => {
@@ -18,7 +19,7 @@ const constructorMethod = (app) => {
     if(req.session.user){
       return res.redirect('/home');
     }
-    res.render('home/home', {document_title: 'home'});
+    res.render('users/login', {document_title: 'home'});
   })
 
   //log out
@@ -34,6 +35,9 @@ const constructorMethod = (app) => {
   app.use('/home', homeRoutes);
   //sign up
   app.use('/signup', signupRoutes);
+  //get information
+  app.use('/users', usersRoutes);
+
 };
 
 module.exports = constructorMethod;
