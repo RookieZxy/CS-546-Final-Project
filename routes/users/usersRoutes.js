@@ -60,15 +60,9 @@ router.get("/", async (req, res) => {
       checkString('confirmPw', req.body.confirmPw);
       checkString('firstName', updatedData.firstName);
       checkString('lastName', updatedData.lastName);
-      if (confirmPw != password)
-        throw `The inputed two passwords are inconsistent`
-    } catch (e) {
-      res.status(400).json({
-        error: e
-      })
-    }
+      if (req.body.confirmPw != updatedData.password)
+        throw `The inputed two passwords are inconsistent`;
 
-    try {
       const updatedUsers = await usersData.update(req.session.user.account, updatedData.password, updatedData.firstName, updatedData.lastName);
       console.log(updatedUsers);
       if (updatedUsers)
@@ -77,18 +71,16 @@ router.get("/", async (req, res) => {
         res.status(500).send({
           message: 'Internal Server Error'
         })
-
-
       // res.render('users/account', {
       //   user: updatedUsers
       // })
     } catch (e) {
       console.log(e);
-      res.status(400).render('users', {
-      login_flag: 'users',
-      status: 'HTTP 400',
-      error: e
-    })
+      res.status(400).render('users/account', {
+        login_flag: 'users',
+        status: 'HTTP 400',
+        error: e
+      })
     }
   });
 
