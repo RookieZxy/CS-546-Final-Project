@@ -3,16 +3,25 @@
 
 <head>
     <title>Account Information</title>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 </head>
 
 <body>
-<h2 class="heading-section">Account Information</h2>
+    <h2 class="heading-section">Account Information</h2>
 
-<p>{{user.account}}</p>
-<p>{{user.firstName}}</p>
-<p>{{user.lastName}}</p>
+    <p>{{user.account}}</p>
+    <p>{{user.firstName}}</p>
+    <p>{{user.lastName}}</p>
+    <form action="/users" method="post">
+        <input type="password" placeholder="password" name="password" id="password" required>
+        <input type="confirmPw" placeholder="confirm password" name="confirmPw" id="confirmPw" required>
+        <input type="firstName" placeholder="firstName" name="firstName" id="firstName" required>
+        <input type="lastName" placeholder="lastName" name="lastName" id="lastName" required>
+        <button type="submit">Submit</button>
+    </form>
 
+
+    <a href="/home" id = "home">Home</a>
 </body>
 
 </html>

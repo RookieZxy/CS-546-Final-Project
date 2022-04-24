@@ -68,7 +68,7 @@ router.post('/', async (req, res) => {
             req.body.lastname,
         );
 
-        console.log(newUser);
+        // console.log(newUser);
         if (newUser.userInserted == true)
             res.redirect('/login');
         else
