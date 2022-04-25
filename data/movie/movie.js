@@ -24,6 +24,7 @@ async function queryFromImdb(imdbId) {
   movie.rating = 0;
   movie.releaseDate = new Date(data.releaseDate);
   movie.name = data.title;
+  movie.plot = data.plot;
   movie.casts = data.stars;
   movie.directors = data.directors;
   movie.writers = data.writers;
@@ -81,7 +82,7 @@ async function modify(movie) {
 }
 
 async function del(id) {
-  if (!ObjectId.isValid(id)) throw "Invalid ObjectId";
+  id = util.isObjectId(id);
   const moviesCollection = await mongoCollections.movies();
   const movie = await getById(id);
   if (movie === null) {
@@ -107,11 +108,12 @@ async function getTopRated() {
 }
 
 async function getById(id) {
-  if (!ObjectId.isValid(id)) throw "Invalid ObjectId";
+  id = util.isObjectId(id);
   const moviesCollection = await mongoCollections.movies();
   const movie = await moviesCollection.findOne({ _id: ObjectId(id) });
   if (movie === null) throw `No movie with id '${id}'`;
   movie._id = movie._id.toString();
+  movie.releaseDate = new Date(movie.releaseDate);
   return movie;
 }
 
@@ -130,6 +132,7 @@ async function getByName(name) {
   for (let i = 0; i < movies.length; i++) {
     const movie = movies[i];
     movie._id = movie._id.toString();
+    movie.releaseDate = new Date(movie.releaseDate);
   }
 
   return movies;
@@ -141,13 +144,14 @@ async function getByImdbId(imdbId) {
   const movie = await moviesCollection.findOne({ imdbId: imdbId });
   if (movie === null) throw `No movie with imdbId '${imdbId}'`;
   movie._id = movie._id.toString();
+  movie.releaseDate = new Date(movie.releaseDate);
   return movie;
 }
 
 async function getSimilar(id) {}
 
 async function changeValidation(id, isValid) {
-  if (!ObjectId.isValid(id)) throw "Invalid ObjectId";
+  id = util.isObjectId(id);
 
   const movie = await getById(id);
   movie.isValid = isValid;
@@ -157,7 +161,7 @@ async function changeValidation(id, isValid) {
 
 async function updateRating(id, rating) {
   util.isValidRating(rating);
-  if (!ObjectId.isValid(id)) throw "Invalid ObjectId";
+  id = util.isObjectId(id);
 
   const movie = await getById(id);
   movie.rating = rating;
