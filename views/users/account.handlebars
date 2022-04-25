@@ -13,10 +13,11 @@
     <p>{{user.firstName}}</p>
     <p>{{user.lastName}}</p>
     <form action="/users" method="post">
-        <input type="password" placeholder="password" name="password" id="password" required>
-        <input type="confirmPw" placeholder="confirm password" name="confirmPw" id="confirmPw" required>
-        <input type="firstName" placeholder="firstName" name="firstName" id="firstName" required>
-        <input type="lastName" placeholder="lastName" name="lastName" id="lastName" required>
+        <input type="prepassword" placeholder="previous password" name="prepassword" id="prepassword" required>
+        <input type="password" placeholder="new password" name="password" id="password" required>
+        <input type="confirmPw" placeholder="confirm new password" name="confirmPw" id="confirmPw" required>
+        <input type="firstName" placeholder="firstName" name="firstName" id="firstName">
+        <input type="lastName" placeholder="lastName" name="lastName" id="lastName">
         <button type="submit">Submit</button>
     </form>
 

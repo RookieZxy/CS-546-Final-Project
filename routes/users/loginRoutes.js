@@ -52,9 +52,11 @@ router.post('/', async (req, res) => {
             req.body.password
         );
         if (newUser.authenticated == true) {
-            req.session.user = {
-                account: req.body.account
-            };
+            if(req.body.check){
+                req.session.user = {
+                    account: req.body.account
+                };
+            }
             res.redirect('/home');
         }
     } catch (e) {

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../../data');
 const usersData = data.users;
+const bcryptjs = require('bcrypt');
 
 function checkString(name, str) {
   if (typeof str != 'string')
@@ -40,52 +41,52 @@ router.get("/", async (req, res) => {
       error: e
     })
   }
-
-
-  router.post("/", async (req, res) => {
-    let updatedData = await usersData.get(req.session.user.account);
-    try {
-      if (!req.body.confirmPw && !req.body.password && !req.body.firstName && !req.body.lastName)
-        throw 'Missing Information';
-      if (req.body.password){
-        if(updatedData.password == req.body.password)
-          throw`Please input a different password`;
-        updatedData.password = req.body.password;
-      }
-      if (req.body.firstName)
-        updatedData.firstName = req.body.firstName;
-      if (req.body.lastName)
-        updatedData.lastName = req.body.lastName;
-
-      checkPassword(updatedData.password);
-      checkPassword(req.body.confirmPw);
-      checkString('password', updatedData.password);
-      checkString('confirmPw', req.body.confirmPw);
-      checkString('firstName', updatedData.firstName);
-      checkString('lastName', updatedData.lastName);
-      if (req.body.confirmPw != updatedData.password)
-        throw `The inputed two passwords are inconsistent`;
-
-      const updatedUsers = await usersData.update(req.session.user.account, updatedData.password, updatedData.firstName, updatedData.lastName);
-      console.log(updatedUsers);
-      if (updatedUsers)
-        res.redirect('/users');
-      else
-        res.status(500).send({
-          message: 'Internal Server Error'
-        })
-      // res.render('users/account', {
-      //   user: updatedUsers
-      // })
-    } catch (e) {
-      console.log(e);
-      res.status(400).render('users/account', {
-        login_flag: 'users',
-        status: 'HTTP 400',
-        error: e
-      })
-    }
-  });
-
 });
+
+router.post("/", async (req, res) => {
+  let updatedData = await usersData.get(req.session.user.account);
+  try {
+    if (!req.body.confirmPw || !req.body.password || !req.body.prepassword)
+      throw 'Missing Information';
+    if (req.body.confirmPw != req.body.password)
+      throw `The inputed two passwords are inconsistent`;
+    if (req.body.firstName)
+      updatedData.firstName = req.body.firstName;
+    if (req.body.lastName)
+      updatedData.lastName = req.body.lastName;
+
+    checkPassword(req.body.prepassword);
+    checkPassword(req.body.password);
+    checkPassword(req.body.confirmPw);
+    checkString('prepassword', req.body.prepassword);
+    checkString('password', req.body.password);
+    checkString('confirmPw', req.body.confirmPw);
+    checkString('firstName', updatedData.firstName);
+    checkString('lastName', updatedData.lastName);
+
+    if (!await bcryptjs.compare(req.body.prepassword, updatedData.password))
+      throw `Previous password is not correct`;
+    updatedData.password = req.body.password;
+
+    const updatedUsers = await usersData.update(req.session.user.account, updatedData.password, updatedData.firstName, updatedData.lastName);
+    // console.log(updatedUsers);
+    if (updatedUsers)
+      res.redirect('/users');
+    else
+      res.status(500).send({
+        message: 'Internal Server Error'
+      })
+    // res.render('users/account', {
+    //   user: updatedUsers
+    // })
+  } catch (e) {
+    console.log(e);
+    res.status(400).render('users/account', {
+      login_flag: 'users',
+      status: 'HTTP 400',
+      error: e
+    })
+  }
+});
+
 module.exports = router;

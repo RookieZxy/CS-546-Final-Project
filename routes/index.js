@@ -3,6 +3,7 @@ const loginRoutes = require('./users/loginRoutes');
 const signupRoutes = require('./users/signupRoutes');
 const homeRoutes = require('./homeRoutes');
 const usersRoutes = require('./users/usersRoutes');
+const forgotRoutes = require('./users/forgotRoutes');
 const path = require('path');
 
 const constructorMethod = (app) => {
@@ -43,6 +44,8 @@ const constructorMethod = (app) => {
   app.use('/signup', signupRoutes);
   //get information
   app.use('/users', usersRoutes);
+  //forgoy password
+  app.use('/forgot', forgotRoutes);
 
 };
 

@@ -35,7 +35,19 @@ function isValidRating(rating) {
   return Number(rating.toFixed(1));
 }
 
+function checkPassword(password) {
+  if (typeof password !== 'string')
+    throw `${password} is not a string`
+  if (password.indexOf(" ") != -1)
+    throw `password shouln'd have spaces`
+  if (password.length < 6)
+    throw `password shouldn't be empty spaces and should be at least 6 characters`
+  if (password.length > 16)
+    throw `password shouldn't be more than 16 characters`
+}
+
 module.exports = {
+  checkPassword,
   isValidMovie,
   isValidString,
   isValidRating,
