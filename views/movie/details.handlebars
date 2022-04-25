@@ -1,0 +1,162 @@
+<header class="bg-dark">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-8 col-xl-7 col-xxl-6">
+                <div class="my-5 text-center text-xl-start">
+                    <h1 class="display-5 fw-bolder text-white mb-2">{{movie.name}}</h1>
+                                        
+                    <input id="input-7-sm" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="5" data-step="0.5" data-size="sm" data-readonly="true" data-show-clear="false">
+                                        
+                    <hr></hr>
+                    <p class="lead fw-normal text-white-50 mb-4">{{movie.plot}}</p>
+                    <h4 class="display-7 text-white mb-2">Countries: <span class="lead fw-normal text-white-50 mb-4">{{movie.countries}}</span></h5>
+                    <h4 class="display-7 text-white mb-2">ReleaseDate: <span class="lead fw-normal text-white-50 mb-4">{{movie.releaseDate}}</span></h5>
+                    <h4 class="display-7 text-white mb-2">Runtime: <span class="lead fw-normal text-white-50 mb-4">{{movie.runtime}}</span></h5>
+                    <h4 class="display-7 text-white mb-2">Languages: <span class="lead fw-normal text-white-50 mb-4">{{movie.languages}}</span></h5>
+                    <h4 class="display-7 text-white mb-2">Stars: <span class="lead fw-normal text-white-50 mb-4">{{movie.languages}}</span></h5>
+                    {{!-- <p class="lead fw-normal text-white-50 mb-4">{{movie.casts}}</p> --}}
+                    <h4 class="display-7 text-white mb-2">Directors: <span class="lead fw-normal text-white-50 mb-4">{{movie.directors}}</span></h5>
+                    <h4 class="display-7 text-white mb-2">Writers: <span class="lead fw-normal text-white-50 mb-4">{{movie.writers}}</span></h5>
+                    <h4 class="display-7 text-white mb-2">Type: 
+                        {{#each movie.typeList}}
+                            <span class="badge bg-success">{{this}}</span>
+                        {{/each}}
+                    </h5>
+                </div>
+            </div>
+            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img style="transform: scale(0.9);" class="img-fluid rounded-3 my-5" src="{{movie.poster}}" alt="{{movie.name}}" /></div>
+        </div>
+    </div>
+</header>
+
+<!-- Page Content -->
+<section class="py-5 bg-light">
+    <!-- Photos -->
+    <div class="container px-5 my-5">
+        <div class="text-center mb-5">
+            <h1 class="fw-bolder">Photos</h1>
+        </div>
+        <div class="row gx-5">
+            {{!-- <div class="col-lg-8">
+                <div class="position-relative mb-5">
+                    <iframe width="100%" height="500" src="{{movie.trailerLink}}"></iframe>
+                </div>
+            </div> --}}
+            {{#each movie.imageShow}}
+            <div class="col-lg-4">
+                <div class="position-relative mb-5 hoverZoom">
+                    <img class="img-fluid rounded-3 mb-3" src="{{this.image}}" alt="{{this.title}}" />
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{!-- <a href="/">All Photos</a> --}}
+    </div>
+    <!-- Video -->
+    <div class="container px-5 my-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-6">
+                <div class="text-center mb-5">
+                    <h1 class="fw-bolder">Video</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row gx-5">
+            <div class="col-2"></div>
+            <div class="col-10">
+                <iframe width="100%" height="500" src="{{movie.trailerLink}}"></iframe>
+            </div>
+            {{!-- <div class="col-1"></div> --}}
+        </div>
+    </div>
+    <!-- Similar -->
+    <div class="container px-5 my-5">
+        <div class="row gx-5 justify-content-center">
+            <div class="col-lg-8 col-xl-6">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bolder">More Like This</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row gx-5">
+            <div class="col-lg-3 mb-5">
+                <div class="card h-100 shadow border-0">
+                    <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
+                    <div class="card-body p-4">
+                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
+                        <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Blog post title</h5></a>
+                        <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-5">
+                <div class="card h-100 shadow border-0">
+                    <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
+                    <div class="card-body p-4">
+                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">Media</div>
+                        <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Another blog post title</h5></a>
+                        <p class="card-text mb-0">This text is a bit longer to illustrate the adaptive height of each card. Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-5">
+                <div class="card h-100 shadow border-0">
+                    <img class="card-img-top" src="https://dummyimage.com/600x350/6c757d/343a40" alt="..." />
+                    <div class="card-body p-4">
+                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
+                        <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">The last blog post title is a little bit longer than the others</h5></a>
+                        <p class="card-text mb-0">Some more quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 mb-5">
+                <div class="card h-100 shadow border-0 bg-dark">
+                    <img class="card-img-top" src="https://imdb-api.com/images/original/MV5BODllNWE0MmEtYjUwZi00ZjY3LThmNmQtZjZlMjI2YTZjYmQ0XkEyXkFqcGdeQXVyNTc1NTQxODI@._V1_Ratio0.6751_AL_.jpg" alt="..." />
+                    <div class="card-body p-4">
+                        <a class="text-decoration-none link-light stretched-link" href="#!"><h5 class="card-title mb-3">Léon: The Professional</h5></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Comments -->
+    <div class="card bg-light">
+        <div class="card-body">
+            <!-- Comment form-->
+            <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
+            <!-- Comment with nested comments-->
+            <div class="d-flex mb-4">
+                <!-- Parent comment-->
+                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                <div class="ms-3">
+                    <div class="fw-bold">Commenter Name</div>
+                    If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+                    <!-- Child comment 1-->
+                    <div class="d-flex mt-4">
+                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                        <div class="ms-3">
+                            <div class="fw-bold">Commenter Name</div>
+                            And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+                        </div>
+                    </div>
+                    <!-- Child comment 2-->
+                    <div class="d-flex mt-4">
+                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                        <div class="ms-3">
+                            <div class="fw-bold">Commenter Name</div>
+                            When you put money directly to a problem, it makes a good headline.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Single comment-->
+            <div class="d-flex">
+                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                <div class="ms-3">
+                    <div class="fw-bold">Commenter Name</div>
+                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

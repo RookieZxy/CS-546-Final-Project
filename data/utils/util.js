@@ -1,3 +1,11 @@
+const { ObjectId } = require("mongodb");
+
+function isObjectId(id) {
+  id = isValidString(id);
+  if (!ObjectId.isValid(id)) throw "Invalid ObjectId";
+  else return id;
+}
+
 function isValidMovie(movie) {
   /*
   movie.releaseDate = new Date(data.releaseDate);
@@ -51,4 +59,5 @@ module.exports = {
   isValidMovie,
   isValidString,
   isValidRating,
+  isObjectId,
 };

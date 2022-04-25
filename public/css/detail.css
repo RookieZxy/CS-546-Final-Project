@@ -1,0 +1,10 @@
+hr {
+    border: 0;
+    border-top: 1px solid white;
+}
+
+.hoverZoom:hover {
+    transform: scale(1.7); 
+    z-index: 9999;
+    /* background-color: black; */
+}
