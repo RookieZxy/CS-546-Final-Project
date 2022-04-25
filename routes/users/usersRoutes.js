@@ -47,8 +47,11 @@ router.get("/", async (req, res) => {
     try {
       if (!req.body.confirmPw && !req.body.password && !req.body.firstName && !req.body.lastName)
         throw 'Missing Information';
-      if (req.body.password)
+      if (req.body.password){
+        if(updatedData.password == req.body.password)
+          throw`Please input a different password`;
         updatedData.password = req.body.password;
+      }
       if (req.body.firstName)
         updatedData.firstName = req.body.firstName;
       if (req.body.lastName)

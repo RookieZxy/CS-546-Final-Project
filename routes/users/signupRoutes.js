@@ -41,9 +41,6 @@ function checkName(firstName, lastName) {
 
 
 router.get('/', async (req, res) => {
-    if (req.session.user) {
-        return res.redirect('/home');
-    }
     res.render('users/signup', {
         login_flag: 'signup'
     })

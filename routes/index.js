@@ -28,6 +28,12 @@ const constructorMethod = (app) => {
     res.clearCookie('AuthCookie');
     res.render('home/home', {login_flag: 'logout'});
   });
+
+  app.get('/login2', async (req, res) => {
+    req.session.destroy();
+    res.clearCookie('AuthCookie');
+    res.render('users/login', {login_flag: 'logout'});
+  });
   
   //login
   app.use('/login', loginRoutes);
