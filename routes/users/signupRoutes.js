@@ -41,9 +41,7 @@ function checkName(firstName, lastName) {
 
 
 router.get('/', async (req, res) => {
-    res.render('users/signup', {
-        login_flag: 'signup'
-    })
+    res.render('users/signup')
 });
 
 router.post('/', async (req, res) => {

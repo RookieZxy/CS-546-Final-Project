@@ -34,9 +34,7 @@ router.get('/', async (req, res) => {
     if (req.session.user) {
         return res.redirect('/home');
     }
-    res.render('users/login', {
-        login_flag: 'login'
-    })
+    res.render('users/login')
 });
 
 
