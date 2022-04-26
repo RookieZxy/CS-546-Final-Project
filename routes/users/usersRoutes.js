@@ -23,8 +23,6 @@ function checkPassword(password) {
     throw `password shouldn't be more than 16 characters`
 }
 
-
-
 router.get("/", async (req, res) => {
   try {
     const users = await usersData.get(req.session.user.account)

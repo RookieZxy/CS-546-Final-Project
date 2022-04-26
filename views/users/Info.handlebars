@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>user Management</title>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <h2 class="heading-section">user Management</h2>
+
+    <form action="/userManage/account" method="post">
+        <input type="account" placeholder="userName" name="account" id="account" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p>{{user.account}}</p>
+    <p>{{user.firstName}}</p>
+    <p>{{user.lastName}}</p>
+
+
+    <a href="/home" id = "home">Home</a>
+</body>
+
+</html>
