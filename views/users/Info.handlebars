@@ -18,7 +18,41 @@
     <p>{{user.lastName}}</p>
 
 
-    <a href="/home" id = "home">Home</a>
+
+
+    <h2 class="heading-section">add user</h2>
+    <form action="/userManage/add" method="post">
+        <input type="account" placeholder="account" name="account" id="account" required>
+        <input type="password" placeholder="password" name="password" id="password" required>
+        <input type="confirm" placeholder="confirm password" name="confirm" id="confirm" required>
+        <input type="firstName" placeholder="first name" name="firstName" id="firstName" required>
+        <input type="lastName" placeholder="last name" name="lastName" id="lastName" required>
+        <button type="submit">Add user</button>
+    </form>
+    <p>{{addInfo}}</p>
+
+
+    <h2 class="heading-section">update user</h2>
+    <form action="/userManage/update" method="post">
+        <input type="account" placeholder="account" name="account" id="account" required>
+        <input type="password" placeholder="password" name="password" id="password">
+        <input type="firstName" placeholder="first name" name="firstName" id="firstName">
+        <input type="lastName" placeholder="last name" name="lastName" id="lastName">
+        <button type="submit">update user</button>
+    </form>
+    <p>{{updateInfo}}</p>
+
+
+    <h2 class="heading-section">remove user</h2>
+    <form action="/userManage/remove" method="post">
+        <input type="account" placeholder="account" name="account" id="account" required>
+        <button type="submit">remove user</button>
+    </form>
+    <p>{{removeInfo}}</p>
+
+
+
+    <a href="/home" id="home">Home</a>
 </body>
 
 </html>

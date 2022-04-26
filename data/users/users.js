@@ -186,9 +186,36 @@ async function update(account, password, firstName, lastName) {
     return updatedUser;
 }
 
+//delete user
+async function remove(account) {
+    if (!account)
+        throw `Please input the username`;
+    account = account.trim();
+    if (account.length <= 0)
+        throw `Inputed account is an empty spaces`;
+
+    const userCollection = await users();
+    let userInfo = await userCollection.findOne({
+        account: account
+    });
+    if (userInfo == null)
+        throw `account is not existed`;
+
+    const deletionInfo = await userCollection.deleteOne({
+        account: account
+    });
+
+    if(deletionInfo.deletedCount === 0)
+        throw `Could not delete band`
+    return {
+        userDeleted: true
+    }
+}
+
 module.exports = {
     get,
     update,
     createUser,
-    checkUser
+    checkUser,
+    remove
 }

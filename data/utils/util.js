@@ -54,7 +54,42 @@ function checkPassword(password) {
     throw `password shouldn't be more than 16 characters`
 }
 
+function checkAccount(username) {
+  username = username.trim();
+  if (typeof username !== 'string')
+      throw `${username} is not a string`
+  if (username.length < 4)
+      throw `username shouldn't be empty spaces and it'length should be at least 4 characters`;
+  if (username.length > 16)
+      throw `The length of username shouldn't be more than 16`;
+  if (username.indexOf(" ") != -1)
+      throw `username shouln'd have spaces`
+  var Regx = /^[A-Za-z0-9]*$/;
+  if (!Regx.test(username))
+      throw 'username should only be combained by alphanumeric characters'
+
+}
+
+function checkName(firstName, lastName) {
+  if (typeof firstName !== 'string' || typeof lastName !== 'string')
+      throw `firstName and lastName should be string`;
+  firstName = firstName.trim();
+  lastName = lastName.trim();
+  if (firstName.length == 0 || lastName.length == 0)
+      throw `firstName and lastName should not be empty spaces`;
+}
+
+function checkString(name, str) {
+  if (typeof str != 'string')
+    throw `${name} is not a string`
+  str = str.trim();
+  if (str.length <= 0)
+    throw `${name} is an empty string`
+}
 module.exports = {
+  checkString,
+  checkName,
+  checkAccount,
   checkPassword,
   isValidMovie,
   isValidString,
