@@ -1,0 +1,179 @@
+<div class="container px-5 my-5">
+    <div class="row gx-5">
+        <h4 class="mb-3">Add New Movie</h4>
+    <form class="needs-validation" novalidate>
+        <div class="row g-3">
+
+            <div class="col-sm-6">
+                <label for="imdbId" class="form-label">IMDB Id</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="imdbId" name="imdbId" placeholder="Input the IMDB id of movie"></input>
+                    <button type="button" class="btn btn-warning" id="getImdb" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to auto fill the form with movie info from IMDB">Get Info</button>
+                </div>
+            </div>
+            <div class="col-sm-6"> </div>
+
+            <div class="col-sm-6">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Input the name of movie" value="" required></input>
+                <div class="invalid-feedback">
+                    Movie Title is required.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="countries" class="form-label">Countries</label>
+                <input type="text" class="form-control" id="countries" name="countries" placeholder="USA/UK/France" value="" required></input>
+                <div class="invalid-feedback">
+                    Countries is required.
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="releaseDate" class="form-label">Release Date</label>
+                <input type="text" class="form-control" id="releaseDate" name="releaseDate" placeholder="mm/dd/yyyy" value="" required></input>
+                <div class="invalid-feedback">
+                    Invalid release date.
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="runtime" class="form-label">Runtime</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="runtime" name="runtime" placeholder="60 minutes" value="" required></input>
+                    <span class="input-group-text">minutes</span>
+                </div>
+                <div class="invalid-feedback">
+                    Invalid release runtime.
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="languages" class="form-label">Languages</label>
+                <input type="text" class="form-control" id="languages" name="languages" placeholder="English/Italian/French" value="" required></input>
+                <div class="invalid-feedback">
+                    Languages is required.
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="stars" class="form-label">Stars</label>
+                <input type="text" class="form-control" id="stars" name="stars" placeholder="Name of stars" required></input>
+                <div class="invalid-feedback">
+                    Stars release date.
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="directors" class="form-label">Directors</label>
+                <input type="text" class="form-control" id="directors" name="directors" placeholder="Name of directors" value="" required></input>
+                <div class="invalid-feedback">
+                    Directors is required.
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="writers" class="form-label">Writers</label>
+                <input type="text" class="form-control" id="writers" name="writers" placeholder="Name of writers" required></input>
+                <div class="invalid-feedback">
+                    Writers is required.
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="plot" class="form-label">Summary</label>
+                <textarea class="form-control" id="plot" rows="3" name="plot" placeholder="Summaries of the movie" required></textarea>
+                <div class="invalid-feedback">
+                    Summary is required.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="typeTheck">Type</label>
+                <div id="typeTheck">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Comedy"></input>
+                        <label class="form-check-label" for="inlineCheckbox1"><span class="badge bg-success">Comedy</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Sci-Fi"></input>
+                        <label class="form-check-label" for="inlineCheckbox2"><span class="badge bg-success">Sci-Fi</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Horror"></input>
+                        <label class="form-check-label" for="inlineCheckbox3"><span class="badge bg-success">Horror</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Romance"></input>
+                        <label class="form-check-label" for="inlineCheckbox4"><span class="badge bg-success">Romance</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="Action"></input>
+                        <label class="form-check-label" for="inlineCheckbox5"><span class="badge bg-success">Action</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="Thriller"></input>
+                        <label class="form-check-label" for="inlineCheckbox6"><span class="badge bg-success">Thriller</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="Drama"></input>
+                        <label class="form-check-label" for="inlineCheckbox7"><span class="badge bg-success">Drama</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="Mystery"></input>
+                        <label class="form-check-label" for="inlineCheckbox8"><span class="badge bg-success">Mystery</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="Crime"></input>
+                        <label class="form-check-label" for="inlineCheckbox9"><span class="badge bg-success">Crime</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="Animation"></input>
+                        <label class="form-check-label" for="inlineCheckbox10"><span class="badge bg-success">Animation</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox11" value="Adventure"></input>
+                        <label class="form-check-label" for="inlineCheckbox11"><span class="badge bg-success">Adventure</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox12" value="Fantasy"></input>
+                        <label class="form-check-label" for="inlineCheckbox12"><span class="badge bg-success">Fantasy</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox13" value="Comedy-Romance"></input>
+                        <label class="form-check-label" for="inlineCheckbox13"><span class="badge bg-success">Comedy-Romance</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox14" value="Action-Comedy"></input>
+                        <label class="form-check-label" for="inlineCheckbox14"><span class="badge bg-success">Action-Comedy</span></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox15" value="Superhero"></input>
+                        <label class="form-check-label" for="inlineCheckbox15"><span class="badge bg-success">Superhero</span></label>
+                    </div>
+                </div>
+                
+                <div class="invalid-feedback">
+                    Type is required.
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="trailerLink" class="form-label">Trailer Link</label>
+                <input type="text" class="form-control" id="trailerLink" name="trailerLink" placeholder="https://www.imdb.com/video/imdb/vi3877612057/imdb/embed" required></input>
+            </div>
+            <div class="col-sm-6">
+                <label for="poster" class="form-label">Poster</label>
+                <input class="form-control" type="file" id="poster" name="poster"></input>
+                <div class="invalid-feedback">
+                    Poster is required.
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="images" class="form-label">Images</label>
+                <input class="form-control" type="file" id="images" name="images" multiple></input>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit" id="submitBtn">Subbmit</button>
+    </form>
+</div>
+

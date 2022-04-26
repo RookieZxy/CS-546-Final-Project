@@ -14,6 +14,12 @@ const movieData = require("../data/movie/movie");
 //   res.render("movie/movieDetails", {});
 // });
 
+router.get("/addMovie", (req, res) => {
+  //auth is Login?
+
+  res.render("movie/addMovie", {});
+});
+
 router.get("/:id", async (req, res) => {
   let id = req.params.id;
   try {
