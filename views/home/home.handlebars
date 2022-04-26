@@ -12,7 +12,22 @@
 </br>
 <a href="/userManage" id="users"> user Management</a>
 
+<form action="/main" method="post" id="search_Form" class="search_Form">
+    <label for="searchFormLable" id="searchFormLable">
+        <input type="text" id="searchText_input" name="searchText_input">
+    </label>
+    <button id="submitSearch" type="submit">Search</button>
+</form>
 
+<div id="searchDiv">
+    <ul>
+        {{#each data}}
+        <li>
+            <a href="/show/{{this.show.id}}">{{this.show.name}}</a>
+        </li>
+        {{/each}}
+    </ul>
+</div>
 
 
 </script>
