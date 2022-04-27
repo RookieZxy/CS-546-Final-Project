@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
 
 router.get('/userInfo', async (req, res) => {
     const username = req.session.user.account;
-    console.log(username);
+    //console.log(username);
     const isAdmin= req.session.user.isAdmin;
     res.send({username: username, isAdmin: isAdmin});
 });

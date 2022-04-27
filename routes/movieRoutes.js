@@ -43,4 +43,27 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+
+
+//search movie
+router.post("/search", async (req, res) => {
+  try {
+    const movieSearch = req.body.search_termInput;
+    if (!movieSearch){
+      throw `movie does not exist!`
+    }
+    const movie  = await movieData.getByName(movieSearch);
+    res.send(movie);
+  } catch (e) {
+    console.log(e);
+    res.status(400).render('home/home', {
+      login_flag: 'movieSearch',
+      status: 'HTTP 400',
+      error: e
+    })
+  }
+});
+
+
+
 module.exports = router;

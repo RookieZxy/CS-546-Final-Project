@@ -94,7 +94,7 @@ async function createUser(username, password, firstName, lastName) {
         lastName: lastName,
     }
 
-    console.log(newuser);
+    //console.log(newuser);
 
     const insertInfo = await userCollection.insertOne(newuser);
     if (insertInfo.insertedCount == 0)
