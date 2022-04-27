@@ -4,6 +4,7 @@
         "database": "CS546_A_GROUP_13"
     },
     "imdb": {
-        "apiKey": "k_o8ajco4w"
+        "apiKey": "k_l31gvkes",
+        "apiKey_Alternative": "k_o8ajco4w"
     }
 }
