@@ -59,7 +59,7 @@ router.post('/', async (req, res) => {
         }
     } catch (e) {
         console.log(e);
-        res.status(400).render('login', {
+        res.status(400).render('users/login', {
             login_flag: 'login',
             status: 'HTTP 400',
             error: e
