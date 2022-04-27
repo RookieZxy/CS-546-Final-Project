@@ -12,6 +12,7 @@ a {
     -o-transition: .3s all ease;
     transition: .3s all ease;
     color: #ff9900;
+    text-decoration: none !important;
 }
 
 a:hover, a:focus {
@@ -30,7 +31,7 @@ h1, h2, h3, h4, h5,
 }
 
 .bg-primary {
-    background: #e3b04b !important;
+    background: #ff9900 !important;
 }
 
 .ftco-section {
@@ -139,7 +140,7 @@ h1, h2, h3, h4, h5,
     outline: none !important;
     -webkit-box-shadow: none;
     box-shadow: none;
-    border: 1px solid #e3b04b;
+    border: 1px solid #ff9900;
 }
 
 .social-media {
@@ -163,7 +164,7 @@ h1, h2, h3, h4, h5,
 }
 
 .social-media .social-icon:hover, .social-media .social-icon:focus {
-    background: #e3b04b;
+    background: #ff9900;
 }
 
 .social-media .social-icon:hover span, .social-media .social-icon:focus span {
@@ -231,11 +232,11 @@ h1, h2, h3, h4, h5,
 
 /* Style the checkmark/indicator */
 .checkbox-primary {
-    color: #e3b04b;
+    color: #ff9900;
 }
 
 .checkbox-primary input:checked ~ .checkmark:after {
-    color: #e3b04b;
+    color: #ff9900;
 }
 
 .btn {
@@ -251,25 +252,47 @@ h1, h2, h3, h4, h5,
 }
 
 .btn.btn-primary {
-    background: #e3b04b !important;
-    border: 1px solid #e3b04b !important;
+    background: #ff9900 !important;
+    border: 1px solid #ff9900 !important;
     color: #fff !important;
 }
 
 .btn.btn-primary:hover {
-    border: 1px solid #e3b04b;
+    border: 1px solid #ff9900;
     background: transparent;
-    color: #e3b04b;
+    color: #ff9900;
 }
 
 .btn.btn-primary.btn-outline-primary {
-    border: 1px solid #e3b04b;
+    border: 1px solid #ff9900;
     background: transparent;
-    color: #e3b04b;
+    color: #ff9900;
 }
 
 .btn.btn-primary.btn-outline-primary:hover {
     border: 1px solid transparent;
-    background: #e3b04b;
+    background: #ff9900;
     color: #fff;
+}
+
+/* Carousel base class */
+.carousel {
+    margin-bottom: 4rem;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel-item {
+    height: 32rem;
+}
+.carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 32rem;
 }
