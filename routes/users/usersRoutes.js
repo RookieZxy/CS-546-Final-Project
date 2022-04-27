@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require('../../data');
 const usersData = data.users;
 const bcryptjs = require('bcrypt');
+const xss = require("xss");
 
 function checkString(name, str) {
   if (typeof str != 'string')
@@ -91,7 +92,10 @@ router.post("/", async (req, res) => {
       updatedData.firstName = req.body.firstName;
     if (req.body.lastName)
       updatedData.lastName = req.body.lastName;
-      
+    
+    req.body.password = xss(req.body.password);
+    updatedData.firstName = xss(updatedData.firstName);
+    updatedData.lastName = xss(updatedData.lastName);
 
     checkPassword(req.body.password);
     // checkPassword(req.body.confirmPw);

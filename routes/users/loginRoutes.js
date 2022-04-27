@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../../data');
 const usersData = data.users;
+const xss = require("xss");
 
 function checkName(account) {
     account = account.trim();
@@ -43,6 +44,8 @@ router.post('/', async (req, res) => {
         if (!req.body || !req.body.account || !req.body.password)
             throw 'Missing account or password'
         req.body.account = req.body.account.toLowerCase();
+        req.body.account = xss(req.body.account);
+        req.body.password = xss(req.body.password);
         checkName(req.body.account);
         checkPassword(req.body.password);
         const newUser = await usersData.checkUser(

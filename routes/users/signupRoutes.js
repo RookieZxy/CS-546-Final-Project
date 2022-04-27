@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../../data');
 const usersData = data.users;
+const xss = require("xss");
 
 function checkAccount(username) {
     username = username.trim();
@@ -16,7 +17,6 @@ function checkAccount(username) {
     var Regx = /^[A-Za-z0-9]*$/;
     if (!Regx.test(username))
         throw 'username should only be combained by alphanumeric characters'
-
 }
 
 function checkPassword(password) {
@@ -46,11 +46,14 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        if (!req.body || !req.body.account || !req.body.confirm|| !req.body.password || !req.body.firstname || !req.body.lastname)
+        if (!req.body || !req.body.account || !req.body.confirm || !req.body.password || !req.body.firstname || !req.body.lastname)
             throw 'Missing username or password'
         if (req.body.password != req.body.confirm)
             throw `The two passwords are inconsistent`;
-
+        req.body.account = xss(req.body.account);
+        req.body.password = xss(req.body.password);
+        req.body.firstname = xss(req.body.firstname);
+        req.body.lastname = xss(req.body.lastname);
         checkAccount(req.body.account);
         checkPassword(req.body.password);
         checkName(req.body.firstname, req.body.lastname)
