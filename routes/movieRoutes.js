@@ -79,7 +79,7 @@ router.post("/comment", async (req, res) => {
       throw `content does not exist!`
     }
     const comment  = await commentData.createComment(content, userName, movieId, date, rate);
-    if(comment == true){
+    if(comment.commentInserted == true){
       res.send(true);
     }
     else{
