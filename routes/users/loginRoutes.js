@@ -60,7 +60,7 @@ router.post('/', async (req, res) => {
                     isAdmin: temp.isAdmin
                 };
             }
-            res.redirect('/home');
+            res.redirect('/');
         }
     } catch (e) {
         console.log(e);
