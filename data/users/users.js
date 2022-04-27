@@ -157,7 +157,6 @@ async function get(account) {
     });
     if (userInfo == null)
         throw `account is not existed`;
-
     return userInfo;
 }
 

@@ -53,9 +53,11 @@ router.post('/', async (req, res) => {
             req.body.password
         );
         if (newUser.authenticated == true) {
+            const temp = await usersData.get(req.body.account);
             if(req.body.check){
                 req.session.user = {
-                    account: req.body.account
+                    account: req.body.account,
+                    isAdmin: temp.isAdmin
                 };
             }
             res.redirect('/home');
