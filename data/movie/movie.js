@@ -4,6 +4,7 @@ const axios = require("axios");
 const util = require("../utils/util");
 const mongoCollections = require("../../config/mongoCollections");
 const { ObjectId } = require("mongodb");
+const mongoConnection = require("../../config/mongoConnection");
 
 async function queryFromImdb(imdbId) {
   const movie = { imdbId: imdbId };
@@ -120,7 +121,16 @@ async function getById(id) {
   return movie;
 }
 
-async function getByType(typeId) {}
+// Query the database and find all movies with typeName in typeList. 
+async function getByType(typeName) {
+  if (!typeName || typeof typeName != 'string') throw `invalid typename: '${typeName}'`;
+  const moviesCollection = await mongoConnections.movies();
+  const movie = await moviesCollection.find( {typeList: typeName} );
+  if (movie === null) throw `No movie with typeName '${typeName}`;
+  movie._id = movie._id.toString();
+  movie.releaseDate = new Date(movie.releaseDate);
+  return movie;
+}
 
 async function getByName(name) {
   const moviesCollection = await mongoCollections.movies();
