@@ -4,7 +4,7 @@
 	$("#userManage").hide();
 	var requestAdmin = {
 		method: 'GET',
-		url: 'http://localhost:3000/home/userInfo'
+		url: 'http://localhost:3000/userInfo'
 	}
 	$.ajax(requestAdmin).then((object) => {      
         if(object.isAdmin == true){
@@ -13,6 +13,8 @@
 
 		if(object.username != null){
 			$("#login").hide();
+		}else{
+			$("#logout").hide();
 		}
     });
 	

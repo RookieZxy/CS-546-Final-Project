@@ -2,13 +2,24 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
+    // if(req.session.user)
+    //     res.render('home/home',{user: req.session.user})
+    // else
     res.render('home/home')
 });
 router.get('/userInfo', async (req, res) => {
-    const username = req.session.user.account;
+    let username = null;
     //console.log(username);
-    const isAdmin = req.session.user.isAdmin;
-    res.send({username: username, isAdmin: isAdmin});
+    let isAdmin = false;
+    if (req.session.user) {
+        username = req.session.user.account;
+        //console.log(username);
+        isAdmin = req.session.user.isAdmin;
+    }
+    res.send({
+        username: username,
+        isAdmin: isAdmin
+    });
 });
 
 // router.get('/', async (req, res) => {

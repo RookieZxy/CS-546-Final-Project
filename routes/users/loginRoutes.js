@@ -33,7 +33,7 @@ function checkPassword(p) {
 
 router.get('/', async (req, res) => {
     if (req.session.user) {
-        return res.redirect('/home');
+        return res.redirect('/');
     }
     res.render('users/login')
 });
