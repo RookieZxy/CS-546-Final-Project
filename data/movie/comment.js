@@ -2,6 +2,7 @@ const mongoCollections = require('../../config/mongoCollections');
 const comment = mongoCollections.comments;
 const axios = require("axios");
 const util = require("../utils/util");
+const movie = require("./movie");
 
 async function createComment(content, userName, movieId, date, rate) {
     const commentCollection = await comment();
@@ -12,7 +13,7 @@ async function createComment(content, userName, movieId, date, rate) {
         userName: userName,
         movieId: movieId,
         content: content,
-        parentId:parentId,
+        parentId: parentId,
         date: date,
         likes: likes,
         rate: rate,
@@ -31,25 +32,47 @@ async function getByMovieId(id) {
     const commentCollection = await comment();
     // let str = ".*" + name + ".*$";
     // let reg = new RegExp(str);
-    if(!id)
+    if (!id)
         throw `You must provide an id`;
     util.checkString("id", id);
+    // console.log(id);
 
     const comments = await commentCollection
-      .find({
-        movieId: id,
-        parentId: 0, //$options: "i"  Ignore case
-      }).toArray();
-  
+        .find({
+            movieId: id,
+            parentId: 0, //$options: "i"  Ignore case
+        }).toArray();
+
     comments.forEach(element => {
         element._id = element._id.toString();
     });
-    // console.log(movies);
+    // console.log(comments);
     return comments;
-  }
-  
+}
+
+async function calMovieRate(id) {
+    if(!id)
+        throw`id does not exist`;
+    let sum = 0;
+    let count = 0;
+    const comments = await getByMovieId(id);
+    // console.log(comments);
+
+    comments.forEach(element => {
+        if (element.parentId == 0){
+            sum += element.rate;
+            count += 1;
+            console.log(sum);
+            console.log(count);
+        }
+    });
+
+    const rate = sum / count;
+    await movie.updateRating(id, rate);
+}
 
 module.exports = {
     getByMovieId,
     createComment,
+    calMovieRate,
 }

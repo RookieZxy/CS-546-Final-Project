@@ -183,6 +183,8 @@ async function changeValidation(id, isValid) {
 }
 
 async function updateRating(id, rating) {
+  console.log(id);
+  console.log(rating);
   util.isValidRating(rating);
   id = util.isObjectId(id);
 

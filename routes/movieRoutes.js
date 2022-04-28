@@ -72,7 +72,7 @@ router.post("/search", async (req, res) => {
 router.post("/comment", async (req, res) => {
   try {
     if(!req.body.content || !req.body.rate)
-      throw`content or rate does not exist!`;
+      throw`content or rate do not exist!`;
     const content = req.body.content;
     util.checkString("content", content);
     //const commentChild = req.body.commentChild;
@@ -82,13 +82,14 @@ router.post("/comment", async (req, res) => {
     const movieId = req.body.movieId;
     var myDate = new Date();
     const date = myDate.toLocaleDateString(); 
-    const rate = req.body.rate;
+    const rate = parseFloat(req.body.rate);
   
     const movie = await movieData.getById(movieId);
-    // console.log(movie);
+    // console.log(rate);
 
-    const comment  = await commentData.createComment(content, userName, movieId, date, rate[1]);
+    const comment  = await commentData.createComment(content, userName, movieId, date, rate);
     if(comment.commentInserted == true){
+      commentData.calMovieRate(movieId);
       res.render(`movie/details`, {movie: movie, userName: req.session.user.account, CSS: "detail.css", comment:true});
     }
     else{
