@@ -4,7 +4,6 @@ const axios = require("axios");
 const util = require("../utils/util");
 
 async function createComment(content, userName, movieId, date, rate) {
-
     const commentCollection = await comment();
 
     const likes = 0;
@@ -18,7 +17,6 @@ async function createComment(content, userName, movieId, date, rate) {
         likes: likes,
         rate: rate,
     }
-
 
     const insertInfo = await commentCollection.insertOne(newComment);
     if (insertInfo.insertedCount == 0)
@@ -36,8 +34,6 @@ async function getByMovieId(id) {
     if(!id)
         throw `You must provide an id`;
     util.checkString("id", id);
-
-
 
     const comments = await commentCollection
       .find({

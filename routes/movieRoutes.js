@@ -71,8 +71,8 @@ router.post("/search", async (req, res) => {
 //comment
 router.post("/comment", async (req, res) => {
   try {
-    if(!req.body.content)
-      throw`content does not exist!`;
+    if(!req.body.content || !req.body.rate)
+      throw`content or rate does not exist!`;
     const content = req.body.content;
     util.checkString("content", content);
     //const commentChild = req.body.commentChild;
