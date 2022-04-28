@@ -67,7 +67,7 @@ async function calMovieRate(id) {
         }
     });
 
-    const rate = sum / count;
+    const rate = (sum / count).toFixed(1);
     await movie.updateRating(id, rate);
 }
 
