@@ -8,24 +8,23 @@ function isObjectId(id) {
 
 function isValidMovie(movie) {
   /*
-  movie.releaseDate = new Date(data.releaseDate);
-  movie.awards = data.awards;
   movie.countries = data.countries;
   movie.keywords = data.keywordList;
   movie.trailerLink = trailerData.linkEmbed;
   movie.images = imgData.items;
   movie.typeList
   */
+  movie.date = isValidDateString(movie.date);
   isValidRating(movie.rating);
-  isValidString(movie.casts);
-  isValidString(movie.imdbId);
-  isValidString(movie.name);
-  isValidString(movie.directors);
-  isValidString(movie.writers);
-  isValidString(movie.languages);
-  isValidString(movie.runtime);
-  isValidString(movie.poster);
-  isValidString(movie.poster);
+  movie.casts = isValidString(movie.casts);
+  movie.imdbId = isValidString(movie.imdbId);
+  movie.name = isValidString(movie.name);
+  movie.directors = isValidString(movie.directors);
+  movie.writers = isValidString(movie.writers);
+  movie.languages = isValidString(movie.languages);
+  movie.runtime = isValidString(movie.runtime);
+  movie.poster = isValidString(movie.poster);
+  return movie;
 }
 
 function isValidString(s) {
