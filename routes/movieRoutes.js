@@ -13,8 +13,9 @@ const movieData = require("../data/movie/movie");
 //   // res.render("movie/movieDetails", { data: data });
 //   res.render("movie/movieDetails", {});
 // });
+
 router.get("/addMovie", (req, res) => {
-  //auth is Login?
+  //is Login
   if (!req.session.user) {
     res.redirect("/");
   }

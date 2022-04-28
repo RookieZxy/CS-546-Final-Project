@@ -55,15 +55,18 @@
     }
 
     //typeList
-    let typeList = [];
-    for (let i = 1; i < 16; i++) {
-      if ($(`#inlineCheckbox${i}`).is(":checked")) {
-        typeList.push($(`#inlineCheckbox${i}`).val());
+    let typeList = 
+    const checkBoxInputs = $("#typeTheck input");
+    for (let i = 1; i < checkBoxInputs.length; i++) {
+      const checkBox = checkBoxInputs[i];
+
+      if ($(checkBox).attr("checked")) {
+        typeList.push($(checkBox).val());
       }
     }
     if (typeList.length === 0) {
       alert("Please select at least one type");
-      $("#inlineCheckbox1").focus();
+      $("#Comedy").focus();
       return;
     }
     movie.typeList = typeList;
@@ -160,6 +163,31 @@
   }
 
   function autoFill(movie) {
-    // $("#");
+    $("#name").val(movie.name);
+    $("#countries").val(movie.countries);
+    //string
+    $("#runtime").val(movie.runtime);
+    $("#languages").val(movie.languages);
+    $("#casts").val(movie.casts);
+    $("#directors").val(movie.directors);
+    $("#writers").val(movie.writers);
+    $("#plot").val(movie.plot);
+    $("#trailerLink").val(movie.trailerLink);
+    $("#posterImg").attr("src", movie.poster);
+    $("#posterImg").show();
+
+    //type
+    for (let i = 0; i < movie.typeList.length; i++) {
+      const type = movie.typeList[i];
+      $(`#${type}`).attr("checked", true);
+    }
+    //images
+    for (let i = 0; i < movie.images.length; i++) {
+      const image = movie.images[i];
+      $("#imagesDiv").append(
+        `<img src="${image.image}" id="img${i}" class="rounded-top" alt="Sample image" width="300" height="300">`
+      );
+      $("#imagesDiv").show();
+    }
   }
 })(jQuery);
