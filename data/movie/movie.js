@@ -12,11 +12,9 @@ async function queryFromImdb(imdbId) {
     `https://imdb-api.com/en/API/Title/${apiKey}/${imdbId}`
   );
   const data = data1.data;
-
   if (data.title === null) {
     throw `No movie with IMDB Id '${imdbId}'`;
   }
-
   const data2 = await axios.get(
     `https://imdb-api.com/en/API/Images/${apiKey}/${imdbId}`
   );
@@ -139,7 +137,7 @@ async function getByName(name) {
     movie._id = movie._id.toString();
     movie.releaseDate = new Date(movie.releaseDate);
   }
-
+  // console.log(movies);
   return movies;
 }
 
