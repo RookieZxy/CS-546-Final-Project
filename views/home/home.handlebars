@@ -1,33 +1,89 @@
-<h1>Home Page</h1>
+<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <rect width="100%" height="100%" fill="#777"/>
+            </svg>
 
-<a href="/login" id = "login">Login</a>
+            <div class="container">
+                <div class="carousel-caption text-start">
+                    <h1>Example headline.</h1>
+                    <p>Some representative placeholder content for the first slide of the carousel.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <rect width="100%" height="100%" fill="#777"/>
+            </svg>
+
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>Another example headline.</h1>
+                    <p>Some representative placeholder content for the second slide of the carousel.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                 aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <rect width="100%" height="100%" fill="#777"/>
+            </svg>
+
+            <div class="container">
+                <div class="carousel-caption text-end">
+                    <h1>One more for good measure.</h1>
+                    <p>Some representative placeholder content for the third slide of this carousel.</p>
+                    <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<h1>Home Page</h1>
+{{!-- <a href="/login" id="login">Login</a>
 </br>
-<a href="/login2" id = "login2">Log in another account</a>
+<a href="/login2" id="login2">Log in another account</a>
 </br>
 <a href="/signup">Sign Up</a>
 </br>
-<a href="/logout" id="logout">logout</a>
+<a href="/logout" id="logout">logout</a> --}}
 </br>
 <a href="/users" id="users"> Account</a>
 </br>
-<a href="/userManage" id="users"> user Management</a>
+<a href="/userManage" id="userManage"> user Management</a>
 
-<form action="/main" method="post" id="search_Form" class="search_Form">
-    <label for="searchFormLable" id="searchFormLable">
-        <input type="text" id="searchText_input" name="searchText_input">
-    </label>
-    <button id="submitSearch" type="submit">Search</button>
-</form>
 
-<div id="searchDiv">
-    <ul>
-        {{#each data}}
-        <li>
-            <a href="/show/{{this.show.id}}">{{this.show.name}}</a>
-        </li>
-        {{/each}}
-    </ul>
+<div>
+    <form action="/movie/search" id="searchForm" method="post" class="searchForm">
+        <label for="search_term">Search show: </label>
+        <input type="text" id="search_termInput" name="search_termInput">
+        <button type="submit" id="submitSearch">Search</button>
+        <p id="error" hidden>Please enter valid input!</p>
+    </form> 
+    <ul id="showList"></ul>
+    <div id="show"></div>
+    <a href="/home" id="homeLink" hidden>Back to All Shows</a>
 </div>
 
 
-</script>
+
+

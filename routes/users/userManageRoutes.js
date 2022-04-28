@@ -4,6 +4,7 @@ const data = require('../../data');
 const usersData = data.users;
 const util = require('../../data');
 const utilsData = util.utils;
+const xss = require("xss");
 
 router.get("/", async (req, res) => {
   res.render('users/Info', {
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
 
 router.post("/account", async (req, res) => {
   try {
-    console.log(req.body.account);
+    req.body.account = xss(req.body.account);
     const users = await usersData.get(req.body.account)
     if (!users)
       throw `account does not exist!`;
@@ -22,9 +23,12 @@ router.post("/account", async (req, res) => {
 
     });
   } catch (e) {
-    res.status(500).json({
+    console.log(e);
+    res.status(400).render('users/Info', {
+      searchInfo: 'fail',
+      status: 'HTTP 400',
       error: e
-    });
+    })
   }
 });
 
@@ -34,7 +38,11 @@ router.post('/add', async (req, res) => {
       throw 'Missing username or password'
     if (req.body.password != req.body.confirm)
       throw `The two passwords are inconsistent`;
-
+    
+    req.body.account = xss(req.body.account);
+    req.body.password = xss(req.body.password);
+    req.body.firstName = xss(req.body.firstName);
+    req.body.lastName = xss(req.body.lastName);
     utilsData.checkAccount(req.body.account);
     utilsData.checkPassword(req.body.password);
     utilsData.checkName(req.body.firstName, req.body.lastName);

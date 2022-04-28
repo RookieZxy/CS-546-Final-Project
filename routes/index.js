@@ -17,12 +17,12 @@ const constructorMethod = (app) => {
   //   res.redirect("/");
   // });
 
-  app.get('/', (req, res) => {
-    if(req.session.user){
-      return res.redirect('/home');
-    }
-    res.render('users/login', {document_title: 'home'});
-  })
+  // app.get('/', (req, res) => {
+  //   if(req.session.user){
+  //     return res.redirect('/home');
+  //   }
+  //   res.render('users/login', {document_title: 'home'});
+  // })
 
   //log out
   app.get('/logout', async (req, res) => {
@@ -40,7 +40,7 @@ const constructorMethod = (app) => {
   //login
   app.use('/login', loginRoutes);
   //home page
-  app.use('/home', homeRoutes);
+  app.use('/', homeRoutes);
   //sign up
   app.use('/signup', signupRoutes);
   //get information

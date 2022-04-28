@@ -27,6 +27,7 @@
     "express-session": "^1.17.2",
     "moment": "^2.29.3",
     "mongodb": "^4.5.0",
-    "session": "^0.1.0"
+    "session": "^0.1.0",
+    "xss": "^1.0.11"
   }
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const data = require('../../data');
 const usersData = data.users;
+const xss = require("xss");
 
 function checkName(account) {
     account = account.trim();
@@ -32,7 +33,7 @@ function checkPassword(p) {
 
 router.get('/', async (req, res) => {
     if (req.session.user) {
-        return res.redirect('/home');
+        return res.redirect('/');
     }
     res.render('users/login')
 });
@@ -43,6 +44,8 @@ router.post('/', async (req, res) => {
         if (!req.body || !req.body.account || !req.body.password)
             throw 'Missing account or password'
         req.body.account = req.body.account.toLowerCase();
+        req.body.account = xss(req.body.account);
+        req.body.password = xss(req.body.password);
         checkName(req.body.account);
         checkPassword(req.body.password);
         const newUser = await usersData.checkUser(
@@ -50,12 +53,14 @@ router.post('/', async (req, res) => {
             req.body.password
         );
         if (newUser.authenticated == true) {
+            const temp = await usersData.get(req.body.account);
             if(req.body.check){
                 req.session.user = {
-                    account: req.body.account
+                    account: req.body.account,
+                    isAdmin: temp.isAdmin
                 };
             }
-            res.redirect('/home');
+            res.redirect('/');
         }
     } catch (e) {
         console.log(e);

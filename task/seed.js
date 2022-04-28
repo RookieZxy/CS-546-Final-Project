@@ -138,6 +138,8 @@ async function main() {
     },
   ];
   await type.insertMany(types);
+  
+  await mongoConnection.closeConnection();
 }
 
 main();

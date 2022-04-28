@@ -4,6 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 const util = require("../data/utils/util");
 const movieData = require("../data/movie/movie");
+const commentData = require("../data/movie/comment");
 
 // router.get("", async (req, res) => {
 //   console.log(123123123123);
@@ -54,9 +55,64 @@ router.get("/:id", async (req, res) => {
       const img = movie.images[i];
       movie.imageShow.push(img);
     }
-    res.render("movie/details", { movie: movie, CSS: "detail.css" }); //
+    if(req.session.user)
+      res.render("movie/details", { movie: movie, userName: req.session.user.account, CSS: "detail.css" }); //
+    else
+      res.render("movie/details", { movie: movie, CSS: "detail.css" });
   } catch (error) {
     res.status(500).json({ error: error });
+  }
+});
+
+
+
+//search movie
+router.post("/search", async (req, res) => {
+  try {
+    const movieSearch = req.body.search_termInput;
+    if (!movieSearch){
+      throw `movie does not exist!`
+    }
+    const movie  = await movieData.getByName(movieSearch);
+    res.send(movie);
+  } catch (e) {
+    console.log(e);
+    res.status(400).render('home/home', {
+      login_flag: 'movieSearch',
+      status: 'HTTP 400',
+      error: e
+    })
+  }
+});
+
+//comment
+router.post("/comment", async (req, res) => {
+  try {
+    const content = req.body.content;
+    //const commentChild = req.body.commentChild;
+    const userName = req.body.userName;
+
+
+    const movieId = req.body.movieId;
+    var myDate = new Date();
+    const date = myDate.toLocaleDateString(); 
+    const rate = req.body.rate;
+
+    const movie = await movieData.getById(movieId);
+    console.log(movie);
+    if (!content){
+      throw `content does not exist!`
+    }
+    const comment  = await commentData.createComment(content, userName, movieId, date, rate);
+    if(comment.commentInserted == true){
+      res.render(`movie/details`, {movie: movie, userName: req.session.user.account, CSS: "detail.css", comment:true});
+    }
+    else{
+      throw `Did not comment.`
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(400).send(e);
   }
 });
 
