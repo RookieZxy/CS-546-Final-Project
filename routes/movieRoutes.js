@@ -16,26 +16,9 @@ const commentData = require("../data/movie/comment");
 // });
 
 router.get("/addMovie", (req, res) => {
-  //is Login
-  if (!req.session.user) {
-    res.redirect("/");
-  }
+  //auth is Login?
+
   res.render("movie/addMovie", {});
-});
-
-router.get("/imdb/:id", async (req, res) => {
-  let imdbId = req.params.id;
-  try {
-    imdbId = util.isValidString(imdbId);
-    const movie = await movieData.getByImdbId(imdbId);
-    res.status(200).send(movie);
-  } catch (error) {
-    res.status(500).send({ error: error });
-  }
-});
-
-router.get("/imdb/", (req, res) => {
-  res.status(400).send({ error: "Please input a IMDB Id" });
 });
 
 router.get("/:id", async (req, res) => {
@@ -88,7 +71,10 @@ router.post("/search", async (req, res) => {
 //comment
 router.post("/comment", async (req, res) => {
   try {
+    if(!req.body.content)
+      throw`content does not exist!`;
     const content = req.body.content;
+    util.checkString("content", content);
     //const commentChild = req.body.commentChild;
     const userName = req.body.userName;
 
@@ -100,9 +86,7 @@ router.post("/comment", async (req, res) => {
 
     const movie = await movieData.getById(movieId);
     console.log(movie);
-    if (!content){
-      throw `content does not exist!`
-    }
+
     const comment  = await commentData.createComment(content, userName, movieId, date, rate);
     if(comment.commentInserted == true){
       res.render(`movie/details`, {movie: movie, userName: req.session.user.account, CSS: "detail.css", comment:true});

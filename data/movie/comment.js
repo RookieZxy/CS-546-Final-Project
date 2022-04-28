@@ -1,6 +1,7 @@
 const mongoCollections = require('../../config/mongoCollections');
 const comment = mongoCollections.comments;
 const axios = require("axios");
+const util = require("../utils/util");
 
 async function createComment(content, userName, movieId, date, rate) {
 
@@ -28,6 +29,28 @@ async function createComment(content, userName, movieId, date, rate) {
 }
 
 
+async function getByMovieId(id) {
+    const commentCollection = await comment();
+    // let str = ".*" + name + ".*$";
+    // let reg = new RegExp(str);
+    if(!id)
+        throw `You must provide an id`;
+    util.checkString("id", id);
+
+
+
+    const comments = await commentCollection
+      .find({
+        movieId: id,
+        parentId: 0, //$options: "i"  Ignore case
+      }).toArray();
+  
+    // console.log(movies);
+    return comments;
+  }
+  
+
 module.exports = {
+    getByMovieId,
     createComment,
 }

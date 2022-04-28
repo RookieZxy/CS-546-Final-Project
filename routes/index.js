@@ -5,6 +5,7 @@ const homeRoutes = require('./homeRoutes');
 const usersRoutes = require('./users/usersRoutes');
 const forgotRoutes = require('./users/forgotRoutes');
 const userManageRoutes = require('./users/userManageRoutes');
+const commentRoutes = require('./commentRoutes');
 const path = require('path');
 
 const constructorMethod = (app) => {
@@ -49,6 +50,8 @@ const constructorMethod = (app) => {
   app.use('/forgot', forgotRoutes);
   //user manage
   app.use('/userManage', userManageRoutes);
+  //comment
+  app.use('/comment', commentRoutes);
 };
 
 module.exports = constructorMethod;
