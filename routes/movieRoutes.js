@@ -83,11 +83,11 @@ router.post("/comment", async (req, res) => {
     var myDate = new Date();
     const date = myDate.toLocaleDateString(); 
     const rate = req.body.rate;
-
+  
     const movie = await movieData.getById(movieId);
-    console.log(movie);
+    // console.log(movie);
 
-    const comment  = await commentData.createComment(content, userName, movieId, date, rate);
+    const comment  = await commentData.createComment(content, userName, movieId, date, rate[1]);
     if(comment.commentInserted == true){
       res.render(`movie/details`, {movie: movie, userName: req.session.user.account, CSS: "detail.css", comment:true});
     }

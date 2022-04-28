@@ -45,6 +45,9 @@ async function getByMovieId(id) {
         parentId: 0, //$options: "i"  Ignore case
       }).toArray();
   
+    comments.forEach(element => {
+        element._id = element._id.toString();
+    });
     // console.log(movies);
     return comments;
   }
