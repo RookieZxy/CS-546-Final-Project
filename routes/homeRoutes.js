@@ -22,6 +22,14 @@ router.get('/userInfo', async (req, res) => {
     });
 });
 
+router.get('/types/:id', async (req, res) => {
+    const type = req.params.id;
+    if (!type || typeof type != 'string')throw `invalide type name: '${type}'`;
+    console.log('get type route: ', type);
+    res.render('home/home');
+});
+
+
 // router.get('/', async (req, res) => {
 //     res.render('home/home', {login_flag: 'home', username: req.session.user.account})
 // });

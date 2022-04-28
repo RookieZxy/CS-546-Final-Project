@@ -129,6 +129,7 @@ async function getByType(typeName) {
   if (movie === null) throw `No movie with typeName '${typeName}`;
   movie._id = movie._id.toString();
   movie.releaseDate = new Date(movie.releaseDate);
+  console.log ('movie: ', movie);
   return movie;
 }
 
@@ -136,8 +137,8 @@ async function getByType(typeName) {
 async function getAllTypes(){
   const typeCollection = await mongoConnections.type();
   const types = typeCollection.find();
-  console.log ('types: ', types);
   if (types === null) throw 'No types.';
+  console.log ('types: ', types);
   return types
 }
 
@@ -204,4 +205,5 @@ module.exports = {
   getByImdbId,
   getTopRated,
   changeValidation,
+  getAllTypes,
 };
