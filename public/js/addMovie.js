@@ -55,7 +55,7 @@
     }
 
     //typeList
-    let typeList = 
+    let typeList = [];
     const checkBoxInputs = $("#typeTheck input");
     for (let i = 1; i < checkBoxInputs.length; i++) {
       const checkBox = checkBoxInputs[i];
