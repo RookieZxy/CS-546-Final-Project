@@ -1,7 +1,7 @@
 <div class="container px-5 my-5">
     <div class="row gx-5">
         <h4 class="mb-3">Add New Movie</h4>
-    <form class="needs-validation" novalidate>
+    <form class="needs-validation" id="myForm" >
         <div class="row g-3">
 
             <div class="col-sm-6">
@@ -157,6 +157,8 @@
                 <label for="trailerLink" class="form-label">Trailer Link</label>
                 <input type="text" class="form-control" id="trailerLink" name="trailerLink" placeholder="https://www.imdb.com/video/imdb/vi3877612057/imdb/embed" required></input>
             </div>
+            <div class="col-sm-6"></div>
+
             <div class="col-sm-6">
                 <label for="poster" class="form-label">Poster</label>
                 <input class="form-control" type="file" id="poster" name="poster"></input>
@@ -164,16 +166,26 @@
                     Poster is required.
                 </div>
             </div>
-
+            <div class="col-sm-6"></div>
+            <div class="col-sm-12">
+                {{!-- poster img --}}
+                <img src="../../public/images/missing.png" id="posterImg"  class="rounded-top" alt="poster image" width="400" height="400" >
+            </div>
             <div class="col-sm-6">
                 <label for="images" class="form-label">Images</label>
                 <input class="form-control" type="file" id="images" name="images" multiple></input>
+            </div>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-12" id="imagesDiv">
+                {{!-- images --}}
             </div>
         </div>
 
         <hr class="my-4">
 
         <button class="w-100 btn btn-primary btn-lg" type="submit" id="submitBtn">Subbmit</button>
+        
+        <button class="w-100 btn btn-success btn-lg" type="submit" id="submitBtn">Reset</button>
     </form>
 </div>
 

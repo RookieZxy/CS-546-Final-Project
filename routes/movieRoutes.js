@@ -13,11 +13,27 @@ const movieData = require("../data/movie/movie");
 //   // res.render("movie/movieDetails", { data: data });
 //   res.render("movie/movieDetails", {});
 // });
-
 router.get("/addMovie", (req, res) => {
   //auth is Login?
-
+  if (!req.session.user) {
+    res.redirect("/");
+  }
   res.render("movie/addMovie", {});
+});
+
+router.get("/imdb/:id", async (req, res) => {
+  let imdbId = req.params.id;
+  try {
+    imdbId = util.isValidString(imdbId);
+    const movie = await movieData.getByImdbId(imdbId);
+    res.status(200).send(movie);
+  } catch (error) {
+    res.status(500).send({ error: error });
+  }
+});
+
+router.get("/imdb/", (req, res) => {
+  res.status(400).send({ error: "Please input a IMDB Id" });
 });
 
 router.get("/:id", async (req, res) => {
