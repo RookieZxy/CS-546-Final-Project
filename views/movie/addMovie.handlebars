@@ -30,7 +30,7 @@
 
             <div class="col-sm-6">
                 <label for="releaseDate" class="form-label">Release Date</label>
-                <input type="text" class="form-control" id="releaseDate" name="releaseDate" placeholder="mm/dd/yyyy" value="" required></input>
+                <input type="text" class="form-control" id="releaseDate" name="releaseDate" placeholder="yyyy-mm-dd" value="" required></input>
                 <div class="invalid-feedback">
                     Invalid release date.
                 </div>
@@ -38,7 +38,7 @@
             <div class="col-sm-6">
                 <label for="runtime" class="form-label">Runtime</label>
                 <div class="input-group">
-                    <input type="number" class="form-control" min="0" id="runtime" name="runtime" placeholder="60 minutes" value="" required></input>
+                    <input type="number" class="form-control" min="0" max="500" id="runtime" name="runtime" placeholder="60 minutes" value="" required></input>
                     <span class="input-group-text">minutes</span>
                 </div>
                 <div class="invalid-feedback">
@@ -78,7 +78,7 @@
 
             <div class="col-sm-6">
                 <label for="plot" class="form-label">Summary</label>
-                <textarea class="form-control" id="plot" rows="3" name="plot" placeholder="Summaries of the movie" required></textarea>
+                <textarea class="form-control" id="plot" style="height: 125px;" name="plot" placeholder="Summaries of the movie" required></textarea>
                 <div class="invalid-feedback">
                     Summary is required.
                 </div>

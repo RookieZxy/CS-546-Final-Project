@@ -27,14 +27,14 @@ async function queryFromImdb(imdbId) {
   const trailerData = data3.data;
 
   movie.rating = 0;
-  movie.releaseDate = new Date(data.releaseDate);
+  movie.releaseDate = data.releaseDate;
   movie.name = data.title;
   movie.plot = data.plot;
   movie.casts = data.stars;
   movie.directors = data.directors;
   movie.writers = data.writers;
   movie.languages = data.languages;
-  movie.runtime = data.runtimeStr;
+  movie.runtime = data.runtimeMins;
   movie.poster = data.image;
   movie.awards = data.awards;
   movie.countries = data.countries;

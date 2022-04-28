@@ -54,6 +54,14 @@
       }
     }
 
+    if (parseRuntime(movie.runtime) === -1) {
+      alert("Invalid runtime. Please input a number between 0 and 500");
+      $("#runtime").focus();
+      return false;
+    } else {
+      movie.runtime = parseRuntime(movie.runtime);
+    }
+
     //typeList
     let typeList = [];
     debugger;
@@ -90,6 +98,7 @@
     movie.images = images;
 
     console.log(movie);
+    //ajax
   });
 
   $("#poster").change(function () {
@@ -135,6 +144,14 @@
     } else return false;
   }
 
+  function parseRuntime(runtime) {
+    runtime = parseInt(runtime);
+    if (runtime < 0 || runtime > 500) {
+      return -1;
+    }
+    return runtime;
+  }
+
   function isImage(file) {
     if (!/image\/\w+/.test(file.type)) {
       return false;
@@ -166,7 +183,7 @@
   function autoFill(movie) {
     $("#name").val(movie.name);
     $("#countries").val(movie.countries);
-    //string
+    $("#releaseDate").val(movie.releaseDate);
     $("#runtime").val(movie.runtime);
     $("#languages").val(movie.languages);
     $("#casts").val(movie.casts);
