@@ -6,15 +6,6 @@ const util = require("../data/utils/util");
 const movieData = require("../data/movie/movie");
 const commentData = require("../data/movie/comment");
 
-// router.get("", async (req, res) => {
-//   console.log(123123123123);
-//   const { data } = await axios.get(
-//     `https://imdb-api.com/en/API/Title/k_o8ajco4w/tt0068646`
-//   );
-//   // res.render("movie/movieDetails", { data: data });
-//   res.render("movie/movieDetails", {});
-// });
-
 router.get("/addMovie", (req, res) => {
   //is Login
   if (!req.session.user) {
@@ -23,11 +14,35 @@ router.get("/addMovie", (req, res) => {
   res.render("movie/addMovie", {});
 });
 
+router.post("/addMovie", (req, res) => {
+  //is Login
+  if (!req.session.user) {
+    res.redirect("/");
+  }
+  console.log("111111111");
+  const movie = req.body.movie;
+  try {
+    const result = await movieData.add(movie);
+    res.send({isSuccess: true})
+  } catch (error) {
+    res.status(500).send({error:error})
+  }
+  // res.render("movie/addMovie", {});
+});
+
 router.get("/imdb/:id", async (req, res) => {
   let imdbId = req.params.id;
   try {
     imdbId = util.isValidString(imdbId);
-    const movie = await movieData.queryFromImdb(imdbId);
+    //is existed movie
+    // const movie1 = await movieData.getByImdbId(imdbId);
+    // if (movie1 !== null) {
+    //   res.status(200).send({ isExisted: true, id: movie1._id });
+    //   return;
+    // }
+
+    // const movie = await movieData.queryFromImdb(imdbId);
+    const movie = await movieData.getByImdbId(imdbId);
     res.status(200).send(movie);
   } catch (error) {
     res.status(500).send({ error: error });

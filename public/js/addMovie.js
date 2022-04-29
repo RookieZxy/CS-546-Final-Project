@@ -19,9 +19,14 @@
     })
       .then((data) => {
         console.log(data);
-        $("#imdbId").attr("disabled", true);
-        $("#getImdb").attr("disabled", true);
-        autoFill(data);
+        if (data.isExisted) {
+          alert(`Movie with IMDB id '${imdbId}' is existed`);
+          window.location.replace(`/movie/${data.id}`);
+        } else {
+          $("#imdbId").attr("disabled", true);
+          $("#getImdb").attr("disabled", true);
+          autoFill(data);
+        }
       })
       .fail((error) => {
         alert(error);
@@ -54,6 +59,12 @@
       }
     }
 
+    //imdb id
+    const imdbId = $("#imdbId").val();
+    if (imdbId !== "") {
+      movie.imdbId = imdbId;
+    }
+
     //typeList
     let typeList = [];
     const checkBoxInputs = $("#typeTheck input");
@@ -76,19 +87,29 @@
 
     //images
     let images = [];
-    let n = $("#images").prop("files").length;
-    if (n !== 0) {
-      for (let i = 0; i < n; i++) {
-        let src = $(`#img${i}`).prop("src");
-        images.push({
-          title: i,
-          image: src,
-        });
-      }
+    const imgs = $("#imagesDiv img");
+    for (let i = 0; i < imgs.length; i++) {
+      const img = imgs[i];
+      images.push({
+        title: `${movie.name}_${i}`,
+        image: $(img).prop("src"),
+      });
     }
     movie.images = images;
 
     console.log(movie);
+    //ajax
+    $.ajax({
+      method: "post",
+      url: "http://localhost:3000/movie/addMovie",
+      data: movie,
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .fail((error) => {
+        alert(error);
+      });
   });
 
   $("#poster").change(function () {
@@ -185,9 +206,24 @@
     for (let i = 0; i < movie.images.length; i++) {
       const image = movie.images[i];
       $("#imagesDiv").append(
-        `<img src="${image.image}" id="img${i}" class="rounded-top" alt="Sample image" width="300" height="300">`
+        `<div class="col-sm-3" id="imagesDiv${i}">
+          <img src="${image.image}" id="img${i}" class="rounded-top" alt="Sample image" width="300" height="300">
+          <button class="w-100 btn btn-danger" id="delBtn${i}" onclick=>Delete</button>
+        </div>`
       );
+      //add click event
+      const delBtns = $("#imagesDiv button");
+      for (let i = 0; i < delBtns.length; i++) {
+        const delBtn = delBtns[i];
+        $(delBtn).click(function () {
+          $(`#imagesDiv${i}`).remove();
+        });
+      }
       $("#imagesDiv").show();
     }
+  }
+
+  function delBtn(i) {
+    alert(i);
   }
 })(jQuery);

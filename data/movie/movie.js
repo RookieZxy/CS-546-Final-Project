@@ -1,6 +1,6 @@
 const settings = require("../../config/settings.json");
-// const apiKey = settings.imdb.apiKey;
-const apiKey = settings.imdb.apiKey_Alternative;
+const apiKey = settings.imdb.apiKey;
+// const apiKey = settings.imdb.apiKey_Alternative;
 const axios = require("axios");
 const util = require("../utils/util");
 const mongoCollections = require("../../config/mongoCollections");
@@ -129,10 +129,10 @@ async function getById(id) {
 
 // Query the database.movie and find all movies with typeName in typeList.
 async function getByType(typeName) {
-  if (!typeName || typeof typeName != "string") 
+  if (!typeName || typeof typeName != "string")
     throw `invalid typename: '${typeName}'`;
   const moviesCollection = await mongoCollections.movies();
-  const movie = await moviesCollection.find( {typeList: typeName} ).toArray();
+  const movie = await moviesCollection.find({ typeList: typeName }).toArray();
   if (movie === null) throw `No movie with typeName '${typeName}`;
   //movie._id = movie._id.toString();
   movie.releaseDate = new Date(movie.releaseDate);
@@ -141,9 +141,11 @@ async function getByType(typeName) {
 }
 
 // Query the database.type to get all movie types.
-async function getAllTypes(){
+async function getAllTypes() {
   const typeCollection = await mongoCollections.type();
-  const types = await typeCollection.find({}, { projection: {_id: 0, name: 1} }).toArray();
+  const types = await typeCollection
+    .find({}, { projection: { _id: 0, name: 1 } })
+    .toArray();
   if (types === null) throw "No types.";
   //console.log ('types: ', types);
   return types;
