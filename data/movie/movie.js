@@ -1,10 +1,12 @@
 const settings = require("../../config/settings.json");
-const apiKey = settings.imdb.apiKey;
+// const apiKey = settings.imdb.apiKey;
+const apiKey = settings.imdb.apiKey_Alternative;
 const axios = require("axios");
 const util = require("../utils/util");
 const mongoCollections = require("../../config/mongoCollections");
 const { ObjectId } = require("mongodb");
 const mongoConnection = require("../../config/mongoConnection");
+const moment = require("moment");
 
 async function queryFromImdb(imdbId) {
   const movie = { imdbId: imdbId };
@@ -26,7 +28,7 @@ async function queryFromImdb(imdbId) {
   const trailerData = data3.data;
 
   movie.rating = 0;
-  movie.releaseDate = new Date(data.releaseDate);
+  movie.releaseDate = data.releaseDate;
   movie.name = data.title;
   movie.plot = data.plot;
   movie.casts = data.stars;
@@ -57,6 +59,7 @@ async function queryFromImdb(imdbId) {
 
 async function add(movie) {
   util.isValidMovie(movie);
+  movie.releaseDate = new Date(movie.releaseDate);
   movie.isValid = false; //Movie can be valid after admin has approved.
   const moviesCollection = await mongoCollections.movies();
   const insertInfo = await moviesCollection.insertOne(movie);
@@ -117,29 +120,32 @@ async function getById(id) {
   const movie = await moviesCollection.findOne({ _id: ObjectId(id) });
   if (movie === null) throw `No movie with id '${id}'`;
   movie._id = movie._id.toString();
-  movie.releaseDate = new Date(movie.releaseDate);
+  // movie.releaseDate = new Date(movie.releaseDate);
+  const date = moment(movie.releaseDate);
+  movie.releaseDate = date.format("YYYY-MM-DD");
   return movie;
 }
 
-// Query the database.movie and find all movies with typeName in typeList. 
+// Query the database.movie and find all movies with typeName in typeList.
 async function getByType(typeName) {
-  if (!typeName || typeof typeName != 'string') throw `invalid typename: '${typeName}'`;
+  if (!typeName || typeof typeName != "string")
+    throw `invalid typename: '${typeName}'`;
   const moviesCollection = await mongoConnections.movies();
-  const movie = await moviesCollection.find( {typeList: typeName} );
+  const movie = await moviesCollection.find({ typeList: typeName });
   if (movie === null) throw `No movie with typeName '${typeName}`;
   movie._id = movie._id.toString();
   movie.releaseDate = new Date(movie.releaseDate);
-  console.log ('movie: ', movie);
+  console.log("movie: ", movie);
   return movie;
 }
 
 // Query the database.type to get all movie types.
-async function getAllTypes(){
+async function getAllTypes() {
   const typeCollection = await mongoConnections.type();
   const types = typeCollection.find();
-  if (types === null) throw 'No types.';
-  console.log ('types: ', types);
-  return types
+  if (types === null) throw "No types.";
+  console.log("types: ", types);
+  return types;
 }
 
 async function getByName(name) {

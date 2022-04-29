@@ -15,7 +15,7 @@ function isValidMovie(movie) {
   movie.images = imgData.items;
   movie.typeList
   */
-  movie.date = isValidDateString(movie.date);
+  movie.releaseDate = isValidDateString(movie.releaseDate);
   isValidRating(movie.rating);
   movie.casts = isValidString(movie.casts);
   movie.imdbId = isValidString(movie.imdbId);
@@ -30,8 +30,8 @@ function isValidMovie(movie) {
 
 function isValidDateString(date) {
   date = isValidString(date);
-  if (!moment(date, "MM/DD/YYYY", true).isValid())
-    throw `${date} wrong format of date. Please input MM/DD/YYYY`;
+  if (!moment(date, "YYYY-MM-DD", true).isValid())
+    throw `${date} wrong format of date. Please input YYYY-MM-DD`;
   return date;
 }
 
