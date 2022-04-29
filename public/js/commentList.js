@@ -1,5 +1,5 @@
 (function ($) {
-    var movieId = $('#movieId').val().trim();
+    var movieId = $('#movieId').val();
     var requestConfig = {
         url: '/comment/search',
         method: 'POST',

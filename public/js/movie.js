@@ -5,7 +5,7 @@
         $('#error').hide();
         //$('#showList').empty();
         $('#showList').show();
-        var inputText = $('#search_termInput').val().trim();
+        var inputText = $('#search_termInput').val();
         if(inputText === ''){
             $('#showList').show();
             $('#error').show();
