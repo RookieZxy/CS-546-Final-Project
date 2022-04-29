@@ -27,6 +27,28 @@ async function createComment(content, userName, movieId, date, rate) {
     }
 }
 
+async function createReply(content, userName, movieId, date, rate, id) {
+    const commentCollection = await comment();
+
+    const likes = 0;
+    const parentId = id;
+    let newComment = {
+        userName: userName,
+        movieId: movieId,
+        content: content,
+        parentId: parentId,
+        date: date,
+        likes: likes,
+        rate: rate,
+    }
+
+    const insertInfo = await commentCollection.insertOne(newComment);
+    if (insertInfo.insertedCount == 0)
+        throw `Could not add a new user`
+    return {
+        commentInserted: true
+    }
+}
 
 async function getByMovieId(id) {
     const commentCollection = await comment();
@@ -41,6 +63,27 @@ async function getByMovieId(id) {
         .find({
             movieId: id,
             parentId: 0, //$options: "i"  Ignore case
+        }).toArray();
+
+    comments.forEach(element => {
+        element._id = element._id.toString();
+    });
+    // console.log(comments);
+    return comments;
+}
+
+async function getById(id) {
+    const commentCollection = await comment();
+    // let str = ".*" + name + ".*$";
+    // let reg = new RegExp(str);
+    if (!id)
+        throw `You must provide an id`;
+    util.checkString("id", id);
+    // console.log(id);
+
+    const comments = await commentCollection
+        .find({
+            parentId: id, 
         }).toArray();
 
     comments.forEach(element => {
@@ -75,4 +118,6 @@ module.exports = {
     getByMovieId,
     createComment,
     calMovieRate,
+    getById,
+    createReply,
 }
