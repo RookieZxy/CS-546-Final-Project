@@ -35,7 +35,7 @@ async function queryFromImdb(imdbId) {
   movie.directors = data.directors;
   movie.writers = data.writers;
   movie.languages = data.languages;
-  movie.runtime = data.runtimeStr;
+  movie.runtime = data.runtimeMins;
   movie.poster = data.image;
   movie.awards = data.awards;
   movie.countries = data.countries;

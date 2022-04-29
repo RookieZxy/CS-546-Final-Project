@@ -165,7 +165,7 @@
   function autoFill(movie) {
     $("#name").val(movie.name);
     $("#countries").val(movie.countries);
-    //string
+    $("#releaseDate").val(movie.releaseDate);
     $("#runtime").val(movie.runtime);
     $("#languages").val(movie.languages);
     $("#casts").val(movie.casts);
