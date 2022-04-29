@@ -74,6 +74,7 @@ async function modify(movie) {
   //will throw an error if values in movie are all same with old one
   id = ObjectId(movie._id);
   delete movie["_id"];
+  movie.releaseDate = new Date(movie.releaseDate);
   const moviesCollection = await mongoCollections.movies();
   const updateInfo = await moviesCollection.updateOne(
     { _id: id },
