@@ -35,6 +35,7 @@ router.post("/searchSub", async (req, res) => {
             throw `parentId does not exist!`
         }
         const comments = await commentData.getById(parentId);
+        // console.log(comments);
         res.send(comments);
     } catch (e) {
         console.log(e);

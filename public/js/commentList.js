@@ -35,6 +35,7 @@
 
             $.ajax(requestConfig2).then(function (responseMessage) {
                 var replyList = $(responseMessage);
+                console.log(replyList);
                 for(var i = 0; i < replyList.length; i++){
                     var li1 = `<li> ${replyList[i].userName}</li>`;
                     var li2 = `<li style = "list-style: none"> ${replyList[i].content}</li></br>`

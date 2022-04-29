@@ -105,12 +105,11 @@ async function calMovieRate(id) {
         if (element.parentId == 0){
             sum += element.rate;
             count += 1;
-            console.log(sum);
-            console.log(count);
         }
     });
 
-    const rate = (sum / count).toFixed(1);
+    const rate = Math.round(sum / count * 10) / 10;
+    console.log(rate);
     await movie.updateRating(id, rate);
 }
 
