@@ -22,7 +22,14 @@ router.post("/addMovie", (req, res) => {
   console.log("111111111");
   const movie = req.body.movie;
   try {
-    const result = await movieData.add(movie);
+
+
+    
+    //bug
+    // const result = await movieData.add(movie);
+
+
+
     res.send({isSuccess: true})
   } catch (error) {
     res.status(500).send({error:error})

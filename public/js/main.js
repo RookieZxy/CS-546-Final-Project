@@ -1,3 +1,6 @@
+const session = require("express-session");
+const { users } = require("../../data");
+
 (function($) {
 
 	"use strict";
@@ -10,7 +13,9 @@
         if(object.isAdmin == true){
 			$("#userManage").show();
 		}
-
+		// var session = sessionStorage.getItem('user');
+		// console.log(session);
+		// if(session.get(user))
 		if(object.username != null){
 			$("#login").hide();
 		}else{
