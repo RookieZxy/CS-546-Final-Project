@@ -80,7 +80,12 @@
     <a href="/types/Sci-Fi" id="Sci-Fi">Sci-Fi</a>
     <a href="/types/Romance" id="Romance">Romance</a>
     <a href="/types/War" id="War">War</a>
+</div>
 
+<div>
+    {{#each types}}
+    <a href="/types/{{this.name}}" id="{{this.name}}">{{this.name}}</a>
+    {{/each}}
 </div>
 
 

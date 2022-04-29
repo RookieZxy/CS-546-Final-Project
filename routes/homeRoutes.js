@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const movieData = require('../data/movie/movie')
 
 router.get('/', async (req, res) => {
     // if(req.session.user)
     //     res.render('home/home',{user: req.session.user})
     // else
-    res.render('home/home')
+    const types = await movieData.getAllTypes();
+    //console.log(types);
+
+    res.render('home/home', {types: types});
 });
+
 router.get('/userInfo', async (req, res) => {
     let username = null;
     //console.log(username);
@@ -25,8 +30,9 @@ router.get('/userInfo', async (req, res) => {
 router.get('/types/:id', async (req, res) => {
     const type = req.params.id;
     if (!type || typeof type != 'string')throw `invalide type name: '${type}'`;
-    console.log('get type route: ', type);
-    res.render('home/home');
+    const moviesByType = await movieData.getByType(type);
+    //console.log("moviesByType: ", moviesByType);
+    res.render('movie/types', {type: type, movies: moviesByType});
 });
 
 

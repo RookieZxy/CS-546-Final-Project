@@ -1,0 +1,9 @@
+<div>
+    <h1>{{type}} Movies</h1>
+    {{#each movies}}
+        <a href="/movie/{{this._id}}" id="{{this.name}}">{{this.name}}</a><br>
+    {{/each}}
+</div>
+
+
+<a href="/">back to home page</a>

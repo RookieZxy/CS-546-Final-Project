@@ -129,23 +129,23 @@ async function getById(id) {
 
 // Query the database.movie and find all movies with typeName in typeList.
 async function getByType(typeName) {
-  if (!typeName || typeof typeName != "string")
+  if (!typeName || typeof typeName != 'string') 
     throw `invalid typename: '${typeName}'`;
-  const moviesCollection = await mongoConnections.movies();
-  const movie = await moviesCollection.find({ typeList: typeName });
+  const moviesCollection = await mongoCollections.movies();
+  const movie = await moviesCollection.find( {typeList: typeName} ).toArray();
   if (movie === null) throw `No movie with typeName '${typeName}`;
-  movie._id = movie._id.toString();
+  //movie._id = movie._id.toString();
   movie.releaseDate = new Date(movie.releaseDate);
-  console.log("movie: ", movie);
+  //console.log ('movie: ', movie);
   return movie;
 }
 
 // Query the database.type to get all movie types.
-async function getAllTypes() {
-  const typeCollection = await mongoConnections.type();
-  const types = typeCollection.find();
-  if (types === null) throw "No types.";
-  console.log("types: ", types);
+async function getAllTypes(){
+  const typeCollection = await mongoCollections.type();
+  const types = await typeCollection.find({}, { projection: {_id: 0, name: 1} }).toArray();
+  if (types === null) throw 'No types.';
+  //console.log ('types: ', types);
   return types;
 }
 
