@@ -16,7 +16,7 @@ async function main() {
   const type = await mongoConnections.type();
 
   const db = await mongoConnection.connectToDb();
-  //await db.dropDatabase();
+  await db.dropDatabase();
 
   //user
   const user1 = {
