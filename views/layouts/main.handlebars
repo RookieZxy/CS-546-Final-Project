@@ -18,7 +18,6 @@
     {{!-- CSS for movie detail page --}}
     {{/if}}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -32,10 +31,13 @@
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                <li><a href="/types/Action" id="Action" class="nav-link px-2 text-white">Action</a></li>
+                <li><a href="/types/Horror" id="Horror" class="nav-link px-2 text-white">Horror</a></li>
+                <li><a href="/types/Drama" id="Drama" class="nav-link px-2 text-white">Drama</a></li>
+                <li><a href="/types/Comedy" id="Comedy" class="nav-link px-2 text-white">Comedy</a></li>
+                <li><a href="/types/Sci-Fi" id="Sci-Fi" class="nav-link px-2 text-white">Sci-Fi</a></li>
+                <li><a href="/types/Romance" id="Romance" class="nav-link px-2 text-white">Romance</a></li>
+                <li><a href="/types/War" id="War" class="nav-link px-2 text-white">War</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -43,10 +45,16 @@
             </form>
 
             <div class="text-end">
-                <a href="/login" id="login"><button type="button" class="btn btn-outline-light me-2">Login</button></a>
-                <a href="/logout" id="logout"><button type="button" class="btn btn-outline-light me-2">Logout</button></a>
+                <a href="/login" id="login">
+                    <button type="button" class="btn btn-outline-light me-2">Login</button>
+                </a>
+                <a href="/logout" id="logout">
+                    <button type="button" class="btn btn-outline-light me-2">Logout</button>
+                </a>
                 {{!-- <a href="/login2" id="login2"><button type="button" class="btn btn-outline-light me-2">Log in another account</button></a> --}}
-                <a href="/signup"><button type="button" class="btn btn-warning">Sign-up</button></a>
+                <a href="/signup">
+                    <button type="button" class="btn btn-warning">Sign-up</button>
+                </a>
             </div>
         </div>
     </div>
