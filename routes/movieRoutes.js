@@ -31,7 +31,7 @@ router.post("/addMovie", async (req, res) => {
   }
   const movie = req.body;
   //is admin
-  if (!req.session.user.isAdmin) {
+  if (req.session.user.isAdmin) {
     movie.isValid = true;
   } else movie.isValid = false;
   try {
