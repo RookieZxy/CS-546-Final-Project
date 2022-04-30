@@ -60,7 +60,6 @@ async function queryFromImdb(imdbId) {
 async function add(movie) {
   util.isValidMovie(movie);
   movie.releaseDate = new Date(movie.releaseDate);
-  movie.isValid = false; //Movie can be valid after admin has approved.
   const moviesCollection = await mongoCollections.movies();
   const insertInfo = await moviesCollection.insertOne(movie);
   if (!insertInfo.acknowledged || !insertInfo.insertedId)
@@ -115,6 +114,20 @@ async function getTopRated() {
   return movies;
 }
 
+async function getInvalid() {
+  const moviesCollection = await mongoCollections.movies();
+
+  const movies = await moviesCollection.find({ isValid: true }).toArray();
+
+  for (let i = 0; i < movies.length; i++) {
+    const movie = movies[i];
+    movie._id = movie._id.toString();
+    const date = moment(movie.releaseDate);
+    movie.releaseDate = date.format("YYYY-MM-DD");
+  }
+  return movies;
+}
+
 async function getById(id) {
   id = util.isObjectId(id);
   const moviesCollection = await mongoCollections.movies();
@@ -158,6 +171,49 @@ async function getByName(name) {
   const movies = await moviesCollection
     .find({
       name: { $regex: reg, $options: "i" }, //$options: "i"  Ignore case
+      isValid: true,
+    })
+    .toArray();
+
+  for (let i = 0; i < movies.length; i++) {
+    const movie = movies[i];
+    movie._id = movie._id.toString();
+    const date = moment(movie.releaseDate);
+    movie.releaseDate = date.format("YYYY-MM-DD");
+  }
+  // console.log(movies);
+  return movies;
+}
+
+async function getByCast(cast) {
+  const moviesCollection = await mongoCollections.movies();
+  let str = ".*" + cast + ".*$";
+  let reg = new RegExp(str);
+  const movies = await moviesCollection
+    .find({
+      casts: { $regex: reg, $options: "i" }, //$options: "i"  Ignore case
+      isValid: true,
+    })
+    .toArray();
+
+  for (let i = 0; i < movies.length; i++) {
+    const movie = movies[i];
+    movie._id = movie._id.toString();
+    const date = moment(movie.releaseDate);
+    movie.releaseDate = date.format("YYYY-MM-DD");
+  }
+  // console.log(movies);
+  return movies;
+}
+
+async function getByDirector(director) {
+  const moviesCollection = await mongoCollections.movies();
+  let str = ".*" + cast + ".*$";
+  let reg = new RegExp(str);
+  const movies = await moviesCollection
+    .find({
+      directors: { $regex: reg, $options: "i" }, //$options: "i"  Ignore case
+      isValid: true,
     })
     .toArray();
 
@@ -184,11 +240,9 @@ async function getByImdbId(imdbId) {
 
 async function getSimilar(id) {}
 
-async function changeValidation(id, isValid) {
-  id = util.isObjectId(id);
-
-  const movie = await getById(id);
-  movie.isValid = isValid;
+async function approveMovie(movie) {
+  util.isValidMovie(movie);
+  movie.isValid = true;
 
   return await modify(movie);
 }
@@ -215,6 +269,9 @@ module.exports = {
   updateRating,
   getByImdbId,
   getTopRated,
-  changeValidation,
+  approveMovie,
   getAllTypes,
+  getInvalid,
+  getByCast,
+  getByDirector,
 };

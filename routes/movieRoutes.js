@@ -14,17 +14,30 @@ router.get("/addMovie", (req, res) => {
   res.render("movie/addMovie", {});
 });
 
+router.get("/approve/:id", (req, res) => {
+  //is admin
+  if (!req.session.user.isAdmin) {
+    res.redirect("/");
+  }
+
+  let id = req.params.id;
+  res.render("movie/addMovie", { _id: id });
+});
+
 router.post("/addMovie", async (req, res) => {
   //is Login
   if (!req.session.user) {
     res.redirect("/");
   }
   const movie = req.body;
+  //is admin
+  if (!req.session.user.isAdmin) {
+    movie.isValid = true;
+  } else movie.isValid = false;
   try {
     util.isValidMovie(movie);
     const id = await movieData.add(movie);
     res.send({ isSuccess: true, id: id });
-    // res.render("movie/success", {});
   } catch (error) {
     res.status(500).send({ error: error });
   }

@@ -59,6 +59,10 @@
       }
     }
 
+    //_id
+    const idP = $("#_id");
+    if (idP) movie._id = idP.val();
+
     //imdb id
     const imdbId = $("#imdbId").val();
     if (imdbId !== "") {
