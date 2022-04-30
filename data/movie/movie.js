@@ -164,7 +164,8 @@ async function getByName(name) {
   for (let i = 0; i < movies.length; i++) {
     const movie = movies[i];
     movie._id = movie._id.toString();
-    movie.releaseDate = new Date(movie.releaseDate);
+    const date = moment(movie.releaseDate);
+    movie.releaseDate = date.format("YYYY-MM-DD");
   }
   // console.log(movies);
   return movies;
@@ -176,7 +177,8 @@ async function getByImdbId(imdbId) {
   const movie = await moviesCollection.findOne({ imdbId: imdbId });
   if (movie === null) throw `No movie with imdbId '${imdbId}'`;
   movie._id = movie._id.toString();
-  movie.releaseDate = new Date(movie.releaseDate);
+  const date = moment(movie.releaseDate);
+  movie.releaseDate = date.format("YYYY-MM-DD");
   return movie;
 }
 

@@ -3,6 +3,7 @@
 
   $("#posterImg").hide();
   $("#imagesDiv").hide();
+  $("#success").hide();
 
   $("#getImdb").click((e) => {
     e.preventDefault();
@@ -18,7 +19,6 @@
       url: `http://localhost:3000/movie/imdb/${imdbId}`,
     })
       .then((data) => {
-        console.log(data);
         if (data.isExisted) {
           alert(`Movie with IMDB id '${imdbId}' is existed`);
           window.location.replace(`/movie/${data.id}`);
@@ -105,7 +105,11 @@
       data: movie,
     })
       .then((data) => {
-        console.log(data);
+        $("#addDiv").hide();
+        $("#success").show();
+        setTimeout(function () {
+          window.location.replace("/");
+        }, 5000);
       })
       .fail((error) => {
         alert(error);
@@ -131,11 +135,22 @@
         return;
       }
       $("#imagesDiv").append(
-        `<img src="" id="img${i}" class="rounded-top" alt="Sample image" width="300" height="300">`
+        `<div class="col-sm-3" id="imagesDiv${i}">
+          <img src="" id="img${i}" class="rounded-top" alt="Sample image" width="300" height="300">
+          <button class="w-100 btn btn-danger" id="delBtn${i}" onclick=>Delete</button>
+        </div>`
       );
       setSrc(image, `img${i}`);
-      $("#imagesDiv").show();
     }
+    //add click event
+    const delBtns = $("#imagesDiv button");
+    for (let i = 0; i < delBtns.length; i++) {
+      const delBtn = delBtns[i];
+      $(delBtn).click(function () {
+        $(`#imagesDiv${i}`).remove();
+      });
+    }
+    $("#imagesDiv").show();
   });
 
   $("#poster").change(function () {

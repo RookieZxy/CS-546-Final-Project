@@ -14,27 +14,20 @@ router.get("/addMovie", (req, res) => {
   res.render("movie/addMovie", {});
 });
 
-router.post("/addMovie", (req, res) => {
+router.post("/addMovie", async (req, res) => {
   //is Login
   if (!req.session.user) {
     res.redirect("/");
   }
-  console.log("111111111");
-  const movie = req.body.movie;
+  const movie = req.body;
   try {
-
-
-    
-    //bug
-    // const result = await movieData.add(movie);
-
-
-
-    res.send({isSuccess: true})
+    util.isValidMovie(movie);
+    const id = await movieData.add(movie);
+    res.send({ isSuccess: true, id: id });
+    // res.render("movie/success", {});
   } catch (error) {
-    res.status(500).send({error:error})
+    res.status(500).send({ error: error });
   }
-  // res.render("movie/addMovie", {});
 });
 
 router.get("/imdb/:id", async (req, res) => {
@@ -70,8 +63,6 @@ router.get("/:id", async (req, res) => {
 
   try {
     const movie = await movieData.getById(id);
-    // movie.releaseDate = movie.releaseDate.getUTCDate();
-    // movie.releaseDate = `${movie.releaseDate.getMonth()}/${movie.releaseDate.getDate()}/${movie.releaseDate.getFullYear()}`;
     movie.imageShow = [];
     for (let i = 0; i < 9; i++) {
       const img = movie.images[i];

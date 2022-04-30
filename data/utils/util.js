@@ -8,24 +8,30 @@ function isObjectId(id) {
 }
 
 function isValidMovie(movie) {
-  /*
-  movie.countries = data.countries;
-  movie.keywords = data.keywordList;
-  movie.trailerLink = trailerData.linkEmbed;
-  movie.images = imgData.items;
-  movie.typeList
-  */
   movie.releaseDate = isValidDateString(movie.releaseDate);
-  isValidRating(movie.rating);
+  // isValidRating(movie.rating);
+  isImagesInMovie(movie);
+  isTypeListInMovie(movie.typeList);
   movie.casts = isValidString(movie.casts);
+  movie.countries = isValidString(movie.countries);
+  movie.trailerLink = isValidString(movie.trailerLink);
   movie.imdbId = isValidString(movie.imdbId);
   movie.name = isValidString(movie.name);
+  movie.plot = isValidString(movie.plot);
   movie.directors = isValidString(movie.directors);
   movie.writers = isValidString(movie.writers);
   movie.languages = isValidString(movie.languages);
   movie.runtime = isValidString(movie.runtime);
   movie.poster = isValidString(movie.poster);
   return movie;
+}
+
+function isImagesInMovie(movie) {
+  if (!movie.images || !Array.isArray(movie.images)) movie.images = [];
+}
+
+function isTypeListInMovie(movie) {
+  if (!movie.typeList || !Array.isArray(movie.typeList)) movie.typeList = [];
 }
 
 function isValidDateString(date) {
