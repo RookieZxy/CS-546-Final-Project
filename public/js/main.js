@@ -12,6 +12,7 @@
 		}
 		if (object.username != null) {
 			$("#login").hide();
+			$("#signup").hide();
 		} else {
 			$("#logout").hide();
 		}

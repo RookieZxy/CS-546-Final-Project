@@ -33,7 +33,7 @@ const constructorMethod = (app) => {
     req.session.destroy();
     res.clearCookie('AuthCookie');
     res.redirect('/');
-    res.render('home/home', {login_flag: 'logout'});
+    // res.render('home/home', {login_flag: 'logout'});
   });
 
   app.get('/login2', async (req, res) => {
