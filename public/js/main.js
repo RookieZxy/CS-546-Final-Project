@@ -6,7 +6,7 @@
 		method: 'GET',
 		url: 'http://localhost:3000/userInfo'
 	}
-	$.ajax(requestAdmin).then((object) => {      
+	$.ajax(requestAdmin).then((object) => {
         if(object.isAdmin == true){
 			$("#userManage").show();
 		}

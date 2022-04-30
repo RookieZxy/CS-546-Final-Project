@@ -24,11 +24,15 @@ const constructorMethod = (app) => {
   //   }
   //   res.render('users/login', {document_title: 'home'});
   // })
+    app.get('/search', async (req, res) => {
+    res.render('search/search');
+  });
 
   //log out
   app.get('/logout', async (req, res) => {
     req.session.destroy();
     res.clearCookie('AuthCookie');
+    res.redirect('/');
     res.render('home/home', {login_flag: 'logout'});
   });
 
@@ -46,7 +50,7 @@ const constructorMethod = (app) => {
   app.use('/signup', signupRoutes);
   //get information
   app.use('/users', usersRoutes);
-  //forgoy password
+  //forgot password
   app.use('/forgot', forgotRoutes);
   //user manage
   app.use('/userManage', userManageRoutes);
