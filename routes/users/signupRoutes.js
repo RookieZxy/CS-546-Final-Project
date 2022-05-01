@@ -68,18 +68,22 @@ router.post('/', async (req, res) => {
 
         // console.log(newUser);
         if (newUser.userInserted == true)
-            res.redirect('/login');
-        else
-            res.status(500).send({
-                message: 'Internal Server Error'
-            })
+            // res.redirect('/login');
+            res.status(200).send();
+        // else
+        //     res.status(500).send({
+        //         message: 'Internal Server Error'
+        //     })
     } catch (e) {
         console.log(e);
-        res.status(400).render('users/signup', {
-            login_flag: 'signup',
-            status: 'HTTP 400',
+        // res.status(400).render('users/signup', {
+        //     login_flag: 'signup',
+        //     status: 'HTTP 400',
+        //     error: e
+        // })
+        res.status(500).send({
             error: e
-        })
+        });
     }
 });
 

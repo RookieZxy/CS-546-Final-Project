@@ -41,20 +41,23 @@
         }
         return check;
     }
-    $('#loginForm').submit((event) => {
+    $('#signUpForm').submit((event) => {
         event.preventDefault();
         // console.log($("#account").val());
         var check = checkLogin($("#account").val(), $("#password").val());
         if(check){
             $.ajax({
                 method: "POST",
-                url: `http://localhost:3000/login`,
+                url: `http://localhost:3000/signup`,
                 data: {
                     account: $("#account").val(),
-                    password: $("#password").val()
+                    password: $("#password").val(),
+                    confirm: $("#confirm").val(),
+                    firstname: $("#firstname").val(),
+                    lastname: $("#lastname").val(),
                 }
             }).then((data) => {
-                window.location.replace('/')
+                window.location.replace('/login')
             }).fail((error) => {
                 // console.log(error);
                 // console.log(error.responseJSON.error);

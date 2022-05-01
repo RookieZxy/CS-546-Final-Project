@@ -13,7 +13,8 @@
     <p>{{user.account}}</p>
     <p>{{user.firstName}}</p>
     <p>{{user.lastName}}</p>
-    <form action="/users" method="post">
+    {{!-- <form action="/users" method="post"> --}}
+    <form id="updateInfo">
         {{!-- <input type="prepassword" placeholder="previous password" name="prepassword" id="prepassword" required> --}}
         <input type="password" placeholder="password" name="password" id="password" required>
         {{!-- <input type="confirmPw" placeholder="confirm new password" name="confirmPw" id="confirmPw" required> --}}
@@ -22,10 +23,11 @@
         <button type="submit">Submit</button>
     </form>
     </br>
-    <form action="/users/password" method="post">
-        <input type="prepassword" placeholder="previous password" name="prepassword" id="prepassword" required>
-        <input type="password" placeholder="new password" name="password" id="password" required>
-        <input type="confirmPw" placeholder="confirm new password" name="confirmPw" id="confirmPw" required>
+    {{!-- <form action="/users/password" method="post"> --}}
+    <form id="updatePassword">
+        <input type="password" placeholder="previous password" name="prepassword" id="prepassword" required>
+        <input type="password" placeholder="new password" name="newPassword" id="newPassword" required>
+        <input type="password" placeholder="confirm new password" name="confirmPw" id="confirmPw" required>
         <button type="submit">Submit</button>
     </form>
 

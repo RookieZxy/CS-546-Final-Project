@@ -62,22 +62,30 @@ router.post("/password", async (req, res) => {
 
     const updatedUsers = await usersData.update(req.session.user.account, updatedData.password, updatedData.firstName, updatedData.lastName);
     // console.log(updatedUsers);
-    if (updatedUsers) {
-      // res.redirect('/users');
-      res.status(400).render('users/account', {
-        userInfo: 'success',
-        user: updatedUsers
-      })
-    } else
-      res.status(500).send({
-        message: 'Internal Server Error'
-      })
+    // if (updatedUsers) {
+    //   // res.redirect('/users');
+    //   res.status(400).render('users/account', {
+    //     userInfo: 'success',
+    //     user: updatedUsers
+    //   })
+    // } else
+    //   res.status(500).send({
+    //     message: 'Internal Server Error'
+    //   })
+
+    res.status(200).send({
+      userInfo: 'success',
+      user: updatedUsers
+    });
   } catch (e) {
     console.log(e);
-    res.status(400).render('users/account', {
-      status: 'HTTP 400',
+    // res.status(400).render('users/account', {
+    //   status: 'HTTP 400',
+    //   error: e
+    // })
+    res.status(400).send({
       error: e
-    })
+    });
   }
 });
 
@@ -108,28 +116,40 @@ router.post("/", async (req, res) => {
       throw `password is not correct`;
     updatedData.password = req.body.password;
 
+
+    console.log(req.body.firstName);
+    console.log(req.body.lastName);
     const updatedUsers = await usersData.update(req.session.user.account, updatedData.password, updatedData.firstName, updatedData.lastName);
     // console.log(updatedUsers);
-    if (updatedUsers) {
-      // res.redirect('/users');
-      res.status(400).render('users/account', {
-        userInfo: 'success',
-        user: updatedUsers
-      })
-    } else
-      res.status(500).send({
-        message: 'Internal Server Error'
-      })
+    // if (updatedUsers) {
+    //   // res.redirect('/users');
+    //   res.status(400).render('users/account', {
+    //     userInfo: 'success',
+    //     user: updatedUsers
+    //   })
+    // }
+
+    res.status(200).send({
+      userInfo: 'success',
+      user: updatedUsers
+    })
+
+    
+    // } else
+    //   res.status(500).send({
+    //     message: 'Internal Server Error'
+    //   })
     // res.render('users/account', {
     //   user: updatedUsers
     // })
   } catch (e) {
     console.log(e);
-    res.status(400).render('users/account', {
-      userInfo: 'fail',
-      status: 'HTTP 400',
-      error: e
-    })
+    // res.status(400).render('users/account', {
+    //   userInfo: 'fail',
+    //   status: 'HTTP 400',
+    //   error: e
+    // })
+    res.status(400).send({error:e})
   }
 });
 
