@@ -173,7 +173,7 @@ router.post("/comment", async (req, res) => {
       movie: movie,
       userName: req.session.user.account,
       CSS: "detail.css",
-      comment: true,
+      // comment: 1,
     });
   } catch (e) {
     console.log(e);

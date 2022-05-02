@@ -71,27 +71,41 @@ router.post("/reply", async (req, res) => {
         // console.log(rate);
 
         const comment = await commentData.createReply(replyMessage, userName, movieId, date, rate, parentId);
-        // if (comment.commentInserted == true) {
-        //     res.render(`movie/details`, {
-        //         movie: movie,
-        //         userName: req.session.user.account,
-        //         CSS: "detail.css",
-        //         comment: true
-        //     });
-        // } else {
-        //     throw `Did not comment.`
-        // }
-        res.status(200).send({
-            movie: movie,
-            userName: req.session.user.account,
-            CSS: "detail.css",
-            comment: true
-        })
+        if (comment.commentInserted == true) {
+            res.render(`movie/details`, {
+                movie: movie,
+                userName: req.session.user.account,
+                CSS: "detail.css",
+                comment: 3,
+            });
+        } else {
+            throw `Did not comment.`
+        }
+        // res.status(200).send({
+        //     movie: movie,
+        //     userName: req.session.user.account,
+        //     CSS: "detail.css",
+        //     comment: true
+        // })
     } catch (e) {
         console.log(e);
-        res.status(400).send({
-            error: e
-        });
+        const movie = await movieData.getById(req.body.movieId);
+        if (req.session.user == undefined) {
+            res.status(400).render(`movie/details`, {
+                movie: movie,
+                CSS: "detail.css",
+                comment: 1,
+                error: e,
+            })
+        } else
+            res.status(400).render(`movie/details`, {
+                movie: movie,
+                userName: req.session.user.account,
+                CSS: "detail.css",
+                comment: 1,
+                error: e,
+            })
+        // res.status(400).send({error: e,})
     }
 });
 
