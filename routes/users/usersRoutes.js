@@ -30,8 +30,9 @@ router.get("/", async (req, res) => {
     if (!users)
       throw `account does not exist!`
     res.render('users/account', {
-      user: users
+      user: users[0]
     })
+    // res.render('users/account', users)
   } catch (e) {
     console.log(e);
     res.status(400).render('users', {
@@ -44,6 +45,7 @@ router.get("/", async (req, res) => {
 
 router.post("/password", async (req, res) => {
   let updatedData = await usersData.get(req.session.user.account);
+  updatedData = updatedData[0];
   try {
     if (!req.body.prepassword || !req.body.password || !req.body.confirmPw)
       throw `Missing Information`;
@@ -91,6 +93,9 @@ router.post("/password", async (req, res) => {
 
 router.post("/", async (req, res) => {
   let updatedData = await usersData.get(req.session.user.account);
+  updatedData = updatedData[0]
+  // console.log(req.body.password);
+  // console.log(req.body.lastName);
   try {
     if (!req.body.password)
       throw 'Missing password';
@@ -115,10 +120,6 @@ router.post("/", async (req, res) => {
     if (!await bcryptjs.compare(req.body.password, updatedData.password))
       throw `password is not correct`;
     updatedData.password = req.body.password;
-
-
-    console.log(req.body.firstName);
-    console.log(req.body.lastName);
     const updatedUsers = await usersData.update(req.session.user.account, updatedData.password, updatedData.firstName, updatedData.lastName);
     // console.log(updatedUsers);
     // if (updatedUsers) {
