@@ -6,7 +6,7 @@
                 <div class="my-5 text-center text-xl-start">
                     <h1 class="display-5 fw-bolder text-white mb-2">{{movie.name}}</h1>
                                         
-                    <input id="input-7-sm" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="5" data-step="0.5" data-size="sm" data-readonly="true" data-show-clear="false">
+                    <input id="rate" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="5" data-step="0.5" data-size="sm" data-readonly="true" data-show-clear="false">
                                         
                     <hr></hr>
                     <p class="lead fw-normal text-white-50 mb-4">{{movie.plot}}</p>
@@ -124,12 +124,15 @@
     <div class="card bg-light">
         <div class="card-body">
             <!-- Comment form-->
-            <form class="mb-4" action="/movie/comment" method="post">
-                <textarea class="form-control" name="content" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
-                <button>Comment</button>
-                <input type="text" value={{userName}} name="userName" hidden>
+            {{!-- <form class="mb-4" action="/movie/comment" method="post"> --}}
+            <form id = "addComment" class="mb-4">
+                <textarea class="form-control" id="content" name="content" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+                <input type="text" value={{userName}} id="userName1" name="userName1" hidden>
                 <input type="text" value={{movie._id}} id="movieId" name="movieId" hidden>
-                <input name="rate" id="input-7-sm" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="5" data-step="0.5" data-size="sm" data-readonly="false" data-show-clear="false">
+                <div>
+                    <input name="rate" id="input-7-sm" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="5" data-step="0.5" data-size="sm" data-readonly="false" data-show-clear="false">
+                    <button class="btn-comment">Comment</button>
+                </div>
             </form>
 
             <ul id = "commentList"></ul>

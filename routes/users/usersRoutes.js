@@ -58,6 +58,10 @@ router.post("/password", async (req, res) => {
     checkString('password', req.body.password);
     checkString('confirmPw', req.body.confirmPw);
 
+    req.body.password = xss(req.body.password);
+    req.body.confirmPw = xss(req.body.confirmPw);
+    req.body.prepassword = xss(req.body.prepassword);
+
     if (!await bcryptjs.compare(req.body.prepassword, updatedData.password))
       throw `Previous password is not correct`;
     updatedData.password = req.body.password;

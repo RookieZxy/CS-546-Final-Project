@@ -21,7 +21,9 @@ router.get("/approve/:id", (req, res) => {
   }
 
   let id = req.params.id;
-  res.render("movie/addMovie", { _id: id });
+  res.render("movie/addMovie", {
+    _id: id
+  });
 });
 
 router.post("/addMovie", async (req, res) => {
@@ -37,9 +39,14 @@ router.post("/addMovie", async (req, res) => {
   try {
     util.isValidMovie(movie);
     const id = await movieData.add(movie);
-    res.send({ isSuccess: true, id: id });
+    res.send({
+      isSuccess: true,
+      id: id
+    });
   } catch (error) {
-    res.status(500).send({ error: error });
+    res.status(500).send({
+      error: error
+    });
   }
 });
 
@@ -58,12 +65,16 @@ router.get("/imdb/:id", async (req, res) => {
     const movie = await movieData.getByImdbId(imdbId);
     res.status(200).send(movie);
   } catch (error) {
-    res.status(500).send({ error: error });
+    res.status(500).send({
+      error: error
+    });
   }
 });
 
 router.get("/imdb/", (req, res) => {
-  res.status(400).send({ error: "Please input a IMDB Id" });
+  res.status(400).send({
+    error: "Please input a IMDB Id"
+  });
 });
 
 router.get("/:id", async (req, res) => {
@@ -71,7 +82,9 @@ router.get("/:id", async (req, res) => {
   try {
     id = util.isObjectId(id);
   } catch (error) {
-    res.status(400).json({ error: error });
+    res.status(400).json({
+      error: error
+    });
   }
 
   try {
@@ -88,9 +101,14 @@ router.get("/:id", async (req, res) => {
         CSS: "detail.css",
       });
     //
-    else res.render("movie/details", { movie: movie, CSS: "detail.css" });
+    else res.render("movie/details", {
+      movie: movie,
+      CSS: "detail.css"
+    });
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({
+      error: error
+    });
   }
 });
 
@@ -116,6 +134,8 @@ router.post("/search", async (req, res) => {
 //comment
 router.post("/comment", async (req, res) => {
   try {
+    if (req.session.user == undefined)
+      throw `Please login first`;
     if (!req.body.content || !req.body.rate)
       throw `content or rate do not exist!`;
     const content = req.body.content;
@@ -138,20 +158,28 @@ router.post("/comment", async (req, res) => {
       date,
       rate
     );
-    if (comment.commentInserted == true) {
-      commentData.calMovieRate(movieId);
-      res.render(`movie/details`, {
-        movie: movie,
-        userName: req.session.user.account,
-        CSS: "detail.css",
-        comment: true,
-      });
-    } else {
-      throw `Did not comment.`;
-    }
+    // if (comment.commentInserted == true) {
+    //   commentData.calMovieRate(movieId);
+    //   res.render(`movie/details`, {
+    //     movie: movie,
+    //     userName: req.session.user.account,
+    //     CSS: "detail.css",
+    //     comment: true,
+    //   });
+    // } else {
+    //   throw `Did not comment.`;
+    // }
+    res.status(200).send({
+      movie: movie,
+      userName: req.session.user.account,
+      CSS: "detail.css",
+      comment: true,
+    });
   } catch (e) {
     console.log(e);
-    res.status(400).send(e);
+    res.status(400).send({
+      error: e
+    });
   }
 });
 

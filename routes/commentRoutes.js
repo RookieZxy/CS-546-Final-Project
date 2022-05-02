@@ -1,7 +1,8 @@
 const express = require("express");
 // const path = require("path");
 const router = express.Router();
-const axios = require("axios");
+// const axios = require("axios");
+const xss = require("xss");
 const util = require("../data/utils/util");
 const movieData = require("../data/movie/movie");
 const commentData = require("../data/movie/comment");
@@ -51,8 +52,11 @@ router.post("/searchSub", async (req, res) => {
 //add sub comment
 router.post("/reply", async (req, res) => {
     try {
+        if (req.session.user == undefined)
+            throw `Please login first`;
         if (!req.body.replyMessage)
             throw `content or rate do not exist!`;
+        req.body.replyMessage = xss(req.body.replyMessage);
         const replyMessage = req.body.replyMessage;
         util.checkString("replyMessage", replyMessage);
         const movieId = req.body.movieId;
@@ -67,19 +71,27 @@ router.post("/reply", async (req, res) => {
         // console.log(rate);
 
         const comment = await commentData.createReply(replyMessage, userName, movieId, date, rate, parentId);
-        if (comment.commentInserted == true) {
-            res.render(`movie/details`, {
-                movie: movie,
-                userName: req.session.user.account,
-                CSS: "detail.css",
-                comment: true
-            });
-        } else {
-            throw `Did not comment.`
-        }
+        // if (comment.commentInserted == true) {
+        //     res.render(`movie/details`, {
+        //         movie: movie,
+        //         userName: req.session.user.account,
+        //         CSS: "detail.css",
+        //         comment: true
+        //     });
+        // } else {
+        //     throw `Did not comment.`
+        // }
+        res.status(200).send({
+            movie: movie,
+            userName: req.session.user.account,
+            CSS: "detail.css",
+            comment: true
+        })
     } catch (e) {
         console.log(e);
-        res.status(400).send(e);
+        res.status(400).send({
+            error: e
+        });
     }
 });
 

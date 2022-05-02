@@ -88,13 +88,17 @@ router.post('/update', async (req, res) => {
   try {
     if (!req.body.password && !req.body.lastName && !req.body.firstName)
       throw 'Missing Information';
+    req.body.password = xss(req.body.laspasswordtName);
+    req.body.firstName = xss(req.body.firstName);
+    req.body.lastName = xss(req.body.lastName);
+      
     if (req.body.password)
       updatedData.password = req.body.password;
     if (req.body.firstName)
       updatedData.firstName = req.body.firstName;
     if (req.body.lastName)
       updatedData.lastName = req.body.lastName;
-
+    
 
     utilsData.checkPassword(updatedData.password);
     utilsData.checkString('password', updatedData.password);
@@ -130,7 +134,7 @@ router.post('/remove', async (req, res) => {
   try {
     if (!req.body.account)
       throw 'Missing username'
-
+    req.body.account = xss(req.body.account);
     utilsData.checkAccount(req.body.account);
 
 

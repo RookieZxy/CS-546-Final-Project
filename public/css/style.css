@@ -298,3 +298,16 @@ h1, h2, h3, h4, h5,
     min-width: 100%;
     height: 30rem;
 }
+
+
+.btn-comment {
+    width: 110px;
+    height: 40px;
+    background-color: #ffffff; 
+    color: #4CAF50; 
+    border: 2px solid #4CAF50;
+}
+.btn-comment:hover {
+    background-color: #4CAF50;
+    color: white;
+}
