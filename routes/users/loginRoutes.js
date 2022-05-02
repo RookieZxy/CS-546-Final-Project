@@ -53,11 +53,12 @@ router.post('/', async (req, res) => {
             req.body.password
         );
         if (newUser.authenticated == true) {
+            // console.log(req.body.account);
             const temp = await usersData.get(req.body.account);
-
+            // console.log(temp[0].isAdmin);
             req.session.user = {
                 account: req.body.account,
-                isAdmin: temp.isAdmin
+                isAdmin: temp[0].isAdmin
             };
             res.status(200).send();
         }

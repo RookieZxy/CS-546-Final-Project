@@ -120,8 +120,11 @@ async function get(account) {
         throw `account should be at least 4 characters and do not more than 16`;
 
     const userCollection = await users();
-    let userInfo = await userCollection.findOne({
+    let userInfo = await userCollection.find({
         account: account
+    }).toArray();
+    userInfo.forEach(element => {
+        element._id = element._id.toString();
     });
     if (userInfo == null)
         throw `account is not existed`;
@@ -179,10 +182,24 @@ async function remove(account) {
     }
 }
 
+// get all users
+async function getAll(){
+    const userCollection = await users();
+
+    const userList = await userCollection.find({}).toArray();
+
+    userList.forEach(element => {
+        element._id = element._id.toString();
+    });
+
+    return userList;
+}
+
 module.exports = {
     get,
     update,
     createUser,
     checkUser,
-    remove
+    remove,
+    getAll
 }
