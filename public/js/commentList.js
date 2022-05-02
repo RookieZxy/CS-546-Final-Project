@@ -40,7 +40,7 @@
                 // <input type="text" value=${user} name="userName" hidden>  <input type="text" value=${searchList[i]._id} name="parentId" hidden>
                 // <input type="text" name = "replyMessage"> <button id ="reply" >reply</button></br></br>
                 // <ul id = ${searchList[i]._id}></ul></form>`;
-                var li = `<div class="d-flex mb-4">  <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                var li = `<div class="d-flex mb-4">  <div class="flex-shrink-0"><img class="rounded-circle" src="/public/images/profile.png" width="50" height="50" alt="..." /></div>
                 <div class="ms-3"> <div class="fw-bold"> ${searchList[i].userName}   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   Rating: ${searchList[i].rate}</div>
                 <form action="/comment/reply" method="post"> ${searchList[i].content} <input type="text" value=${searchList[i].movieId} name="movieId" hidden>
                 <input type="text" value=${user} name="userName" hidden>  <input type="text" value=${searchList[i]._id} name="parentId" hidden>
@@ -57,7 +57,7 @@
                     for (var i = 0; i < replyList.length; i++) {
                         // var li1 = `<div class="fw-bold"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />  ${replyList[i].userName}</div>`;
                         // var li2 = `<li style = "list-style: none"> ${replyList[i].content}</li></br>`
-                        var li1 = `<div class="d-flex mt-4"><div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                        var li1 = `<div class="d-flex mt-4"><div class="flex-shrink-0"><img class="rounded-circle" src="/public/images/profile.png" width="50" height="50" alt="..." /></div>
                         <div class="ms-3"> <div class="fw-bold">  ${replyList[i].userName}</div> 
                          ${replyList[i].content}</div></div>`
                         $(`#${replyList[i].parentId}`).append(li1);
