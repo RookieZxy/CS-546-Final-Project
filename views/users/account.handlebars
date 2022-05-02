@@ -7,32 +7,73 @@
 </head>
 
 <body>
-    <h2 class="heading-section">Account Information</h2>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+                                                                                         width="150px"
+                                                                                         src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                    class="font-weight-bold">{{user.firstName}} {{user.lastName}}</span><span
+                    class="text-black-50">{{user.account}}</span><span> </span></div>
+        </div>
+        <div class="col-md-8 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6 mt-2"><label class="labels">Firstname</label><input name="firstName"
+                                                                                             id="firstName" type="text"
+                                                                                             class="form-control"
+                                                                                             placeholder="Firstname"
+                                                                                             value="{{user.firstName}}">
+                    </div>
+                    <div class="col-md-6 mt-2"><label class="labels">Lastname</label><input name="lastName"
+                                                                                            id="lastName" type="text"
+                                                                                            class="form-control"
+                                                                                            value="{{user.lastName}}"
+                                                                                            placeholder="Lastname">
+                    </div>
+                    <div class="col-md-12 mt-2"><label class="labels">Previous password</label><input name="prepassword"
+                                                                                                      id="prepassword"
+                                                                                                      type="text"
+                                                                                                      class="form-control"
+                                                                                                      placeholder="Previous password"
+                                                                                                      value=""></div>
+                    <div class="col-md-12 mt-2"><label class="labels">New password</label><input name="newPassword"
+                                                                                                 id="newPassword"
+                                                                                                 type="text"
+                                                                                                 class="form-control"
+                                                                                                 placeholder="New password"
+                                                                                                 value=""></div>
+                </div>
+                <div class="mt-5 text-center">
+                    <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <p>{{userInfo}}</p>
-    <p>{{user.account}}</p>
-    <p>{{user.firstName}}</p>
-    <p>{{user.lastName}}</p>
-    {{!-- <form action="/users" method="post"> --}}
-    <form id="updateInfo">
-        {{!-- <input type="prepassword" placeholder="previous password" name="prepassword" id="prepassword" required> --}}
-        <input type="password" placeholder="password" name="password" id="password" required>
-        {{!-- <input type="confirmPw" placeholder="confirm new password" name="confirmPw" id="confirmPw" required> --}}
-        <input type="firstName" placeholder="firstName" name="firstName" id="firstName">
-        <input type="lastName" placeholder="lastName" name="lastName" id="lastName">
-        <button type="submit">Submit</button>
-    </form>
-    </br>
-    {{!-- <form action="/users/password" method="post"> --}}
-    <form id="updatePassword">
-        <input type="password" placeholder="previous password" name="prepassword" id="prepassword" required>
-        <input type="password" placeholder="new password" name="newPassword" id="newPassword" required>
-        <input type="password" placeholder="confirm new password" name="confirmPw" id="confirmPw" required>
-        <button type="submit">Submit</button>
-    </form>
 
+{{!-- <form action="/users" method="post"> --}}
+<!--<form id="updateInfo">-->
+<!--    {{!-- <input type="prepassword" placeholder="previous password" name="prepassword" id="prepassword" required> --}}-->
+<!--    <input type="password" placeholder="password" name="password" id="password" required>-->
+<!--    {{!-- <input type="confirmPw" placeholder="confirm new password" name="confirmPw" id="confirmPw" required> --}}-->
+<!--    <input type="firstName" placeholder="firstName" name="firstName" id="firstName">-->
+<!--    <input type="lastName" placeholder="lastName" name="lastName" id="lastName">-->
+<!--    <button type="submit">Submit</button>-->
+<!--</form>-->
+<!--</br>-->
+<!--{{!-- <form action="/users/password" method="post"> --}}-->
+<!--<form id="updatePassword">-->
+<!--    <input type="password" placeholder="previous password" name="prepassword" id="prepassword" required>-->
+<!--    <input type="password" placeholder="new password" name="newPassword" id="newPassword" required>-->
+<!--    <input type="password" placeholder="confirm new password" name="confirmPw" id="confirmPw" required>-->
+<!--    <button type="submit">Submit</button>-->
+<!--</form>-->
 
-    <a href="/home" id = "home">Home</a>
 </body>
 
 </html>
