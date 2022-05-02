@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../../data');
+const movieData = require('../../data/movie/movie')
 const usersData = data.users;
 const bcryptjs = require('bcrypt');
 const xss = require("xss");
@@ -26,6 +27,8 @@ function checkPassword(password) {
 
 router.get("/", async (req, res) => {
   try {
+    if(req.session.user == undefined)
+      throw `Please login first`;
     const users = await usersData.get(req.session.user.account)
     if (!users)
       throw `account does not exist!`
@@ -35,11 +38,14 @@ router.get("/", async (req, res) => {
     // res.render('users/account', users)
   } catch (e) {
     console.log(e);
-    res.status(400).render('users', {
-      login_flag: 'users',
-      status: 'HTTP 400',
-      error: e
-    })
+    const types = await movieData.getAllTypes();
+
+    res.status(400).render('home/home', {types: types,error: e,login_flag:'false'});
+    // res.status(400).render('users', {
+    //   login_flag: 'users',
+    //   status: 'HTTP 400',
+    //   error: e
+    // })
   }
 });
 

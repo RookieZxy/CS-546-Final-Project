@@ -17,6 +17,17 @@
 			$("#logout").hide();
 		}
 	});
-
+	console.log($("#login_flag").val())
+	if($("#login_flag").val() == 'false'){
+		alert("Please login first")
+	}
+	// $('#users').click(function () {
+	// 	$.ajax({
+	// 		method: 'GET',
+	// 		url: 'http://localhost:3000/users'
+	// 	}).then((object) => {
+			
+	// 	})
+	// })
 
 })(jQuery);
