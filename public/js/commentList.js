@@ -40,8 +40,8 @@
                     // console.log(replyList);
                     for (var i = 0; i < replyList.length; i++) {
                         var li1 = `<li> ${replyList[i].userName}</li>`;
-                        console.log(replyList[i].userName);
-                        console.log(replyList[i].content);
+                        // console.log(replyList[i].userName);
+                        // console.log(replyList[i].content);
                         var li2 = `<li style = "list-style: none"> ${replyList[i].content}</li></br>`
                         // var li3 = `<p>111111</p>`;
                         $(`#replyList`).append(li1);

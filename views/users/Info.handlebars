@@ -9,35 +9,36 @@
 <body>
     <h2 class="heading-section">user Management</h2>
 
-    <form action="/userManage/account" method="post">
-        <input type="account" placeholder="userName" name="account" id="account" required>
+    {{!-- <form action="/userManage/account" method="post"> --}}
+    <form id = "userSearch">
+        <input type="account" placeholder="userName" name="account" id="account">
         <button type="submit">Submit</button>
     </form>
-    <p>{{user.account}}</p>
-    <p>{{user.firstName}}</p>
-    <p>{{user.lastName}}</p>
+    <table border="1" id="userList"></table>
 
-
+    <ul id="userList"></ul>
 
 
     <h2 class="heading-section">add user</h2>
-    <form action="/userManage/add" method="post">
-        <input type="account" placeholder="account" name="account" id="account" required>
-        <input type="password" placeholder="password" name="password" id="password" required>
-        <input type="confirm" placeholder="confirm password" name="confirm" id="confirm" required>
-        <input type="firstName" placeholder="first name" name="firstName" id="firstName" required>
-        <input type="lastName" placeholder="last name" name="lastName" id="lastName" required>
+    {{!-- <form action="/userManage/add" method="post"> --}}
+    <form id="addUserForm">
+        <input type="account" placeholder="account" name="account2" id="account2" required>
+        <input type="password" placeholder="password" name="password2" id="password2" required>
+        <input type="password" placeholder="confirm password" name="confirm2" id="confirm2" required>
+        <input type="firstName" placeholder="first name" name="firstName2" id="firstName2" required>
+        <input type="lastName" placeholder="last name" name="lastName2" id="lastName2" required>
         <button type="submit">Add user</button>
     </form>
     <p>{{addInfo}}</p>
 
 
     <h2 class="heading-section">update user</h2>
-    <form action="/userManage/update" method="post">
-        <input type="account" placeholder="account" name="account" id="account" required>
-        <input type="password" placeholder="password" name="password" id="password">
-        <input type="firstName" placeholder="first name" name="firstName" id="firstName">
-        <input type="lastName" placeholder="last name" name="lastName" id="lastName">
+    {{!-- <form action="/userManage/update" method="post"> --}}
+    <form id="updateForm">
+        <input type="account" placeholder="account" name="account3" id="account3" required>
+        <input type="password" placeholder="password" name="password3" id="password3">
+        <input type="firstName" placeholder="first name" name="firstName3" id="firstName3">
+        <input type="lastName" placeholder="last name" name="lastName3" id="lastName3">
         <button type="submit">update user</button>
     </form>
     <p>{{updateInfo}}</p>

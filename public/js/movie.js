@@ -21,6 +21,7 @@
             };
             $.ajax(requestConfig).then(function(responseMessage){
                 var searchList = $(responseMessage);
+                console.log(searchList);
                 for (var i = 0; i < searchList.length; i++)
                 {
 

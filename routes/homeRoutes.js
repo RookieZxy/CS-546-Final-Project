@@ -1,4 +1,5 @@
 const express = require('express');
+const { isDate } = require('moment');
 const router = express.Router();
 const movieData = require('../data/movie/movie')
 
@@ -21,6 +22,7 @@ router.get('/userInfo', async (req, res) => {
         //console.log(username);
         isAdmin = req.session.user.isAdmin;
     }
+    // console.log(isAdmin);
     res.send({
         username: username,
         isAdmin: isAdmin

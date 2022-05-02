@@ -15,20 +15,27 @@ router.get("/", async (req, res) => {
 router.post("/account", async (req, res) => {
   try {
     req.body.account = xss(req.body.account);
-    const users = await usersData.get(req.body.account)
+    let users = undefined;
+    if(req.body.account.length != 0){
+      users = await usersData.get(req.body.account)
+    }else{
+      users = await usersData.getAll()
+    }
     if (!users)
       throw `account does not exist!`;
-    res.render("users/Info", {
-      user: users,
+    // res.render("users/Info", {
+    //   user: users,
 
-    });
+    // });
+    res.status(200).send(users);
   } catch (e) {
     console.log(e);
-    res.status(400).render('users/Info', {
-      searchInfo: 'fail',
-      status: 'HTTP 400',
-      error: e
-    })
+    // res.status(400).render('users/Info', {
+    //   searchInfo: 'fail',
+    //   status: 'HTTP 400',
+    //   error: e
+    // })
+    res.status(500).send({error:e});
   }
 });
 
@@ -56,21 +63,23 @@ router.post('/add', async (req, res) => {
     );
 
     // console.log(newUser);
-    if (newUser.userInserted == true)
-      res.render('users/Info', {
-        addInfo: 'success'
-      });
-    else
-      res.status(500).send({
-        message: 'Internal Server Error'
-      })
+    // if (newUser.userInserted == true)
+    //   res.render('users/Info', {
+    //     addInfo: 'success'
+    //   });
+    // else
+    //   res.status(500).send({
+    //     message: 'Internal Server Error'
+    //   })
+    res.status(200).send({addInfo: 'success'});
   } catch (e) {
     console.log(e);
-    res.status(400).render('users/Info', {
-      addInfo: 'fail',
-      status: 'HTTP 400',
-      error: e
-    })
+    // res.status(400).render('users/Info', {
+    //   addInfo: 'fail',
+    //   status: 'HTTP 400',
+    //   error: e
+    // })
+    res.status(500).send({error:e});
   }
 });
 
