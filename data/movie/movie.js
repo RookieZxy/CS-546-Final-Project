@@ -164,6 +164,16 @@ async function getAllTypes() {
   return types;
 }
 
+// Query the database randomly, to display recommendation movies on main page.
+async function get3MovieRand(){
+  const moviesCollection = await mongoCollections.movies();
+  const threeMovies = await moviesCollection
+    .aggregate( [ { $sample: { size : 3 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 1, poster: 1 } } ] )
+    .toArray();
+  //console.log(threeMovies);
+  return threeMovies; 
+}
+
 async function getByName(name) {
   const moviesCollection = await mongoCollections.movies();
   let str = ".*" + name + ".*$";
@@ -274,4 +284,5 @@ module.exports = {
   getInvalid,
   getByCast,
   getByDirector,
+  get3MovieRand,
 };
