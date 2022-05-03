@@ -30,25 +30,41 @@
                 <img class="bi me-2" aria-label="Bootstrap" width="140" height="45"
                      src="/public/images/logo-trans.png">
             </a>
-
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-                <li><a href="/users" id="users" class="nav-link px-2 text-secondary">Account</a></li>
-                <li><a href="/userManage" id="userManage" class="nav-link px-2 text-secondary">user Management</a></li>
-                <li><a href="/types/Action" id="Action" class="nav-link px-2 text-white">Action</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" id="navbarDarkDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Movies by genre
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a href="/types/Action" id="Action" class="dropdown-item">Action</a></li>
+                        <li><a href="/types/Horror" id="Horror" class="dropdown-item">Horror</a></li>
+                        <li><a href="/types/Drama" id="Drama" class="dropdown-item">Drama</a></li>
+                        <li><a href="/types/Comedy" id="Comedy" class="dropdown-item">Comedy</a></li>
+                        <li><a href="/types/Sci-Fi" id="Sci-Fi" class="dropdown-item">Sci-Fi</a></li>
+                        <li><a href="/types/Romance" id="Romance" class="dropdown-item">Romance</a></li>
+                        <li><a href="/types/War" id="War" class="dropdown-item">War</a></li>
+                        <li><a href="/types/Thriller" id="Thriller" class="dropdown-item">Thriller</a></li>
+                        <li><a href="/types/Mystery" id="Mystery" class="dropdown-item">Mystery</a></li>
+                        <li><a href="/types/Crime" id="Crime" class="dropdown-item">Crime</a></li>
+                        <li><a href="/types/Animation" id="Animation" class="dropdown-item">Animation</a></li>
+                        <li><a href="/types/Adventure" id="Adventure" class="dropdown-item">Adventure</a></li>
+                        <li><a href="/types/Fantasy" id="Fantasy" class="dropdown-item">Fantasy</a></li>
+                        <li><a href="/types/Superhero" id="Superhero" class="dropdown-item">Superhero</a></li>
+                    </ul>
+                </li>
+                <li><a href="/users" id="users" class="nav-link px-2 text-white">Account</a></li>
+                <li><a href="/userManage" id="userManage" class="nav-link px-2 text-white">user Management</a></li>
                 <input value="{{login_flag}}" id="login_flag" hidden>
                 <input value="{{error}}" id="error" hidden>
-                <li><a href="/types/Horror" id="Horror" class="nav-link px-2 text-white">Horror</a></li>
-                <li><a href="/types/Drama" id="Drama" class="nav-link px-2 text-white">Drama</a></li>
-                <li><a href="/types/Comedy" id="Comedy" class="nav-link px-2 text-white">Comedy</a></li>
-                <li><a href="/types/Sci-Fi" id="Sci-Fi" class="nav-link px-2 text-white">Sci-Fi</a></li>
-                <li><a href="/types/Romance" id="Romance" class="nav-link px-2 text-white">Romance</a></li>
-                <li><a href="/types/War" id="War" class="nav-link px-2 text-white">War</a></li>
             </ul>
 
-            <form id="searchForm"  class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <input type="text" id="search_termInput" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-            </form> 
+
+            <form id="searchForm" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <input type="text" id="search_termInput" class="form-control form-control-dark" placeholder="Search..."
+                       aria-label="Search">
+            </form>
 
             <div class="text-end">
                 <a href="/login" id="login">
@@ -58,7 +74,7 @@
                     <button type="button" class="btn btn-outline-light me-2">Logout</button>
                 </a>
                 {{!-- <a href="/login2" id="login2"><button type="button" class="btn btn-outline-light me-2">Log in another account</button></a> --}}
-                <a href="/signup" id = "signup">
+                <a href="/signup" id="signup">
                     <button type="button" class="btn btn-warning">Sign-up</button>
                 </a>
             </div>
