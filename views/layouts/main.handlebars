@@ -36,7 +36,8 @@
                 <li><a href="/users" id="users" class="nav-link px-2 text-secondary">Account</a></li>
                 <li><a href="/userManage" id="userManage" class="nav-link px-2 text-secondary">user Management</a></li>
                 <li><a href="/types/Action" id="Action" class="nav-link px-2 text-white">Action</a></li>
-                <input value="{{login_flag}}" id="login_flag" >
+                <input value="{{login_flag}}" id="login_flag" hidden>
+                <input value="{{error}}" id="error" hidden>
                 <li><a href="/types/Horror" id="Horror" class="nav-link px-2 text-white">Horror</a></li>
                 <li><a href="/types/Drama" id="Drama" class="nav-link px-2 text-white">Drama</a></li>
                 <li><a href="/types/Comedy" id="Comedy" class="nav-link px-2 text-white">Comedy</a></li>
@@ -45,9 +46,9 @@
                 <li><a href="/types/War" id="War" class="nav-link px-2 text-white">War</a></li>
             </ul>
 
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" id="searchForm">
-                <input type="search" class="form-control form-control-dark" id="search_termInput" name="search_termInput" placeholder="Search..." aria-label="Search">
-            </form>
+            <form id="searchForm"  class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <input type="text" id="search_termInput" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+            </form> 
 
             <div class="text-end">
                 <a href="/login" id="login">

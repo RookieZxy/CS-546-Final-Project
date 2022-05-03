@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../../data');
-const movieData = require('../../data/movie/movie')
 const usersData = data.users;
 const bcryptjs = require('bcrypt');
 const xss = require("xss");
@@ -37,10 +36,7 @@ router.get("/", async (req, res) => {
     })
     // res.render('users/account', users)
   } catch (e) {
-    console.log(e);
-    const types = await movieData.getAllTypes();
-
-    res.status(400).render('home/home', {types: types,error: e,login_flag:'false'});
+    res.status(400).render('home/home', {error: e,login_flag:'false'});
     // res.status(400).render('users', {
     //   login_flag: 'users',
     //   status: 'HTTP 400',

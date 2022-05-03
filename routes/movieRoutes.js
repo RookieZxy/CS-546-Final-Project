@@ -120,14 +120,17 @@ router.post("/search", async (req, res) => {
       throw `movie does not exist!`;
     }
     const movie = await movieData.getByName(movieSearch);
+    if(movie[0] == undefined)
+      throw`movie does not exist!`
     res.send(movie);
   } catch (e) {
     console.log(e);
-    res.status(400).render("home/home", {
-      login_flag: "movieSearch",
-      status: "HTTP 400",
-      error: e,
-    });
+    res.status(400).send({error: e});
+    // res.status(400).render("home/home", {
+    //   login_flag: "movieSearch",
+    //   status: "HTTP 400",
+    //   error: e,
+    // });
   }
 });
 

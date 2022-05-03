@@ -19,7 +19,7 @@
 	});
 	console.log($("#login_flag").val())
 	if($("#login_flag").val() == 'false'){
-		alert("Please login first")
+		alert($("#error").val())
 	}
 	// $('#users').click(function () {
 	// 	$.ajax({

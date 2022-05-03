@@ -2,18 +2,15 @@
 
     $('#searchForm').submit((event) => {
         event.preventDefault();
-        $('#error').hide();
         //$('#showList').empty();
         $('#showList').show();
         var inputText = $('#search_termInput').val();
         if(inputText === ''){
             $('#showList').show();
-            $('#error').show();
             $('#search_termInput').val("");
         }
         else{
             $('#showList').empty();
-            $('#error').hide();
             var requestConfig = {
                 url: '/movie/search',
                 method: 'POST',
@@ -31,7 +28,11 @@
                 $('#show').hide();
                 $('#showList').show();
                 $('#homeLink').hide();
-            })
+            }).then((data) => {
+            }).fail((error) => {
+                console.log(error);
+                alert(error.responseJSON.error);
+            });hen
         }
     })
 
