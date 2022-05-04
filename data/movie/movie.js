@@ -208,9 +208,14 @@ async function get4SimilarMovieByIdRand(id){
   const type = await getTypeById(id);
   //console.log (type);
   const moviesCollection = await mongoCollections.movies();
-  const fourMovies = await moviesCollection
-    .aggregate( [ { $match: {_id : { $ne : ObjectId(id) }, typeList : {$in : [type]} } } , { $sample: { size : 4 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } ] )
+  var fourMovies = await moviesCollection
+    .aggregate( [ { $match: {_id : { $ne : ObjectId(id) }, typeList : {$in : [type]} } } , { $sample: { size : 4 } } , { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } ] )
     .toArray();
+  
+  for (let i = 0; i < fourMovies.length; i++){
+    //console.log(fourMovies[i]);
+    fourMovies[i]._id = fourMovies[i]._id.toString();
+  }
   //console.log(fourMovies);
   return fourMovies; 
 }
