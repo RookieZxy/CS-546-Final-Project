@@ -5,6 +5,7 @@
     },
     "imdb": {
         "apiKey_Alternative": "k_l31gvkes",
-        "apiKey": "k_o8ajco4w"
+        "apiKey": "k_o8ajco4w",
+        "apiKey_Jerry": "k_sn8ectwp"
     }
 }
