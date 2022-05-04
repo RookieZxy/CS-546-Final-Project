@@ -241,8 +241,4 @@
       $("#imagesDiv").show();
     }
   }
-
-  function delBtn(i) {
-    alert(i);
-  }
 })(jQuery);
