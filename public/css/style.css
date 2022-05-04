@@ -303,11 +303,19 @@ h1, h2, h3, h4, h5,
 .btn-comment {
     width: 110px;
     height: 40px;
-    background-color: #ffffff; 
-    color: #4CAF50; 
+    background-color: #ffffff;
+    color: #4CAF50;
     border: 2px solid #4CAF50;
 }
+
 .btn-comment:hover {
     background-color: #4CAF50;
     color: white;
+}
+
+.plot-overflow {
+    max-height: 4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
