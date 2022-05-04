@@ -1,102 +1,80 @@
-<!doctype html>
-<html lang="en">
+<section class="ftco-section">
+    <div class="container">
 
-<head>
-    <title>Sign Up</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="../../public/css/style.css">
-
-</head>
-
-<body>
-    <section class="ftco-section">
-        <div class="container">
-            
-            <div class="row justify-content-center">
-                <div class="col-md-12 col-lg-10">
-                    <div class="wrap d-md-flex">
-                        <div class="img" style="background-image: url(../../public/images/bg-1.jpg);">
-                        </div>
-                        <div class="login-wrap p-4 p-md-5">
-                            <div class="d-flex">
-                                <div class="w-100" style = "text-align: center">
-                                    <h3 class="mb-4">Sign Up</h3>
-                                </div>
-                                {{!-- <div class="w-100">
-                                    <p class="social-media d-flex justify-content-end">
-                                        <a href="#"
-                                            class="social-icon d-flex align-items-center justify-content-center"><span
-                                                class="fa fa-facebook"></span></a>
-                                        <a href="#"
-                                            class="social-icon d-flex align-items-center justify-content-center"><span
-                                                class="fa fa-twitter"></span></a>
-                                    </p>
-                                </div> --}}
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex">
+                    <div class="img" style="background-image: url(../../public/images/bg-1.jpg);">
+                    </div>
+                    <div class="login-wrap p-4 p-md-5">
+                        <div class="d-flex">
+                            <div class="w-100" style="text-align: center">
+                                <h3 class="mb-4">Sign Up</h3>
                             </div>
-                            {{!-- <form action="/signup" method = "post" class="signin-form" id="signup-form"> --}}
-                            <form class="signin-form" id="signUpForm">
-                                <div class="form-group mb-3">
-                                    <label class="label" for="name">Username</label>
-                                    <input type="text" class="form-control" placeholder="Username" name = "account" id= "account"
-                                        required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="password">Password</label>
-                                    <input type="password" class="form-control" placeholder="password" name = "password" id= "password"
-                                        required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="confirm">Confirm password</label>
-                                    <input type="confirm" class="form-control" placeholder="confirm password" name = "confirm" id= "confirm"
-                                        required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="Firstname">Firstname</label>
-                                    <input type="Firstname" class="form-control" placeholder="firstname" name = "firstname" id="firstname"
-                                        required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="LastName">LastName</label>
-                                    <input type="LastName" class="form-control" placeholder="lastname" name = "lastname" id="lastname"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign
-                                        Up</button>
-                                </div>
-                                <div class="form-group d-md-flex">
-                                    <div class="w-50 text-left">
-                                        <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-                                            <input type="checkbox" checked>
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <div class="w-50 text-md-right">
-                                        <a href="/forgot">Forgot Password</a>
-                                    </div>
-                                </div>
-                            </form>
-                            <p class="text-center">Not a member? <a href="/login">Sign In</a></p>
+                            {{!-- <div class="w-100">
+                                <p class="social-media d-flex justify-content-end">
+                                    <a href="#"
+                                        class="social-icon d-flex align-items-center justify-content-center"><span
+                                            class="fa fa-facebook"></span></a>
+                                    <a href="#"
+                                        class="social-icon d-flex align-items-center justify-content-center"><span
+                                            class="fa fa-twitter"></span></a>
+                                </p>
+                            </div> --}}
                         </div>
+                        {{!-- <form action="/signup" method = "post" class="signin-form" id="signup-form"> --}}
+                        <form class="signin-form" id="signUpForm">
+                            <div class="form-group mb-3">
+                                <label class="label" for="name">Username</label>
+                                <input type="text" class="form-control" placeholder="Username" name="account"
+                                       id="account"
+                                       required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="password">Password</label>
+                                <input type="password" class="form-control" placeholder="password" name="password"
+                                       id="password"
+                                       required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="confirm">Confirm password</label>
+                                <input type="confirm" class="form-control" placeholder="confirm password" name="confirm"
+                                       id="confirm"
+                                       required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="Firstname">Firstname</label>
+                                <input type="Firstname" class="form-control" placeholder="firstname" name="firstname"
+                                       id="firstname"
+                                       required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="label" for="LastName">LastName</label>
+                                <input type="LastName" class="form-control" placeholder="lastname" name="lastname"
+                                       id="lastname"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign
+                                    Up
+                                </button>
+                            </div>
+                            <div class="form-group d-md-flex">
+                                <div class="w-50 text-left">
+                                    <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="w-50 text-md-right">
+                                    <a href="/forgot">Forgot Password</a>
+                                </div>
+                            </div>
+                        </form>
+                        <p class="text-center">Not a member? <a href="/login">Sign In</a></p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    {{!--
-    <script src="../../public/js/popper.js"></script> --}}
-    {{!--
-    <script src="../../public/js/bootstrap.min.js"></script> --}}
-    {{!-- <script src="../../public/js/main.js"></script> --}}
-
-</body>
-
-</html>
+    </div>
+</section>

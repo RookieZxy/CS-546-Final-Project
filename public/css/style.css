@@ -319,5 +319,10 @@ h1, h2, h3, h4, h5,
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
+}
 
+.card-zoom:hover{
+    transform: scale(1.1);
+    transition: all 0.3s;
+    z-index: 99;
 }
