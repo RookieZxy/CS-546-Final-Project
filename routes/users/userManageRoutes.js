@@ -7,18 +7,25 @@ const utilsData = util.utils;
 const xss = require("xss");
 
 router.get("/", async (req, res) => {
-  res.render('users/Info', {
-    login_flag: 'login'
-  })
+  if (req.session.user == undefined){
+    res.redirect("/login");
+  }else{
+    if (req.session.user.isAdmin == false){
+      res.redirect('/');
+    }
+    res.render('users/Info', {
+      login_flag: 'login'
+    })
+  }
 });
 
 router.post("/account", async (req, res) => {
   try {
     req.body.account = xss(req.body.account);
     let users = undefined;
-    if(req.body.account.length != 0){
+    if (req.body.account.length != 0) {
       users = await usersData.get(req.body.account)
-    }else{
+    } else {
       users = await usersData.getAll()
     }
     if (!users)
@@ -35,7 +42,9 @@ router.post("/account", async (req, res) => {
     //   status: 'HTTP 400',
     //   error: e
     // })
-    res.status(500).send({error:e});
+    res.status(500).send({
+      error: e
+    });
   }
 });
 
@@ -45,7 +54,7 @@ router.post('/add', async (req, res) => {
       throw 'Missing username or password'
     if (req.body.password != req.body.confirm)
       throw `The two passwords are inconsistent`;
-    
+
     req.body.account = xss(req.body.account);
     req.body.password = xss(req.body.password);
     req.body.firstName = xss(req.body.firstName);
@@ -71,7 +80,9 @@ router.post('/add', async (req, res) => {
     //   res.status(500).send({
     //     message: 'Internal Server Error'
     //   })
-    res.status(200).send({addInfo: 'success'});
+    res.status(200).send({
+      addInfo: 'success'
+    });
   } catch (e) {
     console.log(e);
     // res.status(400).render('users/Info', {
@@ -79,7 +90,9 @@ router.post('/add', async (req, res) => {
     //   status: 'HTTP 400',
     //   error: e
     // })
-    res.status(500).send({error:e});
+    res.status(500).send({
+      error: e
+    });
   }
 });
 
@@ -88,17 +101,18 @@ router.post('/update', async (req, res) => {
   try {
     if (!req.body.password && !req.body.lastName && !req.body.firstName)
       throw 'Missing Information';
-    req.body.password = xss(req.body.laspasswordtName);
+    // console.log(req.body.password)
+    req.body.password = xss(req.body.password);
     req.body.firstName = xss(req.body.firstName);
     req.body.lastName = xss(req.body.lastName);
-      
+    // console.log(req.body.password)
     if (req.body.password)
       updatedData.password = req.body.password;
     if (req.body.firstName)
       updatedData.firstName = req.body.firstName;
     if (req.body.lastName)
       updatedData.lastName = req.body.lastName;
-    
+
 
     utilsData.checkPassword(updatedData.password);
     utilsData.checkString('password', updatedData.password);
@@ -109,9 +123,11 @@ router.post('/update', async (req, res) => {
     // console.log(updatedUsers);
     if (updatedUsers) {
       // res.redirect('/users');
-      res.status(400).render('users/Info', {
-        updateInfo: 'success',
-        user: updatedUsers
+      // res.status(400).render('users/Info', {
+      //   updateInfo: 'success',
+      //   user: updatedUsers
+      // })
+      res.status(200).send({
       })
     } else
       res.status(500).send({

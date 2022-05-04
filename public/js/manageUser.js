@@ -1,3 +1,7 @@
+// const {
+//     update
+// } = require("../../data/users/users");
+
 (function ($) {
     "use strict";
 
@@ -18,10 +22,10 @@
         return check;
     }
 
-    function checkInfo(account, p, firstName, lastName, confirm) {
+    function checkInfo(account, p, firstName, lastName) {
         var Regx = /^[A-Za-z0-9]*$/;
         var account = account.trim();
-        var confirm = confirm.trim();
+        // var confirm = confirm.trim();
         var password = p.trim();
         var firstName = firstName.trim();
         var lastName = lastName.trim();
@@ -59,19 +63,71 @@
         } else if (password.length > 16) {
             alert('The length of password should not be more than 16');
             check = false;
-        } else if (confirm != password) {
-            alert('inputed two new password are not consistent');
-            check = false;
-        }
+        } 
 
         return check;
     }
+
+    $('#userTable').empty();
+    $.ajax({
+        method: "POST",
+        url: `http://localhost:3000/userManage/account`,
+        data: {
+            account: $("#account").val(),
+        }
+    }).then((data) => {
+        var searchList = $(data);
+        console.log(searchList)
+        // var tr = `<tr><th>accound</th><th>first name</th><th>last name</th></tr>`
+        // $('#userList').append(tr);
+        for (var i = 0; i < searchList.length; i++) {
+            var t = `<tr id="tr${i}">
+            <td><p class="fw-bold mb-1">${searchList[i].account}</p></td>
+            <td><p class="fw-bold mb-1">${searchList[i].firstName}</p></td>
+            <td><p class="fw-bold mb-1">${searchList[i].lastName}</p></td>
+            <td><p class="fw-bold mb-1">${searchList[i].isAdmin}</p></td>
+            <td>
+                <input id="account${i}" value="${searchList[i].account}" hidden>
+                <input id="firstName${i}" value="${searchList[i].firstName}" hidden>
+                <input id="lastName${i}" value="${searchList[i].lastName}" hidden>
+                <input id="isAdmin${i}" value="${searchList[i].isAdmin}" hidden>
+                <button id="edit${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#updateForm">Edit</button>
+                <button id="changePassword${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#newPassModal">Change password</button>
+                <button id="remove${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeModal">Remove</button>
+            </td>
+            </tr>`;
+
+            $('#userTable').append(t);
+        }
+
+        const delBtns = $("#userTable button");
+        for (let i = 0; i < delBtns.length / 3; i++) {
+            // const delBtn = delBtns[i];
+            $(delBtns[i * 3]).click(function () {
+                $("#updateAccount").html($(`#account${i}`).val());
+                $("#updateFirstName").val($(`#firstName${i}`).val());
+                $("#updateLastName").val($(`#lastName${i}`).val());
+                // $("updateForm").show();
+            });
+            $(delBtns[i * 3 + 1]).click(function () {
+                console.log(2);
+                // $(`#imagesDiv${i}`).update();
+            });
+            $(delBtns[i * 3 + 2]).click(function () {
+                // $(`#imagesDiv${i}`).remove();
+            });
+        }
+    }).fail((error) => {
+        alert(error.responseJSON.error);
+    });
+
+
 
     $('#userSearch').submit((event) => {
         event.preventDefault();
         // console.log($("#account").val());
         var check = checkAccount($("#account").val());
-        $('#userList').empty();
+        $('#userTable').empty();
         if (check) {
             $.ajax({
                 method: "POST",
@@ -82,45 +138,69 @@
             }).then((data) => {
                 var searchList = $(data);
                 console.log(searchList)
-                // var li1 = `<li style = "list-style: none"> account  firstName  lastName</li>`
-                var tr = `<tr><th>accound</th><th>first name</th><th>last name</th></tr>`
-                $('#userList').append(tr);
+                var id = 1;
+                // var tr = `<tr><th>accound</th><th>first name</th><th>last name</th></tr>`
+                // $('#userList').append(tr);
                 for (var i = 0; i < searchList.length; i++) {
-                    // var li1 = `<li> ${searchList[i].account}</li>`
-                    // var li2 = `<li> ${searchList[i].firstName}</li>`
-                    // var li3 = `<li> ${searchList[i].lastName}</li>`
-                    var tr1 = `<tr><td> ${searchList[i].account}</td><td> ${searchList[i].firstName}</td><td> ${searchList[i].lastName}</td><td><button id="updateUser">update</button></td></tr>`
+                    var t = `<tr id="tr${id}">
+                    <td><p id="account${id}" class="fw-light mb-1">${searchList[i].account}</p></td>
+                    <td><p id="firstName${id}" class="fw-light mb-1">${searchList[i].firstName}</p></td>
+                    <td><p id="lastName${id}" class="fw-light mb-1">${searchList[i].lastName}</p></td>
+                    <td><p id="isAdmin${id}" class="fw-light mb-1">${searchList[i].isAdmin}</p></td>
+                    <td>
+                        <button id="edit${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#updateForm">Edit</button>
+                        <button id="changePassword${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#newPassModal">Change password</button>
+                        <button id="remove${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeModal">Remove</button>
+                    </td>
+                    </tr>`;
 
-                    // $('#userList').append(li1);
-                    // $('#userList').append(li2);
-                    // $('#userList').append(li3);
-                    $('#userList').append(tr1);
+                    $('#userTable').append(t);
                 }
-                // window.location.replace('/users');
-                // confirm("Updated information successfully");
+                const delBtns = $("#userTable button");
+                for (let i = 0; i < delBtns.length / 3; i++) {
+                    // const delBtn = delBtns[i];
+                    $(delBtns[i * 3]).click(function () {
+                        $("#updateAccount").html($(`#account${i}`).val());
+                        $("#updateFirstName").val($(`#firstName${i}`).val());
+                        $("#updateLastName").val($(`#lastName${i}`).val());
+                        // $("updateForm").show();
+                    });
+                    $(delBtns[i * 3 + 1]).click(function () {
+                        console.log(2);
+                        // $(`#imagesDiv${i}`).update();
+                    });
+                    $(delBtns[i * 3 + 2]).click(function () {
+                        // $(`#imagesDiv${i}`).remove();
+                    });
+                }
             }).fail((error) => {
                 alert(error.responseJSON.error);
             });
         }
+
     });
+
 
     $('#updateForm').submit((event) => {
         event.preventDefault();
-        // console.log($("#account").val());
-        var check = checkInfo($("#account2").val(), $("#password2").val(),$("#firstName2").val(),$("#lastName2").val(),$("#confirm2").val());
+        console.log($("#updatePassword").val())
+        console.log($("#updateFirstName").val())
+        console.log($("#updateLastName").val())
+        var check = true;
+        var check = checkInfo($("#updateAccount").html(), $("#updatePassword").val(), $("#updateFirstName").val(), $("#updateLastName").val());
         if (check) {
             $.ajax({
                 method: "POST",
                 url: `http://localhost:3000/userManage/update`,
                 data: {
-                    account: $("#account2").val(),
-                    password: $("#password2").val(),
-                    confirm: $("#confirm2").val(),
-                    firstName: $("#lastName2").val(),
-                    lastName: $("#lastName2").val(),
+                    account: $("#updateAccount").html(),
+                    password: $("#updatePassword").val(),
+                    // confirm: $("#confirm2").val(),
+                    firstName: $("#updateFirstName").val(),
+                    lastName: $("#updateLastName").val(),
                 }
             }).then((data) => {
-                confirm("add successfully");
+                confirm("update successfully");
             }).fail((error) => {
                 alert(error.responseJSON.error);
             });
@@ -130,17 +210,17 @@
     $('#removeForm').submit((event) => {
         event.preventDefault();
         // console.log($("#account").val());
-        var check = checkInfo($("#account2").val(), $("#password2").val(),$("#firstName2").val(),$("#lastName2").val(),$("#confirm2").val());
+        var check = checkInfo($("#updateAccount").html(), $("#updatePassword").val(), $("#updateFirstName").val(), $("#updateLastName").val(), $("#confirm2").val());
         if (check) {
             $.ajax({
                 method: "POST",
                 url: `http://localhost:3000/userManage/update`,
                 data: {
-                    account: $("#account2").val(),
-                    password: $("#password2").val(),
-                    confirm: $("#confirm2").val(),
-                    firstName: $("#lastName2").val(),
-                    lastName: $("#lastName2").val(),
+                    account: $("#updateAccount").html(),
+                    password: $("#updatePassword").val(),
+                    // confirm: $("#confirm2").val(),
+                    firstName: $("#updateFirstName").val(),
+                    lastName: $("#updateLastName").val(),
                 }
             }).then((data) => {
                 confirm("add successfully");
