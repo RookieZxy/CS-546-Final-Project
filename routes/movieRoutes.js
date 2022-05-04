@@ -11,7 +11,7 @@ router.get("/addMovie", (req, res) => {
   if (!req.session.user) {
     res.redirect("/");
   }
-  res.render("movie/addMovie", {});
+  res.render("movie/addMovie", { partial: "addMovie-scripts" });
 });
 
 router.get("/approve/:id", (req, res) => {
@@ -22,7 +22,8 @@ router.get("/approve/:id", (req, res) => {
 
   let id = req.params.id;
   res.render("movie/addMovie", {
-    _id: id
+    _id: id,
+    partial: "addMovie-scripts",
   });
 });
 
@@ -41,11 +42,11 @@ router.post("/addMovie", async (req, res) => {
     const id = await movieData.add(movie);
     res.send({
       isSuccess: true,
-      id: id
+      id: id,
     });
   } catch (error) {
     res.status(500).send({
-      error: error
+      error: error,
     });
   }
 });
@@ -66,14 +67,14 @@ router.get("/imdb/:id", async (req, res) => {
     res.status(200).send(movie);
   } catch (error) {
     res.status(500).send({
-      error: error
+      error: error,
     });
   }
 });
 
 router.get("/imdb/", (req, res) => {
   res.status(400).send({
-    error: "Please input a IMDB Id"
+    error: "Please input a IMDB Id",
   });
 });
 
@@ -83,7 +84,7 @@ router.get("/:id", async (req, res) => {
     id = util.isObjectId(id);
   } catch (error) {
     res.status(400).json({
-      error: error
+      error: error,
     });
   }
 
@@ -101,13 +102,14 @@ router.get("/:id", async (req, res) => {
         CSS: "detail.css",
       });
     //
-    else res.render("movie/details", {
-      movie: movie,
-      CSS: "detail.css"
-    });
+    else
+      res.render("movie/details", {
+        movie: movie,
+        CSS: "detail.css",
+      });
   } catch (error) {
     res.status(500).json({
-      error: error
+      error: error,
     });
   }
 });
@@ -120,12 +122,11 @@ router.post("/search", async (req, res) => {
       throw `movie does not exist!`;
     }
     const movie = await movieData.getByName(movieSearch);
-    if(movie[0] == undefined)
-      throw`movie does not exist!`
+    if (movie[0] == undefined) throw `movie does not exist!`;
     res.send(movie);
   } catch (e) {
     console.log(e);
-    res.status(400).send({error: e});
+    res.status(400).send({ error: e });
     // res.status(400).render("home/home", {
     //   login_flag: "movieSearch",
     //   status: "HTTP 400",
@@ -137,8 +138,7 @@ router.post("/search", async (req, res) => {
 //comment
 router.post("/comment", async (req, res) => {
   try {
-    if (req.session.user == undefined)
-      throw `Please login first`;
+    if (req.session.user == undefined) throw `Please login first`;
     if (!req.body.content || !req.body.rate)
       throw `content or rate do not exist!`;
     const content = req.body.content;
@@ -181,7 +181,7 @@ router.post("/comment", async (req, res) => {
   } catch (e) {
     console.log(e);
     res.status(400).send({
-      error: e
+      error: e,
     });
   }
 });
