@@ -1,91 +1,42 @@
 <div class="container rounded bg-white mt-5 mb-5">
+    <form id="userSearch">
+        <input type="account" placeholder="userName" name="account" id="account">
+        <button type="submit">Search</button>
+    </form>
     <table class="table align-middle mb-0 bg-white">
         <thead>
-        <tr>
-            <th>UserId</th>
-            <th>Account</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Actions</th>
-        </tr>
+            <tr>
+                <th>Account</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Is Admin</th>
+            </tr>
         </thead>
-        <tbody>
-        <!--foreach here-->
-        <tr id="">
-            <td>
-                <p class="fw-light mb-1">123456789</p>
-            </td>
-            <td>
-                <p class="fw-bold mb-1">John Doe</p>
-            </td>
-            <td>
-                <p class="fw-normal mb-1">Software engineer</p>
-            </td>
-            <td>
-                <p class="fw-normal mb-1">IT department</p>
-            </td>
-            <td>
-                <button id="edit" type="button" class="btn btn-link">
-                    Edit
-                </button>
-                <button id="changePassword" type="button" class="btn btn-link" data-bs-toggle="modal"
-                        data-bs-target="#newPassModal">
-                    Change password
-                </button>
-                <button id="remove" type="button" class="btn btn-link" data-bs-toggle="modal"
-                        data-bs-target="#removeModal">
-                    Remove
-                </button>
-            </td>
-        </tr>
-        <!--end foreach-->
+        <tbody id="userTable">
         </tbody>
     </table>
-
-    <!--    <h2 class="heading-section">user Management</h2>-->
-
-    <!--    {{!-- <form action="/userManage/account" method="post"> --}}-->
-    <!--    <form id="userSearch">-->
-    <!--        <input type="account" placeholder="userName" name="account" id="account">-->
-    <!--        <button type="submit">Submit</button>-->
-    <!--    </form>-->
-    <!--    <table id="userList"></table>-->
-
-    <!--    &lt;!&ndash;    <ul id="userList"></ul>&ndash;&gt;-->
-
-
-    <!--    <h2 class="heading-section">add user</h2>-->
-    <!--    {{!-- <form action="/userManage/add" method="post"> --}}-->
-    <!--    <form id="addUserForm">-->
-    <!--        <input type="account" placeholder="account" name="account2" id="account2" required>-->
-    <!--        <input type="password" placeholder="password" name="password2" id="password2" required>-->
-    <!--        <input type="password" placeholder="confirm password" name="confirm2" id="confirm2" required>-->
-    <!--        <input type="firstName" placeholder="first name" name="firstName2" id="firstName2" required>-->
-    <!--        <input type="lastName" placeholder="last name" name="lastName2" id="lastName2" required>-->
-    <!--        <button type="submit">Add user</button>-->
-    <!--    </form>-->
-    <!--    <p>{{addInfo}}</p>-->
-
-
-    <!--    <h2 class="heading-section">update user</h2>-->
-    <!--    {{!-- <form action="/userManage/update" method="post"> --}}-->
-    <!--    <form id="updateForm">-->
-    <!--        <input type="account" placeholder="account" name="account3" id="account3" required>-->
-    <!--        <input type="password" placeholder="password" name="password3" id="password3">-->
-    <!--        <input type="firstName" placeholder="first name" name="firstName3" id="firstName3">-->
-    <!--        <input type="lastName" placeholder="last name" name="lastName3" id="lastName3">-->
-    <!--        <button type="submit">update user</button>-->
-    <!--    </form>-->
-    <!--    <p>{{updateInfo}}</p>-->
-
-
-    <!--    <h2 class="heading-section">remove user</h2>-->
-    <!--    <form action="/userManage/remove" method="post">-->
-    <!--        <input type="account" placeholder="account" name="account" id="account" required>-->
-    <!--        <button type="submit">remove user</button>-->
-    <!--    </form>-->
-
 </div>
+<form class="modal fade" id="updateForm" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <label class="form-label">Change Name:</label>
+                <p class="form-label" id="updateAccount"></p>
+                <input class="form-control" type="firstName" placeholder="new first name" id="updateFirstName">
+                </br>
+                <input class="form-control" type="lastName" placeholder="new last name" id="updateLastName">
+                </br>
+                <input class="form-control" type="password" class="form-label" placeholder="password"
+                    id="updatePassword">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</form>
+
 <div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -105,7 +56,7 @@
             <div class="modal-body">
                 <label for="newPassword" class="form-label">Change password:</label>
                 <input class="form-control" type="password" placeholder="New password" name="newPassword"
-                       id="newPassword">
+                    id="newPassword">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -114,3 +65,46 @@
         </div>
     </div>
 </div>
+
+<!--    <h2 class="heading-section">user Management</h2>-->
+
+<!--    {{!-- <form action="/userManage/account" method="post"> --}}-->
+<!--    <form id="userSearch">-->
+<!--        <input type="account" placeholder="userName" name="account" id="account">-->
+<!--        <button type="submit">Submit</button>-->
+<!--    </form>-->
+<!--    <table id="userList"></table>-->
+
+<!--    &lt;!&ndash;    <ul id="userList"></ul>&ndash;&gt;-->
+
+
+<!--    <h2 class="heading-section">add user</h2>-->
+<!--    {{!-- <form action="/userManage/add" method="post"> --}}-->
+<!--    <form id="addUserForm">-->
+<!--        <input type="account" placeholder="account" name="account2" id="account2" required>-->
+<!--        <input type="password" placeholder="password" name="password2" id="password2" required>-->
+<!--        <input type="password" placeholder="confirm password" name="confirm2" id="confirm2" required>-->
+<!--        <input type="firstName" placeholder="first name" name="firstName2" id="firstName2" required>-->
+<!--        <input type="lastName" placeholder="last name" name="lastName2" id="lastName2" required>-->
+<!--        <button type="submit">Add user</button>-->
+<!--    </form>-->
+<!--    <p>{{addInfo}}</p>-->
+
+
+<!--    <h2 class="heading-section">update user</h2>-->
+<!--    {{!-- <form action="/userManage/update" method="post"> --}}-->
+<!--    <form id="updateForm">-->
+<!--        <input type="account" placeholder="account" name="account3" id="account3" required>-->
+<!--        <input type="password" placeholder="password" name="password3" id="password3">-->
+<!--        <input type="firstName" placeholder="first name" name="firstName3" id="firstName3">-->
+<!--        <input type="lastName" placeholder="last name" name="lastName3" id="lastName3">-->
+<!--        <button type="submit">update user</button>-->
+<!--    </form>-->
+<!--    <p>{{updateInfo}}</p>-->
+
+
+<!--    <h2 class="heading-section">remove user</h2>-->
+<!--    <form action="/userManage/remove" method="post">-->
+<!--        <input type="account" placeholder="account" name="account" id="account" required>-->
+<!--        <button type="submit">remove user</button>-->
+<!--    </form>-->
