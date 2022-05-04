@@ -177,6 +177,28 @@ async function get3MovieRand(){
   return threeMovies;
 }
 
+// Query the database randomly, get 4 movies that different from imdbId. To display in the movie detail page.
+async function get4MovieByImdbIdRand(imdbId){
+  //util.isValidString(imdbId);
+  const moviesCollection = await mongoCollections.movies();
+  const fourMovies = await moviesCollection
+    .find( { imdbId : { $ne : imdbId} } )
+    //.aggregate( [ { $sample: { size : 1 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 0, poster: 0, images: 0 } } ] )
+    .toArray();
+  //console.log(fourMovies.name);
+  return fourMovies; 
+}
+
+// Query the database randomly, get 4 movies that different from id. To display in the movie detail page.
+async function get4MovieByIdRand(id){
+  const moviesCollection = await mongoCollections.movies();
+  const fourMovies = await moviesCollection
+    .aggregate( [ { $sample: { size : 4 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } ] )
+    .toArray();
+  //console.log(fourMovies);
+  return fourMovies; 
+}
+
 async function getByName(name) {
   const moviesCollection = await mongoCollections.movies();
   let str = ".*" + name + ".*$";
@@ -288,4 +310,6 @@ module.exports = {
   getByCast,
   getByDirector,
   get3MovieRand,
+  get4MovieByImdbIdRand,
+  get4MovieByIdRand,
 };
