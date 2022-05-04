@@ -284,19 +284,19 @@ h1, h2, h3, h4, h5,
 .carousel-caption {
     bottom: 3rem;
     z-index: 10;
+    left: 30%;
+    right: 30%;
 }
 
 /* Declare heights because of positioning of img element */
 .carousel-item {
-    height: 30rem;
+    height: 40rem;
 }
 
-.carousel-item > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    height: 30rem;
+.carousel-item img {
+    display: block;
+    margin: auto;
+    height: 40rem;
 }
 
 
@@ -314,8 +314,10 @@ h1, h2, h3, h4, h5,
 }
 
 .plot-overflow {
-    max-height: 4rem;
     overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-    white-space: nowrap;
+
 }
