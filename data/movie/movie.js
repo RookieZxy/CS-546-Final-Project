@@ -105,13 +105,21 @@ async function del(id) {
 
 async function getTopRated() {
   const moviesCollection = await mongoCollections.movies();
-  // const movies = await moviesCollection
-  //   .find({
-  //     name: { $regex: reg, $options: "i" }, //$options: "i"  Ignore case
-  //   })
-  //   .toArray();
+  var topRatedMovies = await moviesCollection
+    .aggregate([  
+      { $sort: { rating : -1 } },
+      { $limit : 10 },
+      { $project : { _id: 1, imdbId: 1, name: 1 } } 
+    ])
+    .toArray();
+  
+  for (let i = 0; i < topRatedMovies.length; i++){
+    topRatedMovies[i]._id = topRatedMovies[i]._id.toString();
+    //console.log(topRatedMovies[i]._id);
+  }
+  //console.log(topRatedMovies);
+  return topRatedMovies; 
 
-  return movies;
 }
 
 async function getInvalid() {
@@ -168,7 +176,10 @@ async function getAllTypes() {
 async function get3MovieRand(){
   const moviesCollection = await mongoCollections.movies();
   const threeMovies = await moviesCollection
-    .aggregate( [ { $sample: { size : 3 } } , { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } ] )
+    .aggregate( [ 
+      { $sample: { size : 3 } } , 
+      { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } 
+    ] )
     .toArray();
   //console.log(threeMovies);
   for (let i = 0; i < threeMovies.length; i++) {
@@ -209,7 +220,11 @@ async function get4SimilarMovieByIdRand(id){
   //console.log (type);
   const moviesCollection = await mongoCollections.movies();
   var fourMovies = await moviesCollection
-    .aggregate( [ { $match: {_id : { $ne : ObjectId(id) }, typeList : {$in : [type]} } } , { $sample: { size : 4 } } , { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } ] )
+    .aggregate( [ 
+      { $match: {_id : { $ne : ObjectId(id) }, typeList : {$in : [type]} } } ,
+      { $sample: { size : 4 } } , 
+      { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } 
+    ] )
     .toArray();
   
   for (let i = 0; i < fourMovies.length; i++){

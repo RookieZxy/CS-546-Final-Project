@@ -51,7 +51,11 @@
     </button>
 </div>
 
-<ul id="showList"></ul>
+<ul id="showList">
+    {{#each topRatedMovies}}
+    <a href="/movie/{{this._id}}">{{this.name}}</a><br>
+    {{/each}}
+</ul>
 
 {{!-- <div>
     <form action="/movie/search" id="searchForm" method="post" class="searchForm">

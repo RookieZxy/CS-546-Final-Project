@@ -9,9 +9,10 @@ router.get('/', async (req, res) => {
     // else
     const types = await movieData.getAllTypes();
     const threeMovies = await movieData.get3MovieRand();
-    //console.log(threeMovies[0].images);
+    const topRatedMovies = await movieData.getTopRated();
+    //console.log(topRatedMovies);
 
-    res.render('home/home', {types: types, threeMovies: threeMovies});
+    res.render('home/home', {types: types, threeMovies: threeMovies, topRatedMovies: topRatedMovies});
 });
 
 router.get('/userInfo', async (req, res) => {
