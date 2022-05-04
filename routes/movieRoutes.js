@@ -127,7 +127,11 @@ router.post("/search", async (req, res) => {
     }
     const movie = await movieData.getByName(movieSearch);
     if (movie[0] == undefined) throw `movie does not exist!`;
-    res.send(movie);
+    //res.send(movie);
+    //console.log(movie);
+    res.render("search/search", {
+      movie: movie
+    });
   } catch (e) {
     console.log(e);
     res.status(400).send({ error: e });
