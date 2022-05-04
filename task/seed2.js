@@ -16,7 +16,7 @@ async function main() {
 
   //mongoexport --jsonArray --collection=movies --db=CS546_A_GROUP_13 --out=movies.json
   try{
-        const movie1 = await movieData.queryFromImdb("tt0114709");
+        const movie1 = await movieData.queryFromImdb("tt0087843");
         await movieData.add(movie1);
     }
     catch(e){
@@ -24,7 +24,7 @@ async function main() {
     };
 
   try{
-        const movie2 = await movieData.queryFromImdb("tt0082096");
+        const movie2 = await movieData.queryFromImdb("tt4154796");
         await movieData.add(movie2);
     }
     catch(e){
@@ -32,7 +32,7 @@ async function main() {
     };
 
     try{
-        const movie3 = await movieData.queryFromImdb("tt2380307");
+        const movie3 = await movieData.queryFromImdb("tt0119217");
         await movieData.add(movie3);
     }
     catch(e){
@@ -40,7 +40,7 @@ async function main() {
     };
 
     try{
-        const movie4 = await movieData.queryFromImdb("tt0361748");
+        const movie4 = await movieData.queryFromImdb("tt0180093");
         await movieData.add(movie4);
     }
     catch(e){
@@ -48,7 +48,7 @@ async function main() {
     };
 
     try{
-        const movie5 = await movieData.queryFromImdb("tt0119698");
+        const movie5 = await movieData.queryFromImdb("tt0045152");
         await movieData.add(movie5);
     }
     catch(e){
@@ -56,7 +56,7 @@ async function main() {
     };
   
     try{
-        const movie6 = await movieData.queryFromImdb("tt0087843");
+        const movie6 = await movieData.queryFromImdb("tt5311514");
         await movieData.add(movie6);
     }
     catch(e){
@@ -64,7 +64,7 @@ async function main() {
     };
 
   try{
-        const movie7 = await movieData.queryFromImdb("tt4154796");
+        const movie7 = await movieData.queryFromImdb("tt0086190");
         await movieData.add(movie7);
     }
     catch(e){
@@ -72,7 +72,7 @@ async function main() {
     };
 
     try{
-        const movie8 = await movieData.queryFromImdb("tt0119217");
+        const movie8 = await movieData.queryFromImdb("tt1187043");
         await movieData.add(movie8);
     }
     catch(e){
@@ -80,7 +80,7 @@ async function main() {
     };
 
     try{
-        const movie9 = await movieData.queryFromImdb("tt0180093");
+        const movie9 = await movieData.queryFromImdb("tt0062622");
         await movieData.add(movie9);
     }
     catch(e){
@@ -88,7 +88,7 @@ async function main() {
     };
 
     try{
-        const movie10 = await movieData.queryFromImdb("tt0435761");
+        const movie10 = await movieData.queryFromImdb("tt0105236");
         await movieData.add(movie10);
     }
     catch(e){

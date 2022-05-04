@@ -168,7 +168,7 @@ async function getAllTypes() {
 async function get3MovieRand(){
   const moviesCollection = await mongoCollections.movies();
   const threeMovies = await moviesCollection
-    .aggregate( [ { $sample: { size : 3 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 1, poster: 1 } } ] )
+    .aggregate( [ { $sample: { size : 3 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } ] )
     .toArray();
   //console.log(threeMovies);
   return threeMovies; 
