@@ -90,6 +90,8 @@ router.get("/:id", async (req, res) => {
 
   try {
     const movie = await movieData.getById(id);
+    const fourSimilarMovies = await movieData.get4SimilarMovieByIdRand(id);
+    //console.log (fourSimilarMovies);
     movie.imageShow = [];
     for (let i = 0; i < 9; i++) {
       const img = movie.images[i];
@@ -98,6 +100,7 @@ router.get("/:id", async (req, res) => {
     if (req.session.user)
       res.render("movie/details", {
         movie: movie,
+        fourSimilarMovies : fourSimilarMovies,
         userName: req.session.user.account,
         CSS: "detail.css",
       });
@@ -105,6 +108,7 @@ router.get("/:id", async (req, res) => {
     else
       res.render("movie/details", {
         movie: movie,
+        fourSimilarMovies : fourSimilarMovies,
         CSS: "detail.css",
       });
   } catch (error) {

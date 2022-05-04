@@ -189,11 +189,27 @@ async function get4MovieByImdbIdRand(imdbId){
   return fourMovies; 
 }
 
+// Get typeList by ObjectId. Return first element of typeList of a movie.
+async function getTypeById(id){
+  id = util.isObjectId(id);
+  const moviesCollection = await mongoCollections.movies();
+  const movie = await moviesCollection
+    .findOne( { _id : ObjectId(id) } )
+    //.toArray();
+  if (movie === [])throw "No movie with id: " + id;
+  if (!movie.typeList || movie.typeList.length < 1)throw "No typeList in the movie with id: " + id;
+  return movie.typeList[0];
+}
+
 // Query the database randomly, get 4 movies that different from id. To display in the movie detail page.
-async function get4MovieByIdRand(id){
+async function get4SimilarMovieByIdRand(id){
+  id = util.isObjectId(id);
+  //console.log(id);
+  const type = await getTypeById(id);
+  //console.log (type);
   const moviesCollection = await mongoCollections.movies();
   const fourMovies = await moviesCollection
-    .aggregate( [ { $sample: { size : 4 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } ] )
+    .aggregate( [ { $match: {_id : { $ne : ObjectId(id) }, typeList : {$in : [type]} } } , { $sample: { size : 4 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } ] )
     .toArray();
   //console.log(fourMovies);
   return fourMovies; 
@@ -311,5 +327,5 @@ module.exports = {
   getByDirector,
   get3MovieRand,
   get4MovieByImdbIdRand,
-  get4MovieByIdRand,
+  get4SimilarMovieByIdRand,
 };
