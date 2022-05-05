@@ -4,13 +4,14 @@ const data = require('../../data');
 const usersData = data.users;
 const util = require('../../data');
 const utilsData = util.utils;
+const bcryptjs = require('bcrypt');
 const xss = require("xss");
 
 router.get("/", async (req, res) => {
-  if (req.session.user == undefined){
+  if (req.session.user == undefined) {
     res.redirect("/login");
-  }else{
-    if (req.session.user.isAdmin == false){
+  } else {
+    if (req.session.user.isAdmin == false) {
       res.redirect('/');
     }
     res.render('users/Info', {
@@ -50,10 +51,8 @@ router.post("/account", async (req, res) => {
 
 router.post('/add', async (req, res) => {
   try {
-    if (!req.body || !req.body.account || !req.body.confirm || !req.body.password || !req.body.firstName || !req.body.lastName)
+    if (!req.body || !req.body.account || !req.body.password || !req.body.firstName || !req.body.lastName)
       throw 'Missing username or password'
-    if (req.body.password != req.body.confirm)
-      throw `The two passwords are inconsistent`;
 
     req.body.account = xss(req.body.account);
     req.body.password = xss(req.body.password);
@@ -99,49 +98,65 @@ router.post('/add', async (req, res) => {
 router.post('/update', async (req, res) => {
   let updatedData = await usersData.get(req.body.account);
   try {
-    if (!req.body.password && !req.body.lastName && !req.body.firstName)
+    if (!req.body.lastName && !req.body.firstName)
       throw 'Missing Information';
-    // console.log(req.body.password)
-    req.body.password = xss(req.body.password);
+
     req.body.firstName = xss(req.body.firstName);
     req.body.lastName = xss(req.body.lastName);
-    // console.log(req.body.password)
-    if (req.body.password)
-      updatedData.password = req.body.password;
+
     if (req.body.firstName)
-      updatedData.firstName = req.body.firstName;
+      updatedData[0].firstName = req.body.firstName;
     if (req.body.lastName)
-      updatedData.lastName = req.body.lastName;
+      updatedData[0].lastName = req.body.lastName;
 
+    utilsData.checkString('firstName', updatedData[0].firstName);
+    utilsData.checkString('lastName', updatedData[0].lastName);
 
-    utilsData.checkPassword(updatedData.password);
-    utilsData.checkString('password', updatedData.password);
-    utilsData.checkString('firstName', updatedData.firstName);
-    utilsData.checkString('lastName', updatedData.lastName);
-
-    const updatedUsers = await usersData.update(req.body.account, updatedData.password, updatedData.firstName, updatedData.lastName);
-    // console.log(updatedUsers);
+    // console.log(updatedData[0].password, updatedData[0].isAdmin, updatedData[0].firstName, updatedData[0].lastName)
+    const updatedUsers = await usersData.changeName(req.body.account, updatedData[0].password, updatedData[0].isAdmin, updatedData[0].firstName, updatedData[0].lastName);
     if (updatedUsers) {
-      // res.redirect('/users');
-      // res.status(400).render('users/Info', {
-      //   updateInfo: 'success',
-      //   user: updatedUsers
-      // })
-      res.status(200).send({
-      })
+      res.status(200).send({})
     } else
       res.status(500).send({
-        message: 'Internal Server Error'
+        error: 'Internal Server Error'
       })
-    // res.render('users/account', {
-    //   user: updatedUsers
-    // })
   } catch (e) {
     console.log(e);
-    res.status(400).render('users/Info', {
-      updateInfo: 'fail',
-      status: 'HTTP 400',
-      error: e
+    res.status(400).send({
+      error: e,
+    })
+  }
+});
+
+router.post('/password', async (req, res) => {
+  let updatedData = await usersData.get(req.body.account);
+  try {
+    if(!req.body.account)
+      throw 'Missing account';
+    if (!req.body.password)
+      throw 'Missing password';
+
+    req.body.password = xss(req.body.password);
+    req.body.account = xss(req.body.account);
+
+    utilsData.checkString('prePassword', req.body.account);
+    utilsData.checkString('prePassword', req.body.password);
+    utilsData.checkPassword(password);
+
+    updatedData[0].password = req.body.password;
+
+    // console.log(updatedData[0].password, updatedData[0].isAdmin, updatedData[0].firstName, updatedData[0].lastName)
+    const updatedUsers = await usersData.update(req.body.account, updatedData[0].password, updatedData[0].firstName, updatedData[0].lastName);
+    if (updatedUsers) {
+      res.status(200).send({})
+    } else
+      res.status(500).send({
+        error: 'Internal Server Error'
+      })
+  } catch (e) {
+    console.log(e);
+    res.status(400).send({
+      error: e,
     })
   }
 });
@@ -158,18 +173,16 @@ router.post('/remove', async (req, res) => {
 
     // console.log(newUser);
     if (newUser.userDeleted == true)
-      res.render('users/Info', {
+      res.send({
         removeInfo: 'success'
       });
     else
       res.status(500).send({
-        message: 'Internal Server Error'
+        error: 'Internal Server Error'
       })
   } catch (e) {
     console.log(e);
-    res.status(400).render('users/Info', {
-      removeInfo: 'fail',
-      status: 'HTTP 400',
+    res.status(400).send({
       error: e
     })
   }

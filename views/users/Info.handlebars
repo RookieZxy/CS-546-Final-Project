@@ -2,7 +2,9 @@
     <form id="userSearch">
         <input type="account" placeholder="userName" name="account" id="account">
         <button type="submit">Search</button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#addForm">Add User</button>
     </form>
+
     <table class="table align-middle mb-0 bg-white">
         <thead>
             <tr>
@@ -25,9 +27,6 @@
                 <input class="form-control" type="firstName" placeholder="new first name" id="updateFirstName">
                 </br>
                 <input class="form-control" type="lastName" placeholder="new last name" id="updateLastName">
-                </br>
-                <input class="form-control" type="password" class="form-label" placeholder="password"
-                    id="updatePassword">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -37,34 +36,66 @@
     </div>
 </form>
 
-<div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+
+<form class="modal fade" id="addForm" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <label class="form-label">Add User</label>
+                <input class="form-control" type="Account" placeholder="Account" id="addAccount">
+                </br>
+                <input class="form-control" type="firstName" placeholder="First name" id="addFirstName">
+                </br>
+                <input class="form-control" type="lastName" placeholder="Last name" id="addLastName">
+                </br>
+                <input class="form-control" type="password" class="form-label" placeholder="password" id="addPassword">
+                </br>
+                <input class="form-control" type="password" class="form-label" placeholder="Confirm password"
+                    id="addConfirmPw">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form class="modal fade" id="removeForm" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-danger">
                 Are you sure to remove that user?
             </div>
             <div class="modal-footer">
+                <input class="form-control" type="Account" id="removeAccount" hidden>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Confirm</button>
+                <button type="submit" class="btn btn-danger">Confirm</button>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="newPassModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+</form>
+
+
+
+<form class="modal fade" id="passwordForm" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
                 <label for="newPassword" class="form-label">Change password:</label>
-                <input class="form-control" type="password" placeholder="New password" name="newPassword"
-                    id="newPassword">
+                <input class="form-control" type="Account" id="passwordAccount" hidden>
+                <input class="form-control" type="password" placeholder="New password" id="newPassword">
+                </br>
+                <input class="form-control" type="confirmPw" placeholder="Confirm new password" id="confirmPw">
+                </br>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
+                <button type="submit" class="btn btn-primary">Confirm</button>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <!--    <h2 class="heading-section">user Management</h2>-->
 

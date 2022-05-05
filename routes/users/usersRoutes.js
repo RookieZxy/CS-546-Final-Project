@@ -37,12 +37,6 @@ router.get("/", async (req, res) => {
     // res.render('users/account', users)
   } catch (e) {
     res.redirect("/login");
-    // res.status(400).render('home/home', {error: e,login_flag:'false'});
-    // res.status(400).render('users', {
-    //   login_flag: 'users',
-    //   status: 'HTTP 400',
-    //   error: e
-    // })
   }
 });
 

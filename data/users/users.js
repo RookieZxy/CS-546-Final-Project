@@ -1,7 +1,8 @@
 const mongoCollections = require('../../config/mongoCollections');
 const users = mongoCollections.users
 const bcryptjs = require('bcrypt');
-const axios = require("axios");
+const util = require('../utils/util');
+// const axios = require("axios");
 const {
     hash
 } = require('bcrypt');
@@ -156,6 +157,33 @@ async function update(account, password, firstName, lastName) {
     return updatedUser;
 }
 
+async function changeName(account, password, isAdmin,firstName, lastName) {
+    util.checkAccount(account);
+    util.checkName(firstName, lastName);
+
+    const userCollection = await users();
+
+    const updatedUser = {
+        account: account,
+        password: password,
+        isAdmin: isAdmin,
+        firstName: firstName,
+        lastName: lastName
+    }
+
+    const updatedInfo = await userCollection.updateOne({
+        account: account
+    }, {
+        $set: updatedUser
+    })
+
+    if (updatedInfo.modifiedCount === 0)
+        throw `Please change Name`;
+
+    return updatedUser;
+}
+
+
 //delete user
 async function remove(account) {
     if (!account)
@@ -201,5 +229,6 @@ module.exports = {
     createUser,
     checkUser,
     remove,
-    getAll
+    getAll,
+    changeName
 }

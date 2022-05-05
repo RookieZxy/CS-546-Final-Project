@@ -22,11 +22,42 @@
         return check;
     }
 
-    function checkInfo(account, p, firstName, lastName) {
+    function checkInfo(account, firstName, lastName) {
         var Regx = /^[A-Za-z0-9]*$/;
         var account = account.trim();
-        // var confirm = confirm.trim();
-        var password = p.trim();
+        var firstName = firstName.trim();
+        var lastName = lastName.trim();
+        var check = true;
+        if (typeof account !== 'string') {
+            alert(`${account} is not a string`);
+            check = false;
+        } else if (account.length < 4) {
+            alert('account should be at least 4 characters and not be empty spaces');
+            check = false;
+        } else if (account.length > 16) {
+            alert('The length of account should not be more than 16');
+            check = false;
+        } else if (account.indexOf(" ") != -1) {
+            alert('account should not have spaces');
+            check = false;
+        } else if (!Regx.test(account)) {
+            alert('account should only be combained by alphanumeric characters');
+            check = false;
+        } else if (typeof firstName !== 'string' || typeof lastName !== 'string') {
+            alert(`firstName and lastName should be string`);
+            check = false;
+        } else if (firstName.length == 0 || lastName.length == 0) {
+            alert(`firstName and lastName should not be empty spaces`);
+            check = false;
+        }
+
+        return check;
+    }
+
+    function checkInfo2(account, firstName, lastName, password) {
+        var Regx = /^[A-Za-z0-9]*$/;
+        var password = password.trim();
+        var account = account.trim();
         var firstName = firstName.trim();
         var lastName = lastName.trim();
         var check = true;
@@ -52,18 +83,38 @@
             alert(`firstName and lastName should not be empty spaces`);
             check = false;
         } else if (typeof password !== 'string') {
-            alert(`${password} is not a string`)
+            confirm(`${password} is not a string`)
             check = false;
         } else if (password.indexOf(" ") != -1) {
-            alert('password should not have spaces')
+            confirm('password should not have spaces')
             check = false;
         } else if (password.length < 6) {
-            alert('password should not be empty spaces and should be at least 6 characters')
+            confirm('password should not be empty spaces and should be at least 6 characters')
             check = false;
         } else if (password.length > 16) {
-            alert('The length of password should not be more than 16');
+            confirm('The length of password should not be more than 16');
             check = false;
-        } 
+        }
+
+        return check;
+    }
+
+    function checkPassword(password) {
+        var password = password.trim();
+        var check = true;
+        if (typeof password !== 'string') {
+            confirm(`${password} is not a string`)
+            check = false;
+        } else if (password.indexOf(" ") != -1) {
+            confirm('password should not have spaces')
+            check = false;
+        } else if (password.length < 6) {
+            confirm('password should not be empty spaces and should be at least 6 characters')
+            check = false;
+        } else if (password.length > 16) {
+            confirm('The length of password should not be more than 16');
+            check = false;
+        }
 
         return check;
     }
@@ -77,9 +128,6 @@
         }
     }).then((data) => {
         var searchList = $(data);
-        console.log(searchList)
-        // var tr = `<tr><th>accound</th><th>first name</th><th>last name</th></tr>`
-        // $('#userList').append(tr);
         for (var i = 0; i < searchList.length; i++) {
             var t = `<tr id="tr${i}">
             <td><p class="fw-bold mb-1">${searchList[i].account}</p></td>
@@ -92,8 +140,8 @@
                 <input id="lastName${i}" value="${searchList[i].lastName}" hidden>
                 <input id="isAdmin${i}" value="${searchList[i].isAdmin}" hidden>
                 <button id="edit${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#updateForm">Edit</button>
-                <button id="changePassword${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#newPassModal">Change password</button>
-                <button id="remove${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeModal">Remove</button>
+                <button id="changePassword${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#passwordForm">Change password</button>
+                <button id="remove${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeForm">Remove</button>
             </td>
             </tr>`;
 
@@ -110,16 +158,16 @@
                 // $("updateForm").show();
             });
             $(delBtns[i * 3 + 1]).click(function () {
-                console.log(2);
-                // $(`#imagesDiv${i}`).update();
+                $("#passwordAccount").val($(`#account${i}`).val());
             });
             $(delBtns[i * 3 + 2]).click(function () {
-                // $(`#imagesDiv${i}`).remove();
+                $("#removeAccount").val($(`#account${i}`).val());
             });
         }
     }).fail((error) => {
         alert(error.responseJSON.error);
     });
+
 
 
 
@@ -137,7 +185,7 @@
                 }
             }).then((data) => {
                 var searchList = $(data);
-                console.log(searchList)
+                // console.log(searchList)
                 var id = 1;
                 // var tr = `<tr><th>accound</th><th>first name</th><th>last name</th></tr>`
                 // $('#userList').append(tr);
@@ -149,8 +197,8 @@
                     <td><p id="isAdmin${id}" class="fw-light mb-1">${searchList[i].isAdmin}</p></td>
                     <td>
                         <button id="edit${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#updateForm">Edit</button>
-                        <button id="changePassword${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#newPassModal">Change password</button>
-                        <button id="remove${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeModal">Remove</button>
+                        <button id="changePassword${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#passwordForm">Change password</button>
+                        <button id="remove${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeForm">Remove</button>
                     </td>
                     </tr>`;
 
@@ -166,11 +214,10 @@
                         // $("updateForm").show();
                     });
                     $(delBtns[i * 3 + 1]).click(function () {
-                        console.log(2);
-                        // $(`#imagesDiv${i}`).update();
+                        $("#passwordAccount").val($(`#account${i}`).val());
                     });
                     $(delBtns[i * 3 + 2]).click(function () {
-                        // $(`#imagesDiv${i}`).remove();
+                        $("#removeAccount").val($(`#account${i}`).val());
                     });
                 }
             }).fail((error) => {
@@ -180,27 +227,47 @@
 
     });
 
-
     $('#updateForm').submit((event) => {
         event.preventDefault();
-        console.log($("#updatePassword").val())
-        console.log($("#updateFirstName").val())
-        console.log($("#updateLastName").val())
         var check = true;
-        var check = checkInfo($("#updateAccount").html(), $("#updatePassword").val(), $("#updateFirstName").val(), $("#updateLastName").val());
+        var check = checkInfo($("#updateAccount").html(), $("#updateFirstName").val(), $("#updateLastName").val());
         if (check) {
             $.ajax({
                 method: "POST",
                 url: `http://localhost:3000/userManage/update`,
                 data: {
                     account: $("#updateAccount").html(),
-                    password: $("#updatePassword").val(),
-                    // confirm: $("#confirm2").val(),
                     firstName: $("#updateFirstName").val(),
                     lastName: $("#updateLastName").val(),
                 }
             }).then((data) => {
                 confirm("update successfully");
+                window.location.replace("/userManage");
+            }).fail((error) => {
+                alert(error.responseJSON.error);
+            });
+        }
+    });
+
+    $('#addForm').submit((event) => {
+        event.preventDefault();
+        var check = true;
+        var check = checkInfo2($("#addAccount").val(), $("#addFirstName").val(), $("#addLastName").val(), $("#addPassword").val());
+        if ($("#addPassword").val() != $("#addConfirmPw").val())
+            alert(`The two inputed password are not consistent`)
+        if (check) {
+            $.ajax({
+                method: "POST",
+                url: `http://localhost:3000/userManage/add`,
+                data: {
+                    account: $("#addAccount").val(),
+                    password: $("#addPassword").val(),
+                    firstName: $("#addFirstName").val(),
+                    lastName: $("#addLastName").val(),
+                }
+            }).then((data) => {
+                confirm("added successfully");
+                window.location.replace("/userManage");
             }).fail((error) => {
                 alert(error.responseJSON.error);
             });
@@ -209,27 +276,47 @@
 
     $('#removeForm').submit((event) => {
         event.preventDefault();
-        // console.log($("#account").val());
-        var check = checkInfo($("#updateAccount").html(), $("#updatePassword").val(), $("#updateFirstName").val(), $("#updateLastName").val(), $("#confirm2").val());
+        var check = checkAccount($("#removeAccount").val())
         if (check) {
             $.ajax({
                 method: "POST",
-                url: `http://localhost:3000/userManage/update`,
+                url: `http://localhost:3000/userManage/remove`,
                 data: {
-                    account: $("#updateAccount").html(),
-                    password: $("#updatePassword").val(),
-                    // confirm: $("#confirm2").val(),
-                    firstName: $("#updateFirstName").val(),
-                    lastName: $("#updateLastName").val(),
+                    account: $("#removeAccount").val(),
                 }
             }).then((data) => {
-                confirm("add successfully");
+                confirm("removed successfully");
+                window.location.replace("/userManage");
             }).fail((error) => {
                 alert(error.responseJSON.error);
             });
         }
     });
 
+    $('#passwordForm').submit((event) => {
+        event.preventDefault();
+        var check = true;
+        var check = checkPassword($("#newPassword").val());
+        if ($("#newPassword").val() != $("#confirmPw").val())
+            alert('Two inputed password are not consistent')
+        else {
+            if (check) {
+                $.ajax({
+                    method: "POST",
+                    url: `http://localhost:3000/userManage/password`,
+                    data: {
+                        account: $("#passwordAccount").val(),
+                        password: $("#newPassword").val(),
+                    }
+                }).then((data) => {
+                    confirm("Password changed");
+                    window.location.replace("/userManage");
+                }).fail((error) => {
+                    alert(error.responseJSON.error);
+                });
+            }
+        }
+    });
 
 
 })(jQuery);
