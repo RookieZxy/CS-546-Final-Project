@@ -106,19 +106,19 @@ async function del(id) {
 async function getTopRated() {
   const moviesCollection = await mongoCollections.movies();
   var topRatedMovies = await moviesCollection
-    .aggregate([  
+    .aggregate([
       { $sort: { rating : -1 } },
       { $limit : 10 },
-      { $project : { _id: 1, imdbId: 1, name: 1 } } 
+      { $project : { _id: 1, imdbId: 1, name: 1, rating: 1 } }
     ])
     .toArray();
-  
+
   for (let i = 0; i < topRatedMovies.length; i++){
     topRatedMovies[i]._id = topRatedMovies[i]._id.toString();
     //console.log(topRatedMovies[i]._id);
   }
   //console.log(topRatedMovies);
-  return topRatedMovies; 
+  return topRatedMovies;
 
 }
 
@@ -176,9 +176,9 @@ async function getAllTypes() {
 async function get3MovieRand(){
   const moviesCollection = await mongoCollections.movies();
   const threeMovies = await moviesCollection
-    .aggregate( [ 
-      { $sample: { size : 3 } } , 
-      { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } 
+    .aggregate( [
+      { $sample: { size : 3 } } ,
+      { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } }
     ] )
     .toArray();
   //console.log(threeMovies);
@@ -197,7 +197,7 @@ async function get4MovieByImdbIdRand(imdbId){
     //.aggregate( [ { $sample: { size : 1 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 0, poster: 0, images: 0 } } ] )
     .toArray();
   //console.log(fourMovies.name);
-  return fourMovies; 
+  return fourMovies;
 }
 
 // Get typeList by ObjectId. Return first element of typeList of a movie.
@@ -220,19 +220,19 @@ async function get4SimilarMovieByIdRand(id){
   //console.log (type);
   const moviesCollection = await mongoCollections.movies();
   var fourMovies = await moviesCollection
-    .aggregate( [ 
+    .aggregate( [
       { $match: {_id : { $ne : ObjectId(id) }, typeList : {$in : [type]} } } ,
-      { $sample: { size : 4 } } , 
-      { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } } 
+      { $sample: { size : 4 } } ,
+      { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } }
     ] )
     .toArray();
-  
+
   for (let i = 0; i < fourMovies.length; i++){
     //console.log(fourMovies[i]);
     fourMovies[i]._id = fourMovies[i]._id.toString();
   }
   //console.log(fourMovies);
-  return fourMovies; 
+  return fourMovies;
 }
 
 async function getByName(name) {

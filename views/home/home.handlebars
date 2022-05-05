@@ -1,5 +1,5 @@
 <div class="coolbackground">
-    <div id="myCarousel" class="carousel slide bg-dark bg-opacity-75" data-bs-ride="carousel">
+    <div id="myCarousel" class="carousel bg-dark bg-opacity-75" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
                     aria-label="Slide 1"></button>
@@ -9,10 +9,10 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <a href="/movie/{{threeMovies.[0]._id}}">
-                    <img src="{{threeMovies.[0].images.[1].image}}" alt="movie1_img">
+                    <img src="{{threeMovies.[0].images.[0].image}}" alt="movie1_img">
                     <div class="container">
                         <div class="carousel-caption text-start">
-                            <h2 class="text-light fw-bold">{{threeMovies.[0].name}}</h2>
+                            <h2 class="text-white fw-bold">{{threeMovies.[0].name}}</h2>
                             <p class="plot-overflow fw-lighter">{{threeMovies.[0].plot}}</p>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
             </div>
             <div class="carousel-item">
                 <a href="/movie/{{threeMovies.[1]._id}}">
-                    <img src="{{threeMovies.[1].images.[1].image}}" alt="movie2_img">
+                    <img src="{{threeMovies.[1].images.[0].image}}" alt="movie2_img">
                     <div class="container">
                         <div class="carousel-caption text-start">
                             <h2 class="text-light fw-bold">{{threeMovies.[1].name}}</h2>
@@ -31,7 +31,7 @@
             </div>
             <div class="carousel-item">
                 <a href="/movie/{{threeMovies.[2]._id}}">
-                    <img src="{{threeMovies.[2].images.[1].image}}" alt="movie3_img">
+                    <img src="{{threeMovies.[2].images.[0].image}}" alt="movie3_img">
                     <div class="container">
                         <div class="carousel-caption text-start">
                             <h2 class="text-light fw-bold">{{threeMovies.[2].name}}</h2>
@@ -52,11 +52,36 @@
         </button>
     </div>
 
-    <ul id="showList">
-        {{#each topRatedMovies}}
-            <a href="/movie/{{this._id}}">{{this.name}}</a><br>
-        {{/each}}
-    </ul>
+    <div class="py-4 text-center bg-dark bg-opacity-75">
+        <div class="container border rounded-3 border-2 border-primary bg-gradient py-3">
+            <div class="py-5">
+                <h1 class="fw-bold text-decoration-underline">TOP 10 IN </h1><img class="rounded-1 d-inline-block"
+                                                                                  src="/public/images/logo-horizontal.png"
+                                                                                  alt="logo" width="280" height="90">
+            </div>
+            <div id="showList" class="mx-auto col-5">
+                {{#each topRatedMovies}}
+                    <div class="top-list d-flex justify-content-between align-items-start fs-4">
+                        <div class="mx-auto">
+                            <a href="/movie/{{this._id}}">{{this.name}}</a>
+                        </div>
+                        <span class="badge bg-primary">{{this.rating}}</span>
+                    </div>
+                {{/each}}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="px-4 py-5 text-center bg-dark bg-opacity-75">
+        <img class="d-block mx-auto mb-4 rounded-3" src="/public/images/logo-vertical.png" alt="" width="150"
+             height="150">
+        <div class="col-lg-6 mx-auto">
+            <p class="lead text-primary">YouTape is an interest platform that people can rely on when hesitating a movie
+                tonight, and a community that cinephiles can discuss everything of a movie.
+            </p>
+        </div>
+    </div>
 </div>
 {{!-- <div>
     <form action="/movie/search" id="searchForm" method="post" class="searchForm">

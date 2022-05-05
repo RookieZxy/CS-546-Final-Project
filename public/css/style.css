@@ -1,6 +1,4 @@
 body {
-    font-family: "Lato", Arial, sans-serif;
-    font-size: 16px;
     line-height: 1.8;
     font-weight: normal;
     background: #f8f9fd;
@@ -12,6 +10,12 @@ body {
     height: 100%;
     background: url(https://w.wallhaven.cc/full/42/wallhaven-42roy9.jpg) no-repeat fixed center center;
     background-size: cover;
+}
+
+.top-list{
+    position: relative;
+    display: block;
+    padding: 0.5rem 1rem;
 }
 
 a {
@@ -238,8 +242,13 @@ h1, h2, h3, h4, h5,
     color: #ff9900;
 }
 
-.text-primary{
-    color: #ff9900!important;
+.text-primary {
+    color: #ff9900 !important;
+}
+
+.border-primary {
+    border-color: #ff9900 !important;
+    border-style: dashed !important;
 }
 
 .checkbox-primary input:checked ~ .checkmark:after {
@@ -282,17 +291,20 @@ h1, h2, h3, h4, h5,
     color: #fff;
 }
 
-/* Carousel base class */
-.carousel {
-    margin-bottom: 4rem;
-}
-
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
     bottom: 3rem;
     z-index: 10;
     left: 30%;
     right: 30%;
+}
+
+.carousel-control-prev {
+    left: 10rem;
+}
+
+.carousel-control-next {
+    right: 10rem;
 }
 
 /* Declare heights because of positioning of img element */

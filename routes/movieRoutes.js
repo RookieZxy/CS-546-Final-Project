@@ -126,7 +126,11 @@ router.post("/search", async (req, res) => {
       throw `movie does not exist!`;
     }
     const movie = await movieData.getByName(movieSearch);
-    if (movie[0] == undefined) throw `movie does not exist!`;
+    if (movie[0] == undefined) {
+      res.render("search/search", {
+        amount: 0
+      });
+    }
     //res.send(movie);
     //console.log(movie.length());
     const amount = movie.length;
@@ -136,6 +140,7 @@ router.post("/search", async (req, res) => {
     });
   } catch (e) {
     console.log(e);
+
     res.status(400).send({ error: e });
     // res.status(400).render("home/home", {
     //   login_flag: "movieSearch",
