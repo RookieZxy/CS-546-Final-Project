@@ -128,9 +128,11 @@ router.post("/search", async (req, res) => {
     const movie = await movieData.getByName(movieSearch);
     if (movie[0] == undefined) throw `movie does not exist!`;
     //res.send(movie);
-    //console.log(movie);
+    //console.log(movie.length());
+    const amount = movie.length;
     res.render("search/search", {
-      movie: movie
+      movie: movie,
+      amount: amount
     });
   } catch (e) {
     console.log(e);
