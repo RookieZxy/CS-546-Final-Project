@@ -1,4 +1,4 @@
-(function ($) {
+/*(function ($) {
 
     $('#searchForm').submit((event) => {
         event.preventDefault();
@@ -35,7 +35,7 @@
             });hen
         }
     })
-
+*/
     // $('#commentForm').submit((event) => {
     //     event.preventDefault();
     //     const userName = userName;
@@ -72,4 +72,4 @@
     //     }
     // })
 
-  })(window.jQuery);
+  //})(window.jQuery);

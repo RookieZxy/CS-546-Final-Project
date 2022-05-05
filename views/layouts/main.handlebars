@@ -62,9 +62,10 @@
             </ul>
 
 
-            <form id="searchForm" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <input type="text" id="search_termInput" class="form-control form-control-dark" placeholder="Search..."
+            <form id="searchForm" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="/movie/search" method="post">
+                <input type="text" name="search_termInput" class="form-control form-control-dark" placeholder="Search..."
                        aria-label="Search">
+
             </form>
 
             <div class="text-end">
@@ -108,7 +109,7 @@
 <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/locales/LANG.js"></script>
 
-<script src="/public/js/movie.js"></script>
+{{!--<script src="/public/js/movie.js"></script> --}}
 
 <script src="/public/js/addMovie.js" type="text/javascript"></script>
 
