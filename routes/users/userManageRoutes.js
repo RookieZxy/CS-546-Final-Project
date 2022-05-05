@@ -129,7 +129,6 @@ router.post('/update', async (req, res) => {
 });
 
 router.post('/password', async (req, res) => {
-  let updatedData = await usersData.get(req.body.account);
   try {
     if(!req.body.account)
       throw 'Missing account';
@@ -139,10 +138,11 @@ router.post('/password', async (req, res) => {
     req.body.password = xss(req.body.password);
     req.body.account = xss(req.body.account);
 
-    utilsData.checkString('prePassword', req.body.account);
-    utilsData.checkString('prePassword', req.body.password);
+    utilsData.checkString('account', req.body.account);
+    utilsData.checkString('password', req.body.password);
     utilsData.checkPassword(password);
 
+    let updatedData = await usersData.get(req.body.account);
     updatedData[0].password = req.body.password;
 
     // console.log(updatedData[0].password, updatedData[0].isAdmin, updatedData[0].firstName, updatedData[0].lastName)
@@ -161,6 +161,43 @@ router.post('/password', async (req, res) => {
   }
 });
 
+router.post('/admin', async (req, res) => {
+  try {
+    if(!req.body.account)
+      throw 'Missing account';
+    if (!req.body.isAdmin)
+      throw 'Missing isAdmin';
+    req.body.isAdmin = xss(req.body.isAdmin);
+    req.body.account = xss(req.body.account);
+    // console.log(req.body.isAdmin)
+      let isAdmin = true;
+    if(req.body.isAdmin == 'true')
+      isAdmin = true;
+    else if(req.body.isAdmin == 'false')
+      isAdmin = false;
+
+    if(typeof isAdmin !=='boolean')
+        throw `isAdmin must be true or false`
+    utilsData.checkString('account', req.body.account);
+
+    let updatedData = await usersData.get(req.body.account);
+    updatedData[0].isAdmin = isAdmin;
+
+    const updatedUsers = await usersData.changeAdmin(req.body.account, updatedData[0].isAdmin);
+    if (updatedUsers) {
+      res.status(200).send({})
+    } else
+      res.status(500).send({
+        error: 'Internal Server Error'
+      })
+  } catch (e) {
+    console.log(e);
+    res.status(400).send({
+      error: e,
+    })
+  }
+})
+ 
 router.post('/remove', async (req, res) => {
   try {
     if (!req.body.account)

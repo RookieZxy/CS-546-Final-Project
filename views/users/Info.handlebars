@@ -82,7 +82,6 @@
     </div>
 </form>
 
-
 <form class="modal fade" id="passwordForm" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -102,45 +101,19 @@
     </div>
 </form>
 
-<!--    <h2 class="heading-section">user Management</h2>-->
-
-<!--    {{!-- <form action="/userManage/account" method="post"> --}}-->
-<!--    <form id="userSearch">-->
-<!--        <input type="account" placeholder="userName" name="account" id="account">-->
-<!--        <button type="submit">Submit</button>-->
-<!--    </form>-->
-<!--    <table id="userList"></table>-->
-
-<!--    &lt;!&ndash;    <ul id="userList"></ul>&ndash;&gt;-->
-
-
-<!--    <h2 class="heading-section">add user</h2>-->
-<!--    {{!-- <form action="/userManage/add" method="post"> --}}-->
-<!--    <form id="addUserForm">-->
-<!--        <input type="account" placeholder="account" name="account2" id="account2" required>-->
-<!--        <input type="password" placeholder="password" name="password2" id="password2" required>-->
-<!--        <input type="password" placeholder="confirm password" name="confirm2" id="confirm2" required>-->
-<!--        <input type="firstName" placeholder="first name" name="firstName2" id="firstName2" required>-->
-<!--        <input type="lastName" placeholder="last name" name="lastName2" id="lastName2" required>-->
-<!--        <button type="submit">Add user</button>-->
-<!--    </form>-->
-<!--    <p>{{addInfo}}</p>-->
-
-
-<!--    <h2 class="heading-section">update user</h2>-->
-<!--    {{!-- <form action="/userManage/update" method="post"> --}}-->
-<!--    <form id="updateForm">-->
-<!--        <input type="account" placeholder="account" name="account3" id="account3" required>-->
-<!--        <input type="password" placeholder="password" name="password3" id="password3">-->
-<!--        <input type="firstName" placeholder="first name" name="firstName3" id="firstName3">-->
-<!--        <input type="lastName" placeholder="last name" name="lastName3" id="lastName3">-->
-<!--        <button type="submit">update user</button>-->
-<!--    </form>-->
-<!--    <p>{{updateInfo}}</p>-->
-
-
-<!--    <h2 class="heading-section">remove user</h2>-->
-<!--    <form action="/userManage/remove" method="post">-->
-<!--        <input type="account" placeholder="account" name="account" id="account" required>-->
-<!--        <button type="submit">remove user</button>-->
-<!--    </form>-->
+<form class="modal fade" id="adminForm" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <label  class="form-label">Change to Administrator:</label>
+            <select id="adminStatus">
+                <option value="true">True</option>
+                <option value="false">False</option>
+            </select>
+            <div class="modal-footer">
+                <input class="form-control" type="Account" id="adminAccount" hidden>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Confirm</button>
+            </div>
+        </div>
+    </div>
+</form>

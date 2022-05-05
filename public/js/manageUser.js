@@ -142,6 +142,7 @@
                 <button id="edit${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#updateForm">Edit</button>
                 <button id="changePassword${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#passwordForm">Change password</button>
                 <button id="remove${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeForm">Remove</button>
+                <button id="changeAdmin${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#adminForm">ChangeAdmin</button>
             </td>
             </tr>`;
 
@@ -149,19 +150,25 @@
         }
 
         const delBtns = $("#userTable button");
-        for (let i = 0; i < delBtns.length / 3; i++) {
+        for (let i = 0; i < delBtns.length / 4; i++) {
             // const delBtn = delBtns[i];
-            $(delBtns[i * 3]).click(function () {
+            $(delBtns[i * 4]).click(function () {
                 $("#updateAccount").html($(`#account${i}`).val());
                 $("#updateFirstName").val($(`#firstName${i}`).val());
                 $("#updateLastName").val($(`#lastName${i}`).val());
                 // $("updateForm").show();
             });
-            $(delBtns[i * 3 + 1]).click(function () {
+            $(delBtns[i * 4 + 1]).click(function () {
                 $("#passwordAccount").val($(`#account${i}`).val());
             });
-            $(delBtns[i * 3 + 2]).click(function () {
+            $(delBtns[i * 4 + 2]).click(function () {
                 $("#removeAccount").val($(`#account${i}`).val());
+            });
+            $(delBtns[i * 4 + 3]).click(function () {
+                var isAdmin = $(`#isAdmin${i}`).val()
+                $("#adminAccount").val($(`#account${i}`).val());
+                // $("#adminStatus").val(`${isAdmin}`)
+                // $("#adminStatus").find(`option[text='${isAdmin}']`).attr("selected", true);
             });
         }
     }).fail((error) => {
@@ -173,7 +180,6 @@
 
     $('#userSearch').submit((event) => {
         event.preventDefault();
-        // console.log($("#account").val());
         var check = checkAccount($("#account").val());
         $('#userTable').empty();
         if (check) {
@@ -199,25 +205,29 @@
                         <button id="edit${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#updateForm">Edit</button>
                         <button id="changePassword${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#passwordForm">Change password</button>
                         <button id="remove${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeForm">Remove</button>
+                        <button id="changeAdmin${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#adminForm">ChangeAdmin</button>
                     </td>
                     </tr>`;
 
                     $('#userTable').append(t);
                 }
                 const delBtns = $("#userTable button");
-                for (let i = 0; i < delBtns.length / 3; i++) {
+                for (let i = 0; i < delBtns.length / 4; i++) {
                     // const delBtn = delBtns[i];
-                    $(delBtns[i * 3]).click(function () {
+                    $(delBtns[i * 4]).click(function () {
                         $("#updateAccount").html($(`#account${i}`).val());
                         $("#updateFirstName").val($(`#firstName${i}`).val());
                         $("#updateLastName").val($(`#lastName${i}`).val());
                         // $("updateForm").show();
                     });
-                    $(delBtns[i * 3 + 1]).click(function () {
+                    $(delBtns[i * 4 + 1]).click(function () {
                         $("#passwordAccount").val($(`#account${i}`).val());
                     });
-                    $(delBtns[i * 3 + 2]).click(function () {
+                    $(delBtns[i * 4 + 2]).click(function () {
                         $("#removeAccount").val($(`#account${i}`).val());
+                    });
+                    $(delBtns[i * 4 + 3]).click(function () {
+                        $("#adminAccount").val($(`#account${i}`).val());
                     });
                 }
             }).fail((error) => {
@@ -316,6 +326,29 @@
                 });
             }
         }
+    });
+
+    $('#adminForm').submit((event) => {
+        event.preventDefault();
+        // console.log($("#adminStatus").val());
+        // var isAdmin = $("#adminStatus").val()
+        // if(isAdmin == 'True')
+        //     isAdmin = true;
+        // else if(isAdmin == 'False')
+        //     isAdmin = false;
+        $.ajax({
+            method: "POST",
+            url: `http://localhost:3000/userManage/admin`,
+            data: {
+                account: $("#adminAccount").val(),
+                isAdmin: $("#adminStatus").val(),
+            }
+        }).then((data) => {
+            confirm("Administrator changed");
+            window.location.replace("/userManage");
+        }).fail((error) => {
+            alert(error.responseJSON.error);
+        });
     });
 
 

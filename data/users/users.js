@@ -157,6 +157,7 @@ async function update(account, password, firstName, lastName) {
     return updatedUser;
 }
 
+//update user name
 async function changeName(account, password, isAdmin,firstName, lastName) {
     util.checkAccount(account);
     util.checkName(firstName, lastName);
@@ -183,6 +184,28 @@ async function changeName(account, password, isAdmin,firstName, lastName) {
     return updatedUser;
 }
 
+async function changeAdmin(account, isAdmin) {
+    util.checkAccount(account);
+    if(typeof isAdmin !=='boolean')
+        throw `isAdmin must be true or false`
+    const userCollection = await users();
+
+    const updatedUser = {
+        account: account,
+        isAdmin: isAdmin,
+    }
+
+    const updatedInfo = await userCollection.updateOne({
+        account: account
+    }, {
+        $set: updatedUser
+    })
+
+    if (updatedInfo.modifiedCount === 0)
+        throw `Please make a change`;
+
+    return updatedUser;
+}
 
 //delete user
 async function remove(account) {
@@ -230,5 +253,6 @@ module.exports = {
     checkUser,
     remove,
     getAll,
-    changeName
+    changeName,
+    changeAdmin
 }
