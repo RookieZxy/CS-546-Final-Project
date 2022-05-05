@@ -148,16 +148,39 @@ async function getById(id) {
   return movie;
 }
 
-// Query the database.movie and find all movies with typeName in typeList.
-async function getByType(typeName) {
+// Query the database.movie and find all movies with typeName in typeList. Sort the return by sortBy
+async function getByType(typeName, sortBy) {
   if (!typeName || typeof typeName != "string")
     throw `invalid typename: '${typeName}'`;
+  if (!sortBy || typeof sortBy != "string")
+    throw `invalid sortBy: '${sortBy}'`;
+  
   const moviesCollection = await mongoCollections.movies();
-  const movie = await moviesCollection.find({ typeList: typeName }).toArray();
+  var movie = null;
+  if (sortBy == "ratingLH"){
+    movie = await moviesCollection
+    .find({ typeList: typeName })
+    .sort( {rating : 1})
+    .toArray();
+  }else if(sortBy == "ratingHL"){
+    movie = await moviesCollection
+    .find({ typeList: typeName })
+    .sort( {rating : -1} )
+    .toArray();
+  }else if(sortBy == "releaseDateNew"){
+    movie = await moviesCollection
+    .find({ typeList: typeName })
+    .sort( {releaseDate : -1} )
+    .toArray();
+  }else {
+    movie = await moviesCollection
+    .find({ typeList: typeName })
+    .sort( {releaseDate : 1} )
+    .toArray();
+  }
+  
   if (movie === null) throw `No movie with typeName '${typeName}`;
-  //movie._id = movie._id.toString();
-  movie.releaseDate = new Date(movie.releaseDate);
-  //console.log ('movie: ', movie);
+  
   return movie;
 }
 
