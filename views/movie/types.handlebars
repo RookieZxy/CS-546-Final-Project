@@ -4,13 +4,20 @@
             <div class="col-lg-6 col-md-2 mx-auto bg-white bg-opacity-50 rounded-3">
                 <h1 class="text-primary">{{type}} Movies</h1>
                 <p class="lead text-primary">found ? results</p>
+                <p id="type-name" name="type-name" hidden>{{type}}</p>
                 <p>selector would be here</p>
+                <select id="type-sort-select" name="type-sort-select">
+                    <option value ="ratingLH">Rating: Low to High</option>
+                    <option value ="ratingHL">Rating: High to LKow</option>
+                    <option value ="releaseDateNew">Release Date: Newest First</option>
+                    <option value ="releaseDateOld">Release Date: Oldest First</option>
+                </select>
             </div>
         </div>
     </section>
     <div class="py-5 bg-dark bg-opacity-75">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="type-movies" name="type-movies" value="{{movies}}">
                 {{#each movies}}
                     <a href="/movie/{{this._id}}" id="{{this.name}}">
                         <div class="col">
