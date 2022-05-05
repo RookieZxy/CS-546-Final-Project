@@ -24,9 +24,6 @@ const constructorMethod = (app) => {
   //   }
   //   res.render('users/login', {document_title: 'home'});
   // })
-    app.get('/search', async (req, res) => {
-    res.render('search/search');
-  });
 
   //log out
   app.get('/logout', async (req, res) => {

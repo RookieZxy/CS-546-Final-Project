@@ -128,6 +128,7 @@ router.post("/search", async (req, res) => {
     const movie = await movieData.getByName(movieSearch);
     if (movie[0] == undefined) {
       res.render("search/search", {
+        search: movieSearch,
         amount: 0
       });
     }
@@ -136,7 +137,8 @@ router.post("/search", async (req, res) => {
     const amount = movie.length;
     res.render("search/search", {
       movie: movie,
-      amount: amount
+      amount: amount,
+      search: movieSearch
     });
   } catch (e) {
     console.log(e);

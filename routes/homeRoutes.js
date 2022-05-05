@@ -35,23 +35,23 @@ router.get('/types/:id', async (req, res) => {
     const type = req.params.id;
     if (!type || typeof type != 'string')throw `invalide type name: '${type}'`;
     //console.log("type in route: ", type);
-    
+
     var sortBy = 'ratingLH';
     //console.log("sortBy in route: ", sortBy);
-    
+
     const moviesByType = await movieData.getByType(type, sortBy);
-    res.render('movie/types', {type: type, movies: moviesByType});
+    res.render('movie/types', {type: type, movies: moviesByType, amount: moviesByType.length});
 });
 
 router.post('/types/:id', async (req, res) => {
     const type = req.params.id;
     if (!type || typeof type != 'string')throw `invalide type name: '${type}'`;
     //console.log("type in post route: ", type);
-    
+
     var sortBy = req.body.sortBy;
     if (!sortBy) sortBy = 'ratingLH';
     //console.log("sortBy in post route: ", sortBy);
-    
+
     const moviesByType = await movieData.getByType(type, sortBy);
     res.json(moviesByType);
 });

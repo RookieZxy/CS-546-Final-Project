@@ -1,6 +1,7 @@
 (function ($) {
 	"use strict";
 	$("#userManage").hide();
+	$("#addmovie").hide();
 	var requestAdmin = {
 		method: 'GET',
 		url: 'http://localhost:3000/userInfo'
@@ -13,6 +14,7 @@
 		if (object.username != null) {
 			$("#login").hide();
 			$("#signup").hide();
+			$("#addmovie").show();
 		} else {
 			$("#logout").hide();
 		}

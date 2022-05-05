@@ -1,31 +1,33 @@
-<section class="mt-5 text-center container">
-    <div class="row">
-        <div class="col-lg-6 col-md-2 mx-auto">
-            <h1 class="fw-light">Search Item</h1>
-            <p class="lead text-muted">found {{amount}} results</p>
-            <p>selector </p>
+<div class="coolbackground">
+    <section class="mx-0 pt-5 text-center bg-dark bg-opacity-75">
+        <div class="row">
+            <div class="col-3 p-3 mx-auto bg-white bg-opacity-25 rounded-3">
+                <h1 class="text-primary">Search '{{search}}'</h1>
+                <p class="lead text-primary">found {{amount}} results</p>
+                <p>selector would be here</p>
 
+            </div>
         </div>
-    </div>
-</section>
-<div class="py-5 bg-light">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <!--single movie card-->
-            {{#each movie}}
-                <a href="/movie/{{this._id}}" id="{{this.name}}">
-                    <div class="col">
-                        <div class="card shadow-sm card-zoom">
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="600"
-                                 src="{{this.poster}}">
-                            <div class="card-body">
-                                <p class="card-text text-center fs-5 fw-bold">{{this.name}}</p>
+    </section>
+    <div class="py-5 bg-dark bg-opacity-75">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <!--single movie card-->
+                {{#each movie}}
+                    <a href="/movie/{{this._id}}" id="{{this.name}}">
+                        <div class="col">
+                            <div class="card shadow-sm card-zoom">
+                                <img class="bd-placeholder-img card-img-top" width="100%" height="600"
+                                     src="{{this.poster}}">
+                                <div class="card-body">
+                                    <p class="card-text text-center fs-5 fw-bold">{{this.name}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            {{/each}}
+                    </a>
+                {{/each}}
 
+            </div>
         </div>
     </div>
 </div>
