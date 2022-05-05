@@ -169,10 +169,11 @@ router.post('/admin', async (req, res) => {
       throw 'Missing isAdmin';
     req.body.isAdmin = xss(req.body.isAdmin);
     req.body.account = xss(req.body.account);
+    // console.log(req.body.isAdmin)
       let isAdmin = true;
-    if(req.body.isAdmin == 'True')
+    if(req.body.isAdmin == 'true')
       isAdmin = true;
-    else if(req.body.isAdmin == 'False')
+    else if(req.body.isAdmin == 'false')
       isAdmin = false;
 
     if(typeof isAdmin !=='boolean')
