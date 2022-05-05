@@ -1,62 +1,63 @@
-<div id="myCarousel" class="carousel slide bg-dark" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-                aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <a href="/movie/{{threeMovies.[0]._id}}">
-            <img src="{{threeMovies.[0].images.[1].image}}" alt="movie1_img">
-            <div class="container">
-                <div class="carousel-caption text-start">
-                    <h2 class="text-light fw-bold">{{threeMovies.[0].name}}</h2>
-                    <p class="plot-overflow fw-lighter">{{threeMovies.[0].plot}}</p>
-                </div>
-            </div>
-            </a>
+<div class="coolbackground">
+    <div id="myCarousel" class="carousel slide bg-dark bg-opacity-75" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+                    aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-item">
-            <a href="/movie/{{threeMovies.[1]._id}}">
-            <img src="{{threeMovies.[1].images.[1].image}}" alt="movie2_img">
-            <div class="container">
-                <div class="carousel-caption text-start">
-                    <h2 class="text-light fw-bold">{{threeMovies.[1].name}}</h2>
-                    <p class="plot-overflow fw-lighter">{{threeMovies.[1].plot}}</p>
-                </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="/movie/{{threeMovies.[0]._id}}">
+                    <img src="{{threeMovies.[0].images.[1].image}}" alt="movie1_img">
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h2 class="text-light fw-bold">{{threeMovies.[0].name}}</h2>
+                            <p class="plot-overflow fw-lighter">{{threeMovies.[0].plot}}</p>
+                        </div>
+                    </div>
+                </a>
             </div>
-            </a>
-        </div>
-        <div class="carousel-item">
-            <a href="/movie/{{threeMovies.[2]._id}}">
-            <img src="{{threeMovies.[2].images.[1].image}}" alt="movie3_img">
-            <div class="container">
-                <div class="carousel-caption text-start">
-                    <h2 class="text-light fw-bold">{{threeMovies.[2].name}}</h2>
-                    <p class="plot-overflow fw-lighter">{{threeMovies.[2].plot}}</p>
-                </div>
+            <div class="carousel-item">
+                <a href="/movie/{{threeMovies.[1]._id}}">
+                    <img src="{{threeMovies.[1].images.[1].image}}" alt="movie2_img">
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h2 class="text-light fw-bold">{{threeMovies.[1].name}}</h2>
+                            <p class="plot-overflow fw-lighter">{{threeMovies.[1].plot}}</p>
+                        </div>
+                    </div>
+                </a>
             </div>
-            </a>
-        </div>
+            <div class="carousel-item">
+                <a href="/movie/{{threeMovies.[2]._id}}">
+                    <img src="{{threeMovies.[2].images.[1].image}}" alt="movie3_img">
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h2 class="text-light fw-bold">{{threeMovies.[2].name}}</h2>
+                            <p class="plot-overflow fw-lighter">{{threeMovies.[2].plot}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+
+    <ul id="showList">
+        {{#each topRatedMovies}}
+            <a href="/movie/{{this._id}}">{{this.name}}</a><br>
+        {{/each}}
+    </ul>
 </div>
-
-<ul id="showList">
-    {{#each topRatedMovies}}
-    <a href="/movie/{{this._id}}">{{this.name}}</a><br>
-    {{/each}}
-</ul>
-
 {{!-- <div>
     <form action="/movie/search" id="searchForm" method="post" class="searchForm">
         <label for="search_term">Search show: </label>
