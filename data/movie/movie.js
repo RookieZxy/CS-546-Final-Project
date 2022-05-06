@@ -42,7 +42,7 @@ async function queryFromImdb(imdbId) {
   movie.keywords = data.keywordList;
   movie.trailerLink = trailerData.linkEmbed;
   movie.images = imgData.items;
-  movie.isValid = true;
+  // movie.isValid = true;
 
   const types = data.genreList;
   for (let i = 0; i < types.length; i++) {
@@ -108,19 +108,18 @@ async function getTopRated() {
   const moviesCollection = await mongoCollections.movies();
   var topRatedMovies = await moviesCollection
     .aggregate([
-      { $sort: { rating : -1 } },
-      { $limit : 10 },
-      { $project : { _id: 1, imdbId: 1, name: 1, rating: 1 } }
+      { $sort: { rating: -1 } },
+      { $limit: 10 },
+      { $project: { _id: 1, imdbId: 1, name: 1, rating: 1 } },
     ])
     .toArray();
 
-  for (let i = 0; i < topRatedMovies.length; i++){
+  for (let i = 0; i < topRatedMovies.length; i++) {
     topRatedMovies[i]._id = topRatedMovies[i]._id.toString();
     //console.log(topRatedMovies[i]._id);
   }
   //console.log(topRatedMovies);
   return topRatedMovies;
-
 }
 
 async function getInvalid() {
@@ -153,35 +152,46 @@ async function getById(id) {
 async function getByType(typeName, sortBy) {
   if (!typeName || typeof typeName != "string")
     throw `invalid typename: '${typeName}'`;
-  if (!sortBy || typeof sortBy != "string")
-    throw `invalid sortBy: '${sortBy}'`;
-  
+  if (!sortBy || typeof sortBy != "string") throw `invalid sortBy: '${sortBy}'`;
+
   const moviesCollection = await mongoCollections.movies();
   var movie = null;
-  if (sortBy == "ratingLH"){
+  if (sortBy == "ratingLH") {
     movie = await moviesCollection
-    .find({ typeList: typeName }, {name:1, poster:1, rating: 1, runtime: 1})
-    .sort( {rating : 1})
-    .toArray();
-  }else if(sortBy == "ratingHL"){
+      .find(
+        { typeList: typeName },
+        { name: 1, poster: 1, rating: 1, runtime: 1 }
+      )
+      .sort({ rating: 1 })
+      .toArray();
+  } else if (sortBy == "ratingHL") {
     movie = await moviesCollection
-    .find({ typeList: typeName }, {name:1, poster:1, rating: 1, runtime: 1})
-    .sort( {rating : -1} )
-    .toArray();
-  }else if(sortBy == "releaseDateNew"){
+      .find(
+        { typeList: typeName },
+        { name: 1, poster: 1, rating: 1, runtime: 1 }
+      )
+      .sort({ rating: -1 })
+      .toArray();
+  } else if (sortBy == "releaseDateNew") {
     movie = await moviesCollection
-    .find({ typeList: typeName }, {name:1, poster:1, rating: 1, runtime: 1})
-    .sort( {releaseDate : -1} )
-    .toArray();
-  }else {
+      .find(
+        { typeList: typeName },
+        { name: 1, poster: 1, rating: 1, runtime: 1 }
+      )
+      .sort({ releaseDate: -1 })
+      .toArray();
+  } else {
     movie = await moviesCollection
-    .find({ typeList: typeName }, {name:1, poster:1, rating: 1, runtime: 1})
-    .sort( {releaseDate : 1} )
-    .toArray();
+      .find(
+        { typeList: typeName },
+        { name: 1, poster: 1, rating: 1, runtime: 1 }
+      )
+      .sort({ releaseDate: 1 })
+      .toArray();
   }
-  
+
   if (movie === null) throw `No movie with typeName '${typeName}`;
-  
+
   return movie;
 }
 
@@ -197,13 +207,15 @@ async function getAllTypes() {
 }
 
 // Query the database randomly, to display recommendation movies on main page.
-async function get3MovieRand(){
+async function get3MovieRand() {
   const moviesCollection = await mongoCollections.movies();
   const threeMovies = await moviesCollection
-    .aggregate( [
-      { $sample: { size : 3 } } ,
-      { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } }
-    ] )
+    .aggregate([
+      { $sample: { size: 3 } },
+      {
+        $project: { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 },
+      },
+    ])
     .toArray();
   //console.log(threeMovies);
   for (let i = 0; i < threeMovies.length; i++) {
@@ -213,11 +225,11 @@ async function get3MovieRand(){
 }
 
 // Query the database randomly, get 4 movies that different from imdbId. To display in the movie detail page.
-async function get4MovieByImdbIdRand(imdbId){
+async function get4MovieByImdbIdRand(imdbId) {
   //util.isValidString(imdbId);
   const moviesCollection = await mongoCollections.movies();
   const fourMovies = await moviesCollection
-    .find( { imdbId : { $ne : imdbId} } )
+    .find({ imdbId: { $ne: imdbId } })
     //.aggregate( [ { $sample: { size : 1 } } , { $project : { _id: 0, imdbId: 1, name: 1, plot: 0, poster: 0, images: 0 } } ] )
     .toArray();
   //console.log(fourMovies.name);
@@ -225,33 +237,35 @@ async function get4MovieByImdbIdRand(imdbId){
 }
 
 // Get typeList by ObjectId. Return first element of typeList of a movie.
-async function getTypeById(id){
+async function getTypeById(id) {
   id = util.isObjectId(id);
   const moviesCollection = await mongoCollections.movies();
-  const movie = await moviesCollection
-    .findOne( { _id : ObjectId(id) } )
-    //.toArray();
-  if (movie === [])throw "No movie with id: " + id;
-  if (!movie.typeList || movie.typeList.length < 1)throw "No typeList in the movie with id: " + id;
+  const movie = await moviesCollection.findOne({ _id: ObjectId(id) });
+  //.toArray();
+  if (movie === []) throw "No movie with id: " + id;
+  if (!movie.typeList || movie.typeList.length < 1)
+    throw "No typeList in the movie with id: " + id;
   return movie.typeList[0];
 }
 
 // Query the database randomly, get 4 movies that different from id. To display in the movie detail page.
-async function get4SimilarMovieByIdRand(id){
+async function get4SimilarMovieByIdRand(id) {
   id = util.isObjectId(id);
   //console.log(id);
   const type = await getTypeById(id);
   //console.log (type);
   const moviesCollection = await mongoCollections.movies();
   var fourMovies = await moviesCollection
-    .aggregate( [
-      { $match: {_id : { $ne : ObjectId(id) }, typeList : {$in : [type]} } } ,
-      { $sample: { size : 4 } } ,
-      { $project : { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 } }
-    ] )
+    .aggregate([
+      { $match: { _id: { $ne: ObjectId(id) }, typeList: { $in: [type] } } },
+      { $sample: { size: 4 } },
+      {
+        $project: { _id: 1, imdbId: 1, name: 1, plot: 1, poster: 1, images: 1 },
+      },
+    ])
     .toArray();
 
-  for (let i = 0; i < fourMovies.length; i++){
+  for (let i = 0; i < fourMovies.length; i++) {
     //console.log(fourMovies[i]);
     fourMovies[i]._id = fourMovies[i]._id.toString();
   }

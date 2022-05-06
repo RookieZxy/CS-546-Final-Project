@@ -15,7 +15,7 @@ function isValidMovie(movie) {
   movie.casts = isValidString(movie.casts);
   movie.countries = isValidString(movie.countries);
   movie.trailerLink = isValidString(movie.trailerLink);
-  movie.imdbId = isValidString(movie.imdbId);
+  // movie.imdbId = isValidString(movie.imdbId);
   movie.name = isValidString(movie.name);
   movie.plot = isValidString(movie.plot);
   movie.directors = isValidString(movie.directors);
@@ -23,6 +23,7 @@ function isValidMovie(movie) {
   movie.languages = isValidString(movie.languages);
   movie.runtime = isValidString(movie.runtime);
   movie.poster = isValidString(movie.poster);
+
   return movie;
 }
 

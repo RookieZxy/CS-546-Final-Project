@@ -11,7 +11,7 @@ router.get("/addMovie", (req, res) => {
   // console.log(req.session.user)
   if (req.session.user == undefined) {
     res.redirect("/");
-  }else{
+  } else {
     res.render("movie/addMovie", { partial: "addMovie-scripts" });
   }
 });
@@ -28,11 +28,13 @@ router.get("/approve/:id", (req, res) => {
     partial: "addMovie-scripts",
   });
 });
-
 router.post("/addMovie", async (req, res) => {
   //is Login
   if (!req.session.user) {
-    res.redirect("/");
+    res.status(401).send({
+      error: "Unauthorized. Please Login",
+    });
+    return;
   }
   const movie = req.body;
   //is admin
@@ -41,6 +43,13 @@ router.post("/addMovie", async (req, res) => {
   } else movie.isValid = false;
   try {
     util.isValidMovie(movie);
+  } catch (error) {
+    res.status(400).send({
+      error: error,
+    });
+    return;
+  }
+  try {
     const id = await movieData.add(movie);
     res.send({
       isSuccess: true,
@@ -57,15 +66,14 @@ router.get("/imdb/:id", async (req, res) => {
   let imdbId = req.params.id;
   try {
     imdbId = util.isValidString(imdbId);
-    //is existed movie
-    // const movie1 = await movieData.getByImdbId(imdbId);
-    // if (movie1 !== null) {
-    //   res.status(200).send({ isExisted: true, id: movie1._id });
-    //   return;
-    // }
+    // is existed movie
+    const movie1 = await movieData.getByImdbId(imdbId);
+    if (movie1 !== null) {
+      res.status(200).send({ isExisted: true, id: movie1._id });
+      return;
+    }
 
-    // const movie = await movieData.queryFromImdb(imdbId);
-    const movie = await movieData.getByImdbId(imdbId);
+    const movie = await movieData.queryFromImdb(imdbId);
     res.status(200).send(movie);
   } catch (error) {
     res.status(500).send({
@@ -102,7 +110,7 @@ router.get("/:id", async (req, res) => {
     if (req.session.user)
       res.render("movie/details", {
         movie: movie,
-        fourSimilarMovies : fourSimilarMovies,
+        fourSimilarMovies: fourSimilarMovies,
         userName: req.session.user.account,
         CSS: "detail.css",
       });
@@ -110,7 +118,7 @@ router.get("/:id", async (req, res) => {
     else
       res.render("movie/details", {
         movie: movie,
-        fourSimilarMovies : fourSimilarMovies,
+        fourSimilarMovies: fourSimilarMovies,
         CSS: "detail.css",
       });
   } catch (error) {
@@ -131,7 +139,7 @@ router.post("/search", async (req, res) => {
     if (movie[0] == undefined) {
       res.render("search/search", {
         search: movieSearch,
-        amount: 0
+        amount: 0,
       });
     }
     //res.send(movie);
@@ -140,7 +148,7 @@ router.post("/search", async (req, res) => {
     res.render("search/search", {
       movie: movie,
       amount: amount,
-      search: movieSearch
+      search: movieSearch,
     });
   } catch (e) {
     console.log(e);
@@ -191,7 +199,7 @@ router.post("/comment", async (req, res) => {
     // } else {
     //   throw `Did not comment.`;
     // }
-    if(comment.commentInserted == true){
+    if (comment.commentInserted == true) {
       commentData.calMovieRate(movieId);
       res.status(200).send({
         movie: movie,
@@ -199,12 +207,12 @@ router.post("/comment", async (req, res) => {
         CSS: "detail.css",
         // comment: 1,
       });
-    }else{
+    } else {
       res.status(500).send({
         movie: movie,
         userName: req.session.user.account,
         CSS: "detail.css",
-        error: 'Did not comment'
+        error: "Did not comment",
         // comment: 1,
       });
     }
@@ -233,6 +241,5 @@ router.get('/getRate', async (req, res) => {
   }
 });
 */
-
 
 module.exports = router;

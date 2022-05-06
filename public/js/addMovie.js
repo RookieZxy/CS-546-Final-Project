@@ -72,10 +72,10 @@
     //typeList
     let typeList = [];
     const checkBoxInputs = $("#typeTheck input");
-    for (let i = 1; i < checkBoxInputs.length; i++) {
+    for (let i = 0; i < checkBoxInputs.length; i++) {
       const checkBox = checkBoxInputs[i];
 
-      if ($(checkBox).attr("checked")) {
+      if ($(checkBox).is(":checked")) {
         typeList.push($(checkBox).val());
       }
     }
@@ -116,7 +116,7 @@
         }, 5000);
       })
       .fail((error) => {
-        alert(error);
+        alert(error.responseJSON.error);
       });
   });
 

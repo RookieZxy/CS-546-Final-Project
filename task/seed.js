@@ -3,9 +3,9 @@ const mongoConnection = require("../config/mongoConnection");
 const movieData = require("../data/movie/movie");
 const { ObjectId } = require("mongodb");
 
-
 var movieSeed = require("../public/json/movies.json");
-movieSeed.forEach(function(movie){
+movieSeed.forEach(function (movie) {
+  movie.isValid = true;
   delete movie._id;
 });
 
@@ -54,7 +54,6 @@ async function main() {
     firstName: "Ming",
     lastName: "Tang",
   };
-  
 
   //movie
 
@@ -68,7 +67,6 @@ async function main() {
     likes: 20,
     rate: 3.5,
   };
-  
 
   //type
   const types = [
@@ -119,7 +117,6 @@ async function main() {
     },
   ];
 
-
   await movies.insertMany(movieSeed);
 
   await users.insertOne(user1);
@@ -129,7 +126,7 @@ async function main() {
   await users.insertOne(user5);
   await comments.insertOne(comment1);
   await type.insertMany(types);
-  
+
   await mongoConnection.closeConnection();
 }
 
