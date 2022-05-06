@@ -142,7 +142,7 @@
                 <button id="edit${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#updateForm">Edit</button>
                 <button id="changePassword${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#passwordForm">Change password</button>
                 <button id="remove${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeForm">Remove</button>
-                <button id="changeAdmin${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#adminForm">ChangeAdmin</button>
+                <button id="changeAdmin${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#adminForm">SetAdmin</button>
             </td>
             </tr>`;
 
@@ -162,7 +162,8 @@
                 $("#passwordAccount").val($(`#account${i}`).val());
             });
             $(delBtns[i * 4 + 2]).click(function () {
-                $("#removeAccount").val($(`#account${i}`).val());
+                //$("#removeAccount").val($(`#account${i}`).val());
+                $("#removeAccount").text($(`#account${i}`).val());
             });
             $(delBtns[i * 4 + 3]).click(function () {
                 var isAdmin = $(`#isAdmin${i}`).val()
@@ -197,15 +198,15 @@
                 // $('#userList').append(tr);
                 for (var i = 0; i < searchList.length; i++) {
                     var t = `<tr id="tr${id}">
-                    <td><p id="account${id}" class="fw-light mb-1">${searchList[i].account}</p></td>
-                    <td><p id="firstName${id}" class="fw-light mb-1">${searchList[i].firstName}</p></td>
-                    <td><p id="lastName${id}" class="fw-light mb-1">${searchList[i].lastName}</p></td>
-                    <td><p id="isAdmin${id}" class="fw-light mb-1">${searchList[i].isAdmin}</p></td>
+                    <td><p id="account${id}" class="fw-bold mb-1">${searchList[i].account}</p></td>
+                    <td><p id="firstName${id}" class="fw-bold mb-1">${searchList[i].firstName}</p></td>
+                    <td><p id="lastName${id}" class="fw-bold mb-1">${searchList[i].lastName}</p></td>
+                    <td><p id="isAdmin${id}" class="fw-bold mb-1">${searchList[i].isAdmin}</p></td>
                     <td>
                         <button id="edit${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#updateForm">Edit</button>
                         <button id="changePassword${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#passwordForm">Change password</button>
                         <button id="remove${id}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#removeForm">Remove</button>
-                        <button id="changeAdmin${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#adminForm">ChangeAdmin</button>
+                        <button id="changeAdmin${i}" type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#adminForm">SetAdmin</button>
                     </td>
                     </tr>`;
 
@@ -224,7 +225,8 @@
                         $("#passwordAccount").val($(`#account${i}`).val());
                     });
                     $(delBtns[i * 4 + 2]).click(function () {
-                        $("#removeAccount").val($(`#account${i}`).val());
+                        // $("#removeAccount").val($(`#account${i}`).val());
+                        $("#removeAccount").text($(`#account${i}`).val());
                     });
                     $(delBtns[i * 4 + 3]).click(function () {
                         $("#adminAccount").val($(`#account${i}`).val());
