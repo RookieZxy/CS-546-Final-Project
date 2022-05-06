@@ -1,4 +1,4 @@
-# CS 546 Web Programming I Final Project: YouTabe
+# CS 546 Web Programming I Final Project: YouTape
 A movies recommendation application.
 
 Built using HTML, CSS, Bootstrap, Express, Node.js, and MongoDB.
