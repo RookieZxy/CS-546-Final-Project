@@ -1,24 +1,28 @@
-
 <div class="bg-dark">
-    <div class="container px-5">
+    <div class="container px-5 py-3">
         <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-1 text-center text-xl-start">
                     <h1 class="fw-bolder text-white mb-2">{{movie.name}}</h1>
-                                        
-                    <input id="rate" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="5" data-step="0.5" data-size="sm" data-readonly="true" data-show-clear="false">
-                                        
-                    <hr></hr>
+                    <input id="rate" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="10"
+                           data-step="0.5" data-size="sm" data-readonly="true" data-show-clear="false">
+                    <hr/>
                     <p class="lead fw-normal text-white-50 mb-4">{{movie.plot}}</p>
-                    <h4 class="text-white mb-2">Countries: <span class="lead fw-normal text-white-50 mb-4">{{movie.countries}}</span></h4>
-                    <h4 class="text-white mb-2">ReleaseDate: <span class="lead fw-normal text-white-50 mb-4">{{movie.releaseDate}}</span></h4>
-                    <h4 class="text-white mb-2">Runtime: <span class="lead fw-normal text-white-50 mb-4">{{movie.runtime}}</span></h4>
-                    <h4 class="text-white mb-2">Languages: <span class="lead fw-normal text-white-50 mb-4">{{movie.languages}}</span></h4>
-                    <h4 class="text-white mb-2">Stars: <span class="lead fw-normal text-white-50 mb-4">{{movie.casts}}</span></h4>
-                    {{!-- <p class="lead fw-normal text-white-50 mb-4">{{movie.casts}}</p> --}}
-                    <h4 class="text-white mb-2">Directors: <span class="lead fw-normal text-white-50 mb-4">{{movie.directors}}</span></h4>
-                    <h4 class="text-white mb-2">Writers: <span class="lead fw-normal text-white-50 mb-4">{{movie.writers}}</span></h4>
-                    <h4 class="text-white mb-2">Type: 
+                    <h4 class="text-white mb-2">Countries: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.countries}}</span></h4>
+                    <h4 class="text-white mb-2">ReleaseDate: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.releaseDate}}</span></h4>
+                    <h4 class="text-white mb-2">Runtime: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.runtime}}</span></h4>
+                    <h4 class="text-white mb-2">Languages: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.languages}}</span></h4>
+                    <h4 class="text-white mb-2">Stars: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.casts}}</span></h4>
+                    <h4 class="text-white mb-2">Directors: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.directors}}</span></h4>
+                    <h4 class="text-white mb-2">Writers: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.writers}}</span></h4>
+                    <h4 class="text-white mb-2">Type:
                         {{#each movie.typeList}}
                             <span class="badge bg-success">{{this}}</span>
                         {{/each}}
@@ -26,7 +30,8 @@
                 </div>
             </div>
             <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                <img style="transform: scale(0.9);" class="img-fluid rounded-3 my-1" src="{{movie.poster}}" alt="{{movie.name}}" /></div>
+                <img style="transform: scale(0.9);" class="img-fluid rounded-3 my-1" src="{{movie.poster}}"
+                     alt="{{movie.name}}"/></div>
         </div>
     </div>
 </div>
@@ -45,11 +50,11 @@
                 </div>
             </div> --}}
             {{#each movie.imageShow}}
-            <div class="col-lg-4">
-                <div class="position-relative mb-5 hoverZoom">
-                    <img class="img-fluid rounded-3 mb-3" src="{{this.image}}" alt="{{this.title}}" />
+                <div class="col-lg-4">
+                    <div class="position-relative mb-5 hoverZoom">
+                        <img class="img-fluid rounded-3 mb-3" src="{{this.image}}" alt="{{this.title}}"/>
+                    </div>
                 </div>
-            </div>
             {{/each}}
         </div>
         {{!-- <a href="/">All Photos</a> --}}
@@ -66,7 +71,8 @@
         <div class="row gx-5">
             <div class="col-2"></div>
             <div class="col-10">
-                <iframe width="100%" height="500" src="{{movie.trailerLink}}" allowfullscreen="allowfullscreen" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                <iframe width="100%" height="500" src="{{movie.trailerLink}}" allowfullscreen="allowfullscreen"
+                        mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
             </div>
             {{!-- <div class="col-1"></div> --}}
         </div>
@@ -83,36 +89,49 @@
         <div class="row gx-5">
             <div class="col-lg-3 mb-5">
                 <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="{{fourSimilarMovies.[0].poster}}" alt="..." />
+                    <img class="card-img-top" src="{{fourSimilarMovies.[0].poster}}"
+                         alt="{{fourSimilarMovies.[0].name}}"/>
                     <div class="card-body p-4">
                         {{!-- <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div> --}}
-                        <a href="/movie/{{fourSimilarMovies.[0]._id}}" class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">{{fourSimilarMovies.[0].name}}</h5></a>
+                        <a href="/movie/{{fourSimilarMovies.[0]._id}}"
+                           class="text-decoration-none link-dark stretched-link"><h5
+                                class="card-title mb-3">{{fourSimilarMovies.[0].name}}</h5></a>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-3 mb-5">
                 <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="{{fourSimilarMovies.[1].poster}}" alt="..." />
+                    <img class="card-img-top" src="{{fourSimilarMovies.[1].poster}}"
+                         alt="{{fourSimilarMovies.[1].name}}"/>
                     <div class="card-body p-4">
                         {{!-- <div class="badge bg-primary bg-gradient rounded-pill mb-2">Media</div> --}}
-                        <a href="/movie/{{fourSimilarMovies.[1]._id}}" class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">{{fourSimilarMovies.[1].name}}</h5></a>
+                        <a href="/movie/{{fourSimilarMovies.[1]._id}}"
+                           class="text-decoration-none link-dark stretched-link"><h5
+                                class="card-title mb-3">{{fourSimilarMovies.[1].name}}</h5></a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 mb-5">
                 <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="{{fourSimilarMovies.[2].poster}}" alt="..." />
+                    <img class="card-img-top" src="{{fourSimilarMovies.[2].poster}}"
+                         alt="{{fourSimilarMovies.[2].name}}"/>
                     <div class="card-body p-4">
                         {{!-- <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div> --}}
-                        <a href="/movie/{{fourSimilarMovies.[2]._id}}" class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">{{fourSimilarMovies.[2].name}}</h5></a>
+                        <a href="/movie/{{fourSimilarMovies.[2]._id}}"
+                           class="text-decoration-none link-dark stretched-link"><h5
+                                class="card-title mb-3">{{fourSimilarMovies.[2].name}}</h5></a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 mb-5">
                 <div class="card h-100 shadow border-0">
-                    <img class="card-img-top" src="{{fourSimilarMovies.[3].poster}}" alt="..." />
+                    <img class="card-img-top" src="{{fourSimilarMovies.[3].poster}}"
+                         alt="{{fourSimilarMovies.[3].name}}"/>
                     <div class="card-body p-4">
-                        <a href="/movie/{{fourSimilarMovies.[3]._id}}" class="text-decoration-none link-light stretched-link" href="#!"><h5 class="card-title mb-3">{{fourSimilarMovies.[3].name}}</h5></a>
+                        <a href="/movie/{{fourSimilarMovies.[3]._id}}"
+                           class="text-decoration-none link-light stretched-link"><h5
+                                class="card-title mb-3">{{fourSimilarMovies.[3].name}}</h5></a>
                     </div>
                 </div>
             </div>
@@ -123,20 +142,21 @@
         <div class="card-body">
             <!-- Comment form-->
             {{!-- <form class="mb-4" action="/movie/comment" method="post"> --}}
-            <form id = "addComment" class="mb-4">
-                <textarea class="form-control" id="content" name="content" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+            <form id="addComment" class="mb-4">
+                <textarea class="form-control" id="content" name="content" rows="3"
+                          placeholder="Join the discussion and leave a comment!"></textarea>
                 <input type="text" value={{userName}} id="userName1" name="userName1" hidden>
                 <input type="text" value={{movie._id}} id="movieId" name="movieId" hidden>
                 <div>
-                    <input name="rate" id="input-7-sm" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="5" data-step="0.5" data-size="sm" data-readonly="false" data-show-clear="false">
+                    <input name="rate" id="input-7-sm" class="rating rating-loading" value="{{movie.rating}}"
+                           data-min="0" data-max="5" data-step="0.5" data-size="sm" data-readonly="false"
+                           data-show-clear="false">
                     <button class="btn-comment">Comment</button>
                 </div>
             </form>
             <input type="text" value="{{error}}" id="alert" name="alert">
             <input type="text" value="{{comment}}" id="comment" name="comment">
-            <ul id = "commentList"></ul>
-
-            
+            <ul id="commentList"></ul>
 
 
             <!-- Comment with nested comments-->
@@ -174,8 +194,6 @@
             </div> --}}
         </div>
     </div>
-
-
 
 
 </section>
