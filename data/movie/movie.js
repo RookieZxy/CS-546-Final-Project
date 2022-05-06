@@ -42,6 +42,7 @@ async function queryFromImdb(imdbId) {
   movie.keywords = data.keywordList;
   movie.trailerLink = trailerData.linkEmbed;
   movie.images = imgData.items;
+  movie.isValid = true;
 
   const types = data.genreList;
   for (let i = 0; i < types.length; i++) {
@@ -159,22 +160,22 @@ async function getByType(typeName, sortBy) {
   var movie = null;
   if (sortBy == "ratingLH"){
     movie = await moviesCollection
-    .find({ typeList: typeName })
+    .find({ typeList: typeName }, {name:1, poster:1, rating: 1, runtime: 1})
     .sort( {rating : 1})
     .toArray();
   }else if(sortBy == "ratingHL"){
     movie = await moviesCollection
-    .find({ typeList: typeName })
+    .find({ typeList: typeName }, {name:1, poster:1, rating: 1, runtime: 1})
     .sort( {rating : -1} )
     .toArray();
   }else if(sortBy == "releaseDateNew"){
     movie = await moviesCollection
-    .find({ typeList: typeName })
+    .find({ typeList: typeName }, {name:1, poster:1, rating: 1, runtime: 1})
     .sort( {releaseDate : -1} )
     .toArray();
   }else {
     movie = await moviesCollection
-    .find({ typeList: typeName })
+    .find({ typeList: typeName }, {name:1, poster:1, rating: 1, runtime: 1})
     .sort( {releaseDate : 1} )
     .toArray();
   }
