@@ -159,7 +159,7 @@
                 // $("updateForm").show();
             });
             $(delBtns[i * 4 + 1]).click(function () {
-                $("#passwordAccount").val($(`#account${i}`).val());
+                $("#passwordAccount").text($(`#account${i}`).val());
             });
             $(delBtns[i * 4 + 2]).click(function () {
                 //$("#removeAccount").val($(`#account${i}`).val());
@@ -167,7 +167,7 @@
             });
             $(delBtns[i * 4 + 3]).click(function () {
                 var isAdmin = $(`#isAdmin${i}`).val()
-                $("#adminAccount").val($(`#account${i}`).val());
+                $("#adminAccount").text($(`#account${i}`).val());
                 // $("#adminStatus").val(`${isAdmin}`)
                 // $("#adminStatus").find(`option[text='${isAdmin}']`).attr("selected", true);
             });
@@ -222,14 +222,14 @@
                         // $("updateForm").show();
                     });
                     $(delBtns[i * 4 + 1]).click(function () {
-                        $("#passwordAccount").val($(`#account${i}`).val());
+                        $("#passwordAccount").text($(`#account${i}`).val());
                     });
                     $(delBtns[i * 4 + 2]).click(function () {
                         // $("#removeAccount").val($(`#account${i}`).val());
                         $("#removeAccount").text($(`#account${i}`).val());
                     });
                     $(delBtns[i * 4 + 3]).click(function () {
-                        $("#adminAccount").val($(`#account${i}`).val());
+                        $("#adminAccount").text($(`#account${i}`).val());
                     });
                 }
             }).fail((error) => {
@@ -288,13 +288,13 @@
 
     $('#removeForm').submit((event) => {
         event.preventDefault();
-        var check = checkAccount($("#removeAccount").val())
+        var check = checkAccount($("#removeAccount").text())
         if (check) {
             $.ajax({
                 method: "POST",
                 url: `http://localhost:3000/userManage/remove`,
                 data: {
-                    account: $("#removeAccount").val(),
+                    account: $("#removeAccount").text(),
                 }
             }).then((data) => {
                 confirm("removed successfully");
@@ -317,7 +317,7 @@
                     method: "POST",
                     url: `http://localhost:3000/userManage/password`,
                     data: {
-                        account: $("#passwordAccount").val(),
+                        account: $("#passwordAccount").text(),
                         password: $("#newPassword").val(),
                     }
                 }).then((data) => {
@@ -342,7 +342,7 @@
             method: "POST",
             url: `http://localhost:3000/userManage/admin`,
             data: {
-                account: $("#adminAccount").val(),
+                account: $("#adminAccount").text(),
                 isAdmin: $("#adminStatus").val(),
             }
         }).then((data) => {

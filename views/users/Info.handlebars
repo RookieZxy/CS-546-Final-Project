@@ -29,7 +29,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Name for</h5><h5 class="modal-title" id="updateAccount"></h5>
+                <h5 class="modal-title">Edit Name for <span class="text-success fw-bold" id="updateAccount"></span></h5>
             </div>
             <div class="modal-body">
                 <div class="input-group mb-3">
@@ -89,8 +89,8 @@
 <form class="modal fade" id="removeForm" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header text-danger">
-                Are you sure to remove that user?<span id="removeAccount"></span>
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Are you sure to remove <span class="fw-bold" id="removeAccount"></span> ?</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -100,16 +100,21 @@
     </div>
 </form>
 
-<form class="modal fade" id="passwordForm" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+<form class="modal fade" id="passwordForm" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change Password for <span class="text-success fw-bold" id="passwordAccount"></span></h5>
+            </div>
             <div class="modal-body">
-                <label for="newPassword" class="form-label">Change password:</label>
-                <input class="form-control" type="Account" id="passwordAccount" hidden>
-                <input class="form-control" type="password" placeholder="New password" id="newPassword">
-
-                <input class="form-control" type="confirmPw" placeholder="Confirm new password" id="confirmPw">
-
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="newPassword">New password</label>
+                    <input class="form-control" type="password" placeholder="New password" id="newPassword">
+                </div>
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="confirmPw">Confirm password</label>
+                    <input class="form-control" type="password" placeholder="Confirm new password" id="confirmPw">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -122,15 +127,16 @@
 <form class="modal fade" id="adminForm" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Set <span class="text-warning fw-bold" id="adminAccount"></span> as Administrator?</h5>
+            </div>
             <div class="modal-body">
-                <label class="form-label" for="adminStatus">Set Administrator:</label>
                 <select id="adminStatus" class="form-select">
                     <option value="true">True</option>
                     <option value="false">False</option>
                 </select>
             </div>
             <div class="modal-footer">
-                <input class="form-control" type="Account" id="adminAccount" hidden>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger">Confirm</button>
             </div>
