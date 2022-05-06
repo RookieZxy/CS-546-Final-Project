@@ -8,10 +8,12 @@ const commentData = require("../data/movie/comment");
 
 router.get("/addMovie", (req, res) => {
   //is Login
-  if (!req.session.user) {
+  // console.log(req.session.user)
+  if (req.session.user == undefined) {
     res.redirect("/");
+  }else{
+    res.render("movie/addMovie", { partial: "addMovie-scripts" });
   }
-  res.render("movie/addMovie", { partial: "addMovie-scripts" });
 });
 
 router.get("/approve/:id", (req, res) => {

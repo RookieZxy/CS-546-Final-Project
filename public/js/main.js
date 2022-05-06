@@ -18,18 +18,10 @@
 		} else {
 			$("#logout").hide();
 		}
+		if($("#login_flag").val() == 'false'){
+			alert($("#error").val())
+		}
 	});
-	console.log($("#login_flag").val())
-	if($("#login_flag").val() == 'false'){
-		alert($("#error").val())
-	}
-	// $('#users').click(function () {
-	// 	$.ajax({
-	// 		method: 'GET',
-	// 		url: 'http://localhost:3000/users'
-	// 	}).then((object) => {
-			
-	// 	})
-	// })
+
 
 })(jQuery);

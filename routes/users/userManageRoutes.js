@@ -27,6 +27,7 @@ router.post("/account", async (req, res) => {
     } else {
       if (req.session.user.isAdmin == false) {
         res.redirect('/');
+        return;
       }
 
       req.body.account = xss(req.body.account);
