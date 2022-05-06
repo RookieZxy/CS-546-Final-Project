@@ -5,21 +5,35 @@
                 <h1 class="text-primary">{{type}} Movies</h1>
                 <p class="lead text-primary">found {{amount}} results</p>
                 <p id="type-name" name="type-name" hidden>{{type}}</p>
-                <p>selector would be here</p>
+                {{!-- <p>selector would be here</p> --}}
                 <select id="type-sort-select" name="type-sort-select">
+                    <option value ="ratingHL">Rating: High to Low</option>
                     <option value ="ratingLH">Rating: Low to High</option>
-                    <option value ="ratingHL">Rating: High to LKow</option>
                     <option value ="releaseDateNew">Release Date: Newest First</option>
                     <option value ="releaseDateOld">Release Date: Oldest First</option>
                 </select>
+                <ul id="type-filter-rating" name="type-filter-rating">
+                    <li rating="0">rating</li>
+                    <li rating="5">5</li>
+                    <li rating="4">4</li>
+                    <li rating="3">3</li>
+                    <li rating="2">2</li>
+                    <li rating="1">1</li>
+                </ul>
+                <ul id="type-filter-runTime" name="type-filter-runTime">
+                    <li runTime="0">Run Time</li>
+                    <li runTime="1">90 minutes -</li>
+                    <li runTime="2">90 minutes +</li>
+                </ul>
+                
             </div>
         </div>
     </section>
     <div class="py-5 bg-dark bg-opacity-75">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="type-movies" name="type-movies" value="{{movies}}">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="type-movies" name="type-movies">
                 {{#each movies}}
-                    <a href="/movie/{{this._id}}" id="{{this.name}}">
+                    <a href="/movie/{{this._id}}" class="type-single-movie" rating="{{this.rating}}" runTime="{{this.runtime}}">
                         <div class="col">
                             <div class="card shadow-sm card-zoom">
                                 <img class="bd-placeholder-img card-img-top" width="100%" height="600"
