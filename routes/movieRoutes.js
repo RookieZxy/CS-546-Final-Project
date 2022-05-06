@@ -189,12 +189,23 @@ router.post("/comment", async (req, res) => {
     // } else {
     //   throw `Did not comment.`;
     // }
-    res.status(200).send({
-      movie: movie,
-      userName: req.session.user.account,
-      CSS: "detail.css",
-      // comment: 1,
-    });
+    if(comment.commentInserted == true){
+      commentData.calMovieRate(movieId);
+      res.status(200).send({
+        movie: movie,
+        userName: req.session.user.account,
+        CSS: "detail.css",
+        // comment: 1,
+      });
+    }else{
+      res.status(500).send({
+        movie: movie,
+        userName: req.session.user.account,
+        CSS: "detail.css",
+        error: 'Did not comment'
+        // comment: 1,
+      });
+    }
   } catch (e) {
     console.log(e);
     res.status(400).send({

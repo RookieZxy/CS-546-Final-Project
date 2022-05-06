@@ -52,7 +52,7 @@ function isValidString(s) {
 function isValidRating(rating) {
   if (typeof rating !== "number")
     throw "Wrong type. Rating must be type of number.";
-  if (rating < 0 || rating > 5) throw "Invalied rating, must in range of 1~5";
+  if (rating < 0 || rating > 10) throw "Invalied rating, must in range of 1~5";
   return Number(rating.toFixed(1));
 }
 
