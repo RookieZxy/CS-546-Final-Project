@@ -42,6 +42,7 @@ async function queryFromImdb(imdbId) {
   movie.keywords = data.keywordList;
   movie.trailerLink = trailerData.linkEmbed;
   movie.images = imgData.items;
+  movie.isValid = true;
 
   const types = data.genreList;
   for (let i = 0; i < types.length; i++) {
