@@ -6,6 +6,10 @@
                     <h1 class="fw-bolder text-white mb-2">{{movie.name}}</h1>
                     <input id="rate" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="10"
                            data-step="1" data-size="sm" data-readonly="true" data-show-clear="false">
+                    {{!--<p>{{movie.rate}}</p>
+                    <p>{{this.rate}}</p>
+                    <p>{{movie.rating}}</p>
+                    <p>{{this.rating}}</p>--}}
                     <hr/>
                     <p class="lead fw-normal text-white-50 mb-4">{{movie.plot}}</p>
                     <h4 class="text-white mb-2">Countries: <span
@@ -142,7 +146,7 @@
         <div class="row d-flex justify-content-center">
             <!-- Comment form-->
             {{!-- <form class="mb-4" action="/movie/comment" method="post"> --}}
-            <form id="addComment" class="mb-1">
+            <form id="addComment" class="mb-1" <!--action="/movie/getRate" method="get"-->>
                 <textarea class="form-control" id="content" name="content"
                           placeholder="Join the discussion and leave a comment!"></textarea>
                 <input type="text" value={{userName}} id="userName1" name="userName1" hidden>
