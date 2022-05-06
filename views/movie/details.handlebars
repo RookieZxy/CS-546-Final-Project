@@ -5,7 +5,7 @@
                 <div class="my-1 text-center text-xl-start">
                     <h1 class="fw-bolder text-white mb-2">{{movie.name}}</h1>
                     <input id="rate" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="10"
-                           data-step="0.5" data-size="sm" data-readonly="true" data-show-clear="false">
+                           data-step="1" data-size="sm" data-readonly="true" data-show-clear="false">
                     <hr/>
                     <p class="lead fw-normal text-white-50 mb-4">{{movie.plot}}</p>
                     <h4 class="text-white mb-2">Countries: <span
@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="row gx-5">
-            <div class="col-lg-3 mb-5">
+            <div class="col-lg-3 col-md-6 mb-5">
                 <div class="card h-100 shadow border-0">
                     <img class="card-img-top" src="{{fourSimilarMovies.[0].poster}}"
                          alt="{{fourSimilarMovies.[0].name}}"/>
@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 mb-5">
+            <div class="col-lg-3 col-md-6 mb-5">
                 <div class="card h-100 shadow border-0">
                     <img class="card-img-top" src="{{fourSimilarMovies.[1].poster}}"
                          alt="{{fourSimilarMovies.[1].name}}"/>
@@ -112,7 +112,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 mb-5">
+            <div class="col-lg-3 col-md-6 mb-5">
                 <div class="card h-100 shadow border-0">
                     <img class="card-img-top" src="{{fourSimilarMovies.[2].poster}}"
                          alt="{{fourSimilarMovies.[2].name}}"/>
@@ -124,7 +124,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 mb-5">
+            <div class="col-lg-3 col-md-6 mb-5">
                 <div class="card h-100 shadow border-0">
                     <img class="card-img-top" src="{{fourSimilarMovies.[3].poster}}"
                          alt="{{fourSimilarMovies.[3].name}}"/>
@@ -138,62 +138,107 @@
         </div>
     </div>
     <!-- Comments -->
-    <div class="card bg-light">
-        <div class="card-body">
+    <div class="container px-5 my-5">
+        <div class="row d-flex justify-content-center">
             <!-- Comment form-->
             {{!-- <form class="mb-4" action="/movie/comment" method="post"> --}}
-            <form id="addComment" class="mb-4">
-                <textarea class="form-control" id="content" name="content" rows="3"
+            <form id="addComment" class="mb-1">
+                <textarea class="form-control" id="content" name="content"
                           placeholder="Join the discussion and leave a comment!"></textarea>
                 <input type="text" value={{userName}} id="userName1" name="userName1" hidden>
                 <input type="text" value={{movie._id}} id="movieId" name="movieId" hidden>
-                <div>
-                    <input name="rate" id="input-7-sm" class="rating rating-loading" value="{{movie.rating}}"
-                           data-min="0" data-max="5" data-step="0.5" data-size="sm" data-readonly="false"
-                           data-show-clear="false">
-                    <button class="btn-comment">Comment</button>
+                <div class="row my-3 px-3">
+                    <div class="col">
+                        <input name="rate" id="input-7-sm" class="rating crating rating-loading"
+                               value="{{movie.rating}}"
+                               data-min="0" data-max="10" data-step="1" data-size="sm" data-readonly="false"
+                               data-show-clear="false">
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-success">Comment</button>
+                    </div>
                 </div>
             </form>
             <input type="text" value="{{error}}" id="alert" name="alert">
             <input type="text" value="{{comment}}" id="comment" name="comment">
             <ul id="commentList"></ul>
 
-
-            <!-- Comment with nested comments-->
-            {{!-- <div class="d-flex mb-4">
-                <!-- Parent comment-->
-                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                <div class="ms-3">
-                    <div class="fw-bold">Commenter Name</div>
-                    If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                    <!-- Child comment 1-->
-                    <div class="d-flex mt-4">
-                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                        <div class="ms-3">
-                            <div class="fw-bold">Commenter Name</div>
-                            And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+            <div class="d-flex flex-start">
+                <img class="rounded-circle shadow-1-strong me-3"
+                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar"
+                     width="65"
+                     height="65"/>
+                <div class="flex-grow-1 flex-shrink-1">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="mb-1">
+                                Maria Smantha <span class="small">- 2 hours ago</span>
+                            </p>
+                            <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
                         </div>
+                        <p class="small mb-0">
+                            It is a long established fact that a reader will be distracted by
+                            the readable content of a page.
+                        </p>
                     </div>
-                    <!-- Child comment 2-->
-                    <div class="d-flex mt-4">
-                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                        <div class="ms-3">
-                            <div class="fw-bold">Commenter Name</div>
-                            When you put money directly to a problem, it makes a good headline.
+
+                    <div class="d-flex flex-start mt-4">
+                        <a class="me-3" href="#">
+                            <img class="rounded-circle shadow-1-strong"
+                                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                                 alt="avatar"
+                                 width="65" height="65"/>
+                        </a>
+                        <div class="flex-grow-1 flex-shrink-1">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="mb-1">
+                                        John Smith <span class="small">- 4 hours ago</span>
+                                    </p>
+                                </div>
+                                <p class="small mb-0">
+                                    the majority have suffered alteration in some form, by
+                                    injected humour, or randomised words.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Single comment-->
-            <div class="d-flex">
-                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                <div class="ms-3">
-                    <div class="fw-bold">Commenter Name</div>
-                    When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                </div>
-            </div> --}}
+
         </div>
     </div>
-
-
 </section>
+<!-- Comment with nested comments-->
+{{!-- <div class="d-flex mb-4">
+    <!-- Parent comment-->
+    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+    <div class="ms-3">
+        <div class="fw-bold">Commenter Name</div>
+        If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
+        <!-- Child comment 1-->
+        <div class="d-flex mt-4">
+            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+            <div class="ms-3">
+                <div class="fw-bold">Commenter Name</div>
+                And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+            </div>
+        </div>
+        <!-- Child comment 2-->
+        <div class="d-flex mt-4">
+            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+            <div class="ms-3">
+                <div class="fw-bold">Commenter Name</div>
+                When you put money directly to a problem, it makes a good headline.
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Single comment-->
+<div class="d-flex">
+    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+    <div class="ms-3">
+        <div class="fw-bold">Commenter Name</div>
+        When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
+    </div>
+</div> --}}
