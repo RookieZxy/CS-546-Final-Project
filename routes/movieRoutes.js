@@ -203,4 +203,18 @@ router.post("/comment", async (req, res) => {
   }
 });
 
+
+//calculate rate
+/*
+router.post('/getRate', async (req, res) => {
+  const movieId = req.body.movieId;
+  const getRate = await commentData.calMovieRate(movieId);
+  const movie = await movieData.getByName(getRate);
+
+  res.render('movie/details', {movie: movie});
+});
+*/
+
+
+
 module.exports = router;
