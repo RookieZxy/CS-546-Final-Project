@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
     if (req.session.user) {
         return res.redirect('/');
     }
-    res.render('users/login')
+    res.render('users/login', {title: 'login'})
 });
 
 

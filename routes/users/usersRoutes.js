@@ -32,6 +32,7 @@ router.get("/", async (req, res) => {
     if (!users)
       throw `account does not exist!`
     res.render('users/account', {
+      title: 'user info',
       user: users[0]
     })
     // res.render('users/account', users)

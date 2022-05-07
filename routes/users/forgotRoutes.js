@@ -24,6 +24,7 @@ function checkPassword(password) {
 
 router.get('/', async (req, res) => {
     res.render('users/forgotPassword', {
+        title: 'forgotPassword',
         login_flag: 'forgot'
     })
 });

@@ -144,6 +144,7 @@ router.post("/search", async (req, res) => {
     const movie = await movieData.getByName(movieSearch);
     if (movie[0] == undefined) {
       res.render("search/search", {
+        title: `search ${movieSearch}`,
         search: movieSearch,
         amount: 0,
       });
@@ -152,6 +153,7 @@ router.post("/search", async (req, res) => {
     //console.log(movie.length());
     const amount = movie.length;
     res.render("search/search", {
+      title: `search ${movieSearch}`,
       movie: movie,
       amount: amount,
       search: movieSearch,
@@ -206,7 +208,7 @@ router.post("/comment", async (req, res) => {
     //   throw `Did not comment.`;
     // }
     if (comment.commentInserted == true) {
-      commentData.calMovieRate(movieId);
+      await commentData.calMovieRate(movieId);
       res.status(200).send({
         movie: movie,
         userName: req.session.user.account,

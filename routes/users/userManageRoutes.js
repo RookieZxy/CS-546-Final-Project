@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
       res.redirect('/');
     }
     res.render('users/Info', {
+      title: 'user manage',
       login_flag: 'login'
     })
   }

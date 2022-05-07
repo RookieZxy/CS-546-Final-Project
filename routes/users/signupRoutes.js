@@ -41,7 +41,7 @@ function checkName(firstName, lastName) {
 
 
 router.get('/', async (req, res) => {
-    res.render('users/signup')
+    res.render('users/signup', {title: 'sign up'})
 });
 
 router.post('/', async (req, res) => {
