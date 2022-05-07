@@ -1,10 +1,6 @@
 # CS 546 Web Programming I Final Project: YouTape
 
-Our application operates as a movie recommended board. Users are allowed to 
-search for movies by categories and names, have a look at essential information 
-before paying for the ticket and leave a score/comment after watching it. The 
-purpose is to build a platform that users can rely on when hesitating about movie 
-tonight, and a community that users can discuss about everything of a movie. 
+Our application operates as a movie recommended board. Users are allowed to search for movies by categories and names, have a look at essential information before paying for the ticket and leave a score/comment after watching it. The purpose is to build a platform that users can rely on when hesitating about movie tonight, and a community that users can discuss about everything of a movie. 
 
 ## Built with
 
@@ -32,10 +28,15 @@ Run 'npm run start' to run the application. Then navigate to http://localhost:30
 
 
 ## Arthurs
-Junjie Chen 
-Xiangyu Zhou 
-An Sun 
-Yuankai Ma 
+
+Junjie Chen
+
+Xiangyu Zhou
+
+An Sun
+
+Yuankai Ma
+
 Ming Tang 
 
 ## GitHub Link
