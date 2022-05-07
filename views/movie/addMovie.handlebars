@@ -1,13 +1,13 @@
 <div class="container px-5 my-5">
     <div class="row gx-5" id="addDiv">
-        <h4 class="mb-3">Add New Movie</h4>
+        <h1 class="mb-3">Add New Movie</h1>
         <form class="needs-validation" id="myForm" >
             <div class="row g-3">
                 {{#if _id}}
                     <p id="_id">{{_id}}</p>
                 {{/if}}
                 <div class="col-sm-6">
-                    <label for="imdbId" class="form-label">IMDB Id</label>
+                    <label style="color: black" for="imdbId" class="form-label">IMDB Id</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" id="imdbId" name="imdbId" placeholder="Input the IMDB id of movie"></input>
                         <button type="button" class="btn btn-warning" id="getImdb" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to auto fill the form with movie info from IMDB">Get Info</button>
@@ -16,14 +16,14 @@
                 <div class="col-sm-6"> </div>
 
                 <div class="col-sm-6">
-                    <label for="title" class="form-label">Title</label>
+                    <label style="color: black" for="name" class="form-label">Title</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Input the name of movie" value="" required></input>
                     <div class="invalid-feedback">
                         Movie Title is required.
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label for="countries" class="form-label">Countries</label>
+                    <label style="color: black" for="countries" class="form-label">Countries</label>
                     <input type="text" class="form-control" id="countries" name="countries" placeholder="USA/UK/France" value="" required></input>
                     <div class="invalid-feedback">
                         Countries is required.
@@ -31,14 +31,14 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="releaseDate" class="form-label">Release Date</label>
+                    <label style="color: black" for="releaseDate" class="form-label">Release Date</label>
                     <input type="text" class="form-control" id="releaseDate" name="releaseDate" placeholder="YYYY-MM-DD" value="" required></input>
                     <div class="invalid-feedback">
                         Invalid release date.
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label for="runtime" class="form-label">Runtime</label>
+                    <label style="color: black" for="runtime" class="form-label">Runtime</label>
                     <div class="input-group">
                         <input type="number" class="form-control" min="0" max="500" id="runtime" name="runtime" placeholder="60" value="" required></input>
                         <span class="input-group-text">minutes</span>
@@ -49,14 +49,14 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="languages" class="form-label">Languages</label>
+                    <label style="color: black" for="languages" class="form-label">Languages</label>
                     <input type="text" class="form-control" id="languages" name="languages" placeholder="English/Italian/French" value="" required></input>
                     <div class="invalid-feedback">
                         Languages is required.
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label for="stars" class="form-label">Stars</label>
+                    <label style="color: black" for="casts" class="form-label">Stars</label>
                     <input type="text" class="form-control" id="casts" name="casts" placeholder="Name of stars" required></input>
                     <div class="invalid-feedback">
                         Stars release date.
@@ -64,14 +64,14 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="directors" class="form-label">Directors</label>
+                    <label style="color: black" for="directors" class="form-label">Directors</label>
                     <input type="text" class="form-control" id="directors" name="directors" placeholder="Name of directors" value="" required></input>
                     <div class="invalid-feedback">
                         Directors is required.
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label for="writers" class="form-label">Writers</label>
+                    <label style="color: black" for="writers" class="form-label">Writers</label>
                     <input type="text" class="form-control" id="writers" name="writers" placeholder="Name of writers" required></input>
                     <div class="invalid-feedback">
                         Writers is required.
@@ -79,14 +79,14 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="plot" class="form-label">Summary</label>
+                    <label style="color: black" for="plot" class="form-label">Summary</label>
                     <textarea class="form-control" id="plot" style="height: 125px;" name="plot" placeholder="Summaries of the movie" required></textarea>
                     <div class="invalid-feedback">
                         Summary is required.
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label" for="typeTheck">Type</label>
+                    <label style="color: black" class="form-label" for="typeTheck">Type</label>
                     <div id="typeTheck">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="Comedy" value="Comedy"></input>
@@ -156,13 +156,13 @@
                 </div>
 
                 <div class="col-sm-6">
-                    <label for="trailerLink" class="form-label">Trailer Link</label>
+                    <label style="color: black" for="trailerLink" class="form-label">Trailer Link</label>
                     <input type="text" class="form-control" id="trailerLink" name="trailerLink" placeholder="https://www.imdb.com/video/imdb/vi3877612057/imdb/embed" required></input>
                 </div>
                 <div class="col-sm-6"></div>
 
                 <div class="col-sm-6">
-                    <label for="poster" class="form-label">Poster</label>
+                    <label style="color: black" for="poster" class="form-label">Poster</label>
                     <input class="form-control" type="file" id="poster" name="poster"></input>
                     <div class="invalid-feedback">
                         Poster is required.
@@ -174,7 +174,7 @@
                     <img src="../../public/images/missing.png" id="posterImg"  class="rounded-top" alt="poster image" width="400" height="400" >
                 </div>
                 <div class="col-sm-6">
-                    <label for="images" class="form-label">Images</label>
+                    <label style="color: black" for="images" class="form-label">Images</label>
                     <input class="form-control" type="file" id="images" name="images" multiple></input>
                 </div>
                 <div class="col-sm-6"></div>
