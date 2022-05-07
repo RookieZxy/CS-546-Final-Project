@@ -37,8 +37,13 @@ router.get('/types/:id', async (req, res) => {
     //console.log("type in route: ", type);
     var sortBy = 'ratingHL';
     //console.log("sortBy in route: ", sortBy);
-    const moviesByType = await movieData.getByType(type, sortBy);
-    res.render('movie/types', {type: type, movies: moviesByType, amount: moviesByType.length});
+    try{
+        const moviesByType = await movieData.getByType(type, sortBy);
+        res.status(200).render('movie/types', {title: type+" movies", type: type, movies: moviesByType, amount: moviesByType.length});
+    }catch(e){
+        res.status(400).send({error: error});
+    }
+    
 });
 
 router.post('/types/:id', async (req, res) => {
@@ -48,8 +53,12 @@ router.post('/types/:id', async (req, res) => {
     var sortBy = req.body.sortBy;
     if (!sortBy) sortBy = 'ratingLH';
     //console.log("sortBy in post route: ", sortBy);
-    const moviesByType = await movieData.getByType(type, sortBy);
-    res.json(moviesByType);
+    try{
+        const moviesByType = await movieData.getByType(type, sortBy);
+        res.json(moviesByType);
+    }catch(error){
+        console.log(error);
+    }
 });
 
 // router.get('/', async (req, res) => {
