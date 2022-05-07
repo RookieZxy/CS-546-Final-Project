@@ -35,7 +35,8 @@
             </div>
             <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
                 <img style="transform: scale(0.9);" class="img-fluid rounded-3 my-1" src="{{movie.poster}}"
-                     alt="{{movie.name}}"/></div>
+                     alt="{{movie.name}}"/>
+            </div>
         </div>
     </div>
 </div>
@@ -146,7 +147,8 @@
         <div class="row d-flex justify-content-center">
             <!-- Comment form-->
             {{!-- <form class="mb-4" action="/movie/comment" method="post"> --}}
-            <form id="addComment" class="mb-1" <!--action="/movie/getRate" method="get"-->>
+            <form id="addComment" class="mb-1" {{!--action="/movie/getRate" method="get"--}}>
+                <label for="content"></label>
                 <textarea class="form-control" id="content" name="content"
                           placeholder="Join the discussion and leave a comment!"></textarea>
                 <input type="text" value={{userName}} id="userName1" name="userName1" hidden>
@@ -157,59 +159,17 @@
                                value="{{movie.rating}}"
                                data-min="0" data-max="10" data-step="1" data-size="sm" data-readonly="false"
                                data-show-clear="false">
+
                     </div>
-                    <div class="col-4">
-                        <button class="btn btn-success">Comment</button>
+                    <div class="col">
+                        <label for="input-7-sm"></label>
+                        <button class="btn btn-success" type="submit">Comment</button>
                     </div>
                 </div>
             </form>
             <input type="text" value="{{error}}" id="alert" name="alert">
             <input type="text" value="{{comment}}" id="comment" name="comment">
             <ul id="commentList"></ul>
-
-            <div class="d-flex flex-start">
-                <img class="rounded-circle shadow-1-strong me-3"
-                     src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp" alt="avatar"
-                     width="65"
-                     height="65"/>
-                <div class="flex-grow-1 flex-shrink-1">
-                    <div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-1">
-                                Maria Smantha <span class="small">- 2 hours ago</span>
-                            </p>
-                            <a href="#!"><i class="fas fa-reply fa-xs"></i><span class="small"> reply</span></a>
-                        </div>
-                        <p class="small mb-0">
-                            It is a long established fact that a reader will be distracted by
-                            the readable content of a page.
-                        </p>
-                    </div>
-
-                    <div class="d-flex flex-start mt-4">
-                        <a class="me-3" href="#">
-                            <img class="rounded-circle shadow-1-strong"
-                                 src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
-                                 alt="avatar"
-                                 width="65" height="65"/>
-                        </a>
-                        <div class="flex-grow-1 flex-shrink-1">
-                            <div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="mb-1">
-                                        John Smith <span class="small">- 4 hours ago</span>
-                                    </p>
-                                </div>
-                                <p class="small mb-0">
-                                    the majority have suffered alteration in some form, by
-                                    injected humour, or randomised words.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
