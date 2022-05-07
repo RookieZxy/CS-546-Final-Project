@@ -72,21 +72,16 @@ router.post("/reply", async (req, res) => {
 
         const comment = await commentData.createReply(replyMessage, userName, movieId, date, rate, parentId);
         if (comment.commentInserted == true) {
-            res.render(`movie/details`, {
-                movie: movie,
-                userName: req.session.user.account,
-                CSS: "detail.css",
-                comment: 3,
-            });
+            // res.render(`movie/details`, {
+            //     movie: movie,
+            //     userName: req.session.user.account,
+            //     CSS: "detail.css",
+            //     comment: 3,
+            // });
+            res.redirect(`../movie/${movieId}`)
         } else {
             throw `Did not comment.`
         }
-        // res.status(200).send({
-        //     movie: movie,
-        //     userName: req.session.user.account,
-        //     CSS: "detail.css",
-        //     comment: true
-        // })
     } catch (e) {
         console.log(e);
         const movie = await movieData.getById(req.body.movieId);
