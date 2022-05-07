@@ -4,8 +4,20 @@
             <div class="col-3 p-3 mx-auto bg-white bg-opacity-25 rounded-3">
                 <h1 class="text-primary">Search '{{search}}'</h1>
                 <p class="lead text-primary">found {{amount}} results</p>
-                <p>selector would be here</p>
-
+                {{!-- <p>selector would be here</p> --}}
+                <ul id="search-filter-rating" name="search-filter-rating">
+                    <li rating="0">rating</li>
+                    <li rating="10">10</li>
+                    <li rating="8">8</li>
+                    <li rating="6">6</li>
+                    <li rating="4">4</li>
+                    <li rating="2">2</li>
+                </ul>
+                <ul id="search-filter-runTime" name="search-filter-runTime">
+                    <li runTime="0">Run Time</li>
+                    <li runTime="1">90 minutes -</li>
+                    <li runTime="2">90 minutes +</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -14,7 +26,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <!--single movie card-->
                 {{#each movie}}
-                    <a href="/movie/{{this._id}}" id="{{this.name}}">
+                    <a href="/movie/{{this._id}}" id="{{this.name}}" class="search-single-movie" rating="{{this.rating}}" runTime="{{this.runtime}}">
                         <div class="col">
                             <div class="card shadow-sm card-zoom">
                                 <img class="bd-placeholder-img card-img-top" width="100%" height="600"

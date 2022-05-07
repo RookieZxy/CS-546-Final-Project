@@ -49,6 +49,19 @@
         })
     })
 
+    $('#search-filter-rating li').click(function(event){
+        event.preventDefault();
+        var rating = $(this).attr('rating');
+        $('.search-single-movie').each(function(index, element){
+            if ($(element).attr('rating') >= rating){
+                $(element).show();
+            }
+            else{
+                $(element).hide();
+            }
+        })
+    })
+
     $('#type-filter-runTime li').click(function(event){
         event.preventDefault();
         var choice = $(this).attr('runTime');
@@ -72,6 +85,39 @@
             })
         }else{
             $('.type-single-movie').each(function(index, element){
+                if ($(element).attr('runTime') >= 90){
+                    $(element).show();
+                }
+                else{
+                    $(element).hide();
+                }
+            })
+        }
+    })
+
+    $('#search-filter-runTime li').click(function(event){
+        event.preventDefault();
+        var choice = $(this).attr('runTime');
+        if (choice == "0"){
+            $('.search-single-movie').each(function(index, element){
+                if ($(element).attr('runTime') >= 0){
+                    $(element).show();
+                }
+                else{
+                    $(element).hide();
+                }
+            })
+        }else if (choice == "1"){
+            $('.search-single-movie').each(function(index, element){
+                if ($(element).attr('runTime') <= 90){
+                    $(element).show();
+                }
+                else{
+                    $(element).hide();
+                }
+            })
+        }else{
+            $('.search-single-movie').each(function(index, element){
                 if ($(element).attr('runTime') >= 90){
                     $(element).show();
                 }
