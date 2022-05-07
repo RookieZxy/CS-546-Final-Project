@@ -12,7 +12,10 @@ router.get("/addMovie", (req, res) => {
   if (req.session.user == undefined) {
     res.redirect("/");
   } else {
-    res.render("movie/addMovie", { partial: "addMovie-scripts" });
+    res.render("movie/addMovie", {
+      title: "Add Movie",
+      partial: "addMovie-scripts",
+    });
   }
 });
 
@@ -24,6 +27,7 @@ router.get("/approve/:id", (req, res) => {
 
   let id = req.params.id;
   res.render("movie/addMovie", {
+    title: "Add Movie",
     _id: id,
     partial: "addMovie-scripts",
   });
@@ -109,6 +113,7 @@ router.get("/:id", async (req, res) => {
     }
     if (req.session.user)
       res.render("movie/details", {
+        title: movie.name,
         movie: movie,
         fourSimilarMovies: fourSimilarMovies,
         userName: req.session.user.account,
@@ -117,6 +122,7 @@ router.get("/:id", async (req, res) => {
     //
     else
       res.render("movie/details", {
+        title: movie.name,
         movie: movie,
         fourSimilarMovies: fourSimilarMovies,
         CSS: "detail.css",
