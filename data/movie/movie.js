@@ -125,7 +125,7 @@ async function getTopRated() {
 async function getInvalid() {
   const moviesCollection = await mongoCollections.movies();
 
-  const movies = await moviesCollection.find({ isValid: true }).toArray();
+  const movies = await moviesCollection.find({ isValid: false }).toArray();
 
   for (let i = 0; i < movies.length; i++) {
     const movie = movies[i];
@@ -340,7 +340,8 @@ async function getByImdbId(imdbId) {
   const moviesCollection = await mongoCollections.movies();
 
   const movie = await moviesCollection.findOne({ imdbId: imdbId });
-  if (movie === null) throw `No movie with imdbId '${imdbId}'`;
+  // if (movie === null) throw `No movie with imdbId '${imdbId}'`;
+  if (movie === null) return null;
   movie._id = movie._id.toString();
   const date = moment(movie.releaseDate);
   movie.releaseDate = date.format("YYYY-MM-DD");

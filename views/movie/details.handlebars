@@ -4,6 +4,7 @@
             <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-1 text-center text-xl-start">
                     <h1 class="fw-bolder text-white mb-2">{{movie.name}}</h1>
+                    <label for="rate"></label>
                     <input id="rate" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="10"
                            data-step="1" data-size="sm" data-readonly="true" data-show-clear="false">
                     {{!--<p>{{movie.rate}}</p>
@@ -12,25 +13,25 @@
                     <p>{{this.rating}}</p>--}}
                     <hr/>
                     <p class="lead fw-normal text-white-50 mb-4">{{movie.plot}}</p>
-                    <h4 class="text-white mb-2">Countries: <span
-                            class="lead fw-normal text-white-50 mb-4">{{movie.countries}}</span></h4>
-                    <h4 class="text-white mb-2">ReleaseDate: <span
-                            class="lead fw-normal text-white-50 mb-4">{{movie.releaseDate}}</span></h4>
-                    <h4 class="text-white mb-2">Runtime: <span
-                            class="lead fw-normal text-white-50 mb-4">{{movie.runtime}}</span></h4>
-                    <h4 class="text-white mb-2">Languages: <span
-                            class="lead fw-normal text-white-50 mb-4">{{movie.languages}}</span></h4>
-                    <h4 class="text-white mb-2">Stars: <span
-                            class="lead fw-normal text-white-50 mb-4">{{movie.casts}}</span></h4>
-                    <h4 class="text-white mb-2">Directors: <span
-                            class="lead fw-normal text-white-50 mb-4">{{movie.directors}}</span></h4>
-                    <h4 class="text-white mb-2">Writers: <span
-                            class="lead fw-normal text-white-50 mb-4">{{movie.writers}}</span></h4>
-                    <h4 class="text-white mb-2">Type:
+                    <h2 class="text-white mb-2">Countries: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.countries}}</span></h2>
+                    <h2 class="text-white mb-2">ReleaseDate: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.releaseDate}}</span></h2>
+                    <h2 class="text-white mb-2">Runtime: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.runtime}}</span></h2>
+                    <h2 class="text-white mb-2">Languages: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.languages}}</span></h2>
+                    <h2 class="text-white mb-2">Stars: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.casts}}</span></h2>
+                    <h2 class="text-white mb-2">Directors: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.directors}}</span></h2>
+                    <h2 class="text-white mb-2">Writers: <span
+                            class="lead fw-normal text-white-50 mb-4">{{movie.writers}}</span></h2>
+                    <h2 class="text-white mb-2">Type:
                         {{#each movie.typeList}}
                             <span class="badge bg-success">{{this}}</span>
                         {{/each}}
-                    </h4>
+                    </h2>
                 </div>
             </div>
             <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
@@ -99,8 +100,8 @@
                     <div class="card-body p-4">
                         {{!-- <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div> --}}
                         <a href="/movie/{{fourSimilarMovies.[0]._id}}"
-                           class="text-decoration-none link-dark stretched-link"><h5
-                                class="card-title mb-3">{{fourSimilarMovies.[0].name}}</h5></a>
+                           class="text-decoration-none link-dark stretched-link">
+                           <h3 class="card-title mb-3">{{fourSimilarMovies.[0].name}}</h3></a>
                     </div>
                 </div>
             </div>
@@ -112,8 +113,8 @@
                     <div class="card-body p-4">
                         {{!-- <div class="badge bg-primary bg-gradient rounded-pill mb-2">Media</div> --}}
                         <a href="/movie/{{fourSimilarMovies.[1]._id}}"
-                           class="text-decoration-none link-dark stretched-link"><h5
-                                class="card-title mb-3">{{fourSimilarMovies.[1].name}}</h5></a>
+                           class="text-decoration-none link-dark stretched-link"><h3
+                                class="card-title mb-3">{{fourSimilarMovies.[1].name}}</h3></a>
                     </div>
                 </div>
             </div>
@@ -124,8 +125,8 @@
                     <div class="card-body p-4">
                         {{!-- <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div> --}}
                         <a href="/movie/{{fourSimilarMovies.[2]._id}}"
-                           class="text-decoration-none link-dark stretched-link"><h5
-                                class="card-title mb-3">{{fourSimilarMovies.[2].name}}</h5></a>
+                           class="text-decoration-none link-dark stretched-link"><h3
+                                class="card-title mb-3">{{fourSimilarMovies.[2].name}}</h3></a>
                     </div>
                 </div>
             </div>
@@ -135,8 +136,8 @@
                          alt="{{fourSimilarMovies.[3].name}}"/>
                     <div class="card-body p-4">
                         <a href="/movie/{{fourSimilarMovies.[3]._id}}"
-                           class="text-decoration-none link-light stretched-link"><h5
-                                class="card-title mb-3">{{fourSimilarMovies.[3].name}}</h5></a>
+                           class="text-decoration-none link-light stretched-link"><h3
+                                class="card-title mb-3">{{fourSimilarMovies.[3].name}}</h3></a>
                     </div>
                 </div>
             </div>
