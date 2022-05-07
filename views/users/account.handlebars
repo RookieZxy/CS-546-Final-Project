@@ -3,7 +3,7 @@
         <div class="col-md-4 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img class="rounded-circle mt-5" width="150px"
-                     src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                     src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="head">
                 {{!-- <span class="font-weight-bold">{{user.firstName}} {{user.lastName}}</span> --}}
                 <span class="text-black-50">{{user.account}}</span><span> </span>
             </div>
@@ -14,39 +14,43 @@
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
-                    <div id="first" class="col-md-6 mt-2"><label class="labels">Firstname</label>
+                    <div id="first" class="col-md-6 mt-2">
+                        <label class="labels" for="firstName">Firstname</label>
                         <input name="firstName" id="firstName" type="text" class="form-control"
                                placeholder="Firstname" value="{{user.firstName}}">
                     </div>
-                    <div id="last" class="col-md-6 mt-2"><label class="labels">Lastname</label>
+                    <div id="last" class="col-md-6 mt-2">
+                        <label class="labels" for="lastName">Lastname</label>
                         <input name="lastName" id="lastName" type="text" class="form-control"
                                value="{{user.lastName}}" placeholder="Lastname">
                     </div>
-                    <div id="p" class="col-md-12 mt-2"><label class="labels">password</label>
+                    <div id="p" class="col-md-12 mt-2">
+                        <label class="labels" for="password">password</label>
                         <input name="password" id="password" type="password" class="form-control"
                                placeholder="password" value="">
                     </div>
-                    <div id="pre" class="col-md-12 mt-2"><label class="labels">Previous password</label>
+                    <div id="pre" class="col-md-12 mt-2">
+                        <label class="labels" for="prePassword">Previous password</label>
                         <input name="prePassword" id="prePassword" type="password" class="form-control"
                                placeholder="Previous password" value="">
                     </div>
-                    <div id="new" class="col-md-12 mt-2"><label class="labels">New password</label>
+                    <div id="new" class="col-md-12 mt-2">
+                        <label class="labels" for="newPassword">New password</label>
                         <input name="newPassword" id="newPassword" type="password" class="form-control"
                                placeholder="New password" value="">
                     </div>
-                    <div id="confirm" class="col-md-12 mt-2"><label class="labels">Confirm new password</label>
+                    <div id="confirm" class="col-md-12 mt-2">
+                        <label class="labels" for="confirmPw">Confirm new password</label>
                         <input name="confirmPw" id="confirmPw" type="password" class="form-control"
                                placeholder="Confirm new password password" value="">
                     </div>
                 </div>
                 <div class="mt-5 text-center">
-                    <button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                    <button class="btn btn-primary" type="submit">Save Profile</button>
+                    <button id="changePassword" class="btn btn-primary" type="button">Change Password</button>
+                    <button id="changeInfo" class="btn btn-primary" type="button">Change Name</button>
                 </div>
             </form>
-            <button id="changePassword" class="btn btn-primary profile-button" type="submit">Change
-                Password
-            </button>
-            <button id="changeInfo" class="btn btn-primary profile-button" type="submit">Change Name</button>
         </div>
     </div>
 </div>
