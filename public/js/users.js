@@ -67,6 +67,7 @@
     $('#changeInfo').hide();
     $('#pre').hide();
     $('#new').hide();
+    $('#confirm').hide();
     // $('#confirm').hide();
     $('#changePassword').click(function () {
         // alert('sdf');
