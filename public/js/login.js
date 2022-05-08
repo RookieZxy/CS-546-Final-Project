@@ -48,7 +48,8 @@
         if(check){
             $.ajax({
                 method: "POST",
-                url: `http://localhost:3000/login`,
+                // url: `http://localhost:3000/login`,
+                url: `/login`,
                 data: {
                     account: $("#account").val(),
                     password: $("#password").val()

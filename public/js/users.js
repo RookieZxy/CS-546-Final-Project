@@ -100,7 +100,7 @@
             if (check) {
                 $.ajax({
                     method: "POST",
-                    url: `http://localhost:3000/users`,
+                    url: `/users`,
                     data: {
                         password: $("#password").val(),
                         firstName: $("#firstName").val(),
@@ -119,7 +119,7 @@
             if (check) {
                 $.ajax({
                     method: "POST",
-                    url: `http://localhost:3000/users/password`,
+                    url: `/users/password`,
                     data: {
                         prepassword: $("#prePassword").val(),
                         password: $("#newPassword").val(),

@@ -122,7 +122,7 @@
     $('#userTable').empty();
     $.ajax({
         method: "POST",
-        url: `http://localhost:3000/userManage/account`,
+        url: `/userManage/account`,
         data: {
             account: $("#account").val(),
         }
@@ -186,7 +186,7 @@
         if (check) {
             $.ajax({
                 method: "POST",
-                url: `http://localhost:3000/userManage/account`,
+                url: `/userManage/account`,
                 data: {
                     account: $("#account").val(),
                 }
@@ -246,7 +246,7 @@
         if (check) {
             $.ajax({
                 method: "POST",
-                url: `http://localhost:3000/userManage/update`,
+                url: `/userManage/update`,
                 data: {
                     account: $("#updateAccount").html(),
                     firstName: $("#updateFirstName").val(),
@@ -270,7 +270,7 @@
         if (check) {
             $.ajax({
                 method: "POST",
-                url: `http://localhost:3000/userManage/add`,
+                url: `/userManage/add`,
                 data: {
                     account: $("#addAccount").val(),
                     password: $("#addPassword").val(),
@@ -292,7 +292,7 @@
         if (check) {
             $.ajax({
                 method: "POST",
-                url: `http://localhost:3000/userManage/remove`,
+                url: `/userManage/remove`,
                 data: {
                     account: $("#removeAccount").text(),
                 }
@@ -315,7 +315,7 @@
             if (check) {
                 $.ajax({
                     method: "POST",
-                    url: `http://localhost:3000/userManage/password`,
+                    url: `/userManage/password`,
                     data: {
                         account: $("#passwordAccount").text(),
                         password: $("#newPassword").val(),
@@ -340,7 +340,7 @@
         //     isAdmin = false;
         $.ajax({
             method: "POST",
-            url: `http://localhost:3000/userManage/admin`,
+            url: `/userManage/admin`,
             data: {
                 account: $("#adminAccount").text(),
                 isAdmin: $("#adminStatus").val(),

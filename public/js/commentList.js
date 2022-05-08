@@ -131,7 +131,7 @@
             var id = $("#movieId").val();
             $.ajax({
                 method: "POST",
-                url: `http://localhost:3000/movie/comment`,
+                url: `/movie/comment`,
                 data: {
                     userName: $("#userName1").val(),
                     movieId: id,
