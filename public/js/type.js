@@ -22,7 +22,7 @@
                 <div class="col">
                     <div class="card shadow-sm card-zoom">
                         <img class="bd-placeholder-img card-img-top" width="100%" height="600"
-                             src="${this.poster}">
+                             src="${this.poster}" alt="${this.name}">
                         <div class="card-body">
                             <p class="card-text text-center fs-5 fw-bold">${this.name}</p>
                         </div>
