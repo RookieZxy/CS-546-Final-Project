@@ -1,6 +1,6 @@
 # CS 546 Web Programming I Final Project: YouTape
 
-Our application operates as a movie recommended board. Users are allowed to search for movies by categories and names, have a look at essential information before paying for the ticket and leave a score/comment after watching it. The purpose is to build a platform that users can rely on when hesitating about movie tonight, and a community that users can discuss about everything of a movie. 
+Our application operates as a movie recommended board. Users are allowed to search for movies by categories and names, have a look at essential information before paying for the ticket and leave a score/comment after watching it. The purpose is to build a platform that users can rely on when hesitating about movie tonight, and a community that users can discuss everything of a movie. 
 
 ## Built with
 
@@ -13,6 +13,8 @@ Clone the repo 'git clone https://github.com/RookieZxy/CS-546-Final-Project'
 Run 'npm install' to install the required dependencies for our project.
 
 Then run 'npm run seed' to run the task of seeding the database.
+
+(The first administrator authority needs to be set in MongoDB's users table.)
 
 ## Executing Program
 
