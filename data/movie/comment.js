@@ -109,7 +109,7 @@ async function calMovieRate(id) {
     });
 
     const rate = Math.round(sum / count * 10) / 10;
-    console.log(rate);
+    // console.log(rate);
     await movie.updateRating(id, rate);
 }
 
