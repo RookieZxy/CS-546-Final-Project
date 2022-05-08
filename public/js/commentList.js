@@ -42,18 +42,19 @@
                         <div>
                             <form action="/comment/reply" method="post">
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="mb-1">
-                                    ${searchList[i].userName} <span class="small text-success">- Rating: ${searchList[i].rate}</span>
+                                <p class="mb-1" style="color: black;">
+                                    ${searchList[i].userName} <span>- Rating: ${searchList[i].rate}</span>
                                 </p>
-                                <button class="btn btn-link" id ="reply" type="submit">reply</button>
+                                <button class="btn btn-success" id ="reply" type="submit">reply</button>
                             </div>
-                                <p class="mb-1">
+                                <p class="mb-1" style="color: black;">
                                     ${searchList[i].content}
                                 </p>
                                 <input type="text" value=${searchList[i].movieId} name="movieId" hidden>
                                 <input type="text" value=${user} name="userName" hidden>
                                 <input type="text" value=${searchList[i]._id} name="parentId" hidden>
-                                <textarea class="form-control w-75" name="replyMessage" placeholder="Reply to this comment"></textarea>
+                                <label for="replyMessage" hidden></label>
+                                <textarea class="form-control w-75" id="replyMessage" name="replyMessage" placeholder="Reply to this comment"></textarea>
                             </form>
                             <ul id = ${searchList[i]._id}></ul>
                         </div></div></li>`
@@ -73,11 +74,11 @@
                                     <div class="flex-grow-1 flex-shrink-1">
                                         <div>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <p class="mb-1">
+                                                <p class="mb-1" style="color: black;">
                                                     ${replyList[i].userName}
                                                 </p>
                                             </div>
-                                            <p class="small mb-0">
+                                            <p class="small mb-0" style="color: black;">
                                                 ${replyList[i].content}
                                             </p>
                                         </div>
@@ -172,18 +173,19 @@
                                     <div>
                                         <form action="/comment/reply" method="post">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <p class="mb-1">
-                                                ${searchList[i].userName} <span class="small text-success">- Rating: ${searchList[i].rate}</span>
+                                            <p class="mb-1" style="color: black;">
+                                                ${searchList[i].userName} <span>- Rating: ${searchList[i].rate}</span>
                                             </p>
-                                            <button class="btn btn-link" id ="reply" type="submit">reply</button>
+                                            <button class="btn btn-success" id ="reply" type="submit">reply</button>
                                         </div>
-                                            <p class="mb-1">
+                                            <p class="mb-1" style="color: black;">
                                                 ${searchList[i].content}
                                             </p>
                                             <input type="text" value=${searchList[i].movieId} name="movieId" hidden>
                                             <input type="text" value=${user} name="userName" hidden>
                                             <input type="text" value=${searchList[i]._id} name="parentId" hidden>
-                                            <textarea class="form-control w-75" name="replyMessage" placeholder="Reply to this comment"></textarea>
+                                            <label for="replyMessage" hidden></label>
+                                            <textarea class="form-control w-75" id="replyMessage" name="replyMessage" placeholder="Reply to this comment"></textarea>
                                         </form>
                                         <ul id = ${searchList[i]._id}></ul>
                                     </div></div></li>`
@@ -203,11 +205,11 @@
                                                 <div class="flex-grow-1 flex-shrink-1">
                                                     <div>
                                                         <div class="d-flex justify-content-between align-items-center">
-                                                            <p class="mb-1">
+                                                            <p class="mb-1" style="color: black;">
                                                                 ${replyList[i].userName}
                                                             </p>
                                                         </div>
-                                                        <p class="small mb-0">
+                                                        <p class="small mb-0" style="color: black;">
                                                             ${replyList[i].content}
                                                         </p>
                                                     </div>

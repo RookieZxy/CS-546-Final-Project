@@ -5,42 +5,42 @@
                 <img class="rounded-circle mt-5" width="150"
                      src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="head">
                 {{!-- <span class="font-weight-bold">{{user.firstName}} {{user.lastName}}</span> --}}
-                <span class="text-black-50">{{user.account}}</span><span> </span>
+                <span style="color: black;">{{user.account}}</span><span> </span>
             </div>
         </div>
         <div class="col-md-8 border-right">
             <form id="updateInfo" class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
+                    <h1 class="text-right">Profile Settings</h1>
                 </div>
                 <div class="row mt-2">
                     <div id="first" class="col-md-6 mt-2">
-                        <label class="labels" for="firstName">Firstname</label>
+                        <label class="labels" for="firstName" style="color: black;">Firstname</label>
                         <input name="firstName" id="firstName" type="text" class="form-control"
                                placeholder="Firstname" value="{{user.firstName}}">
                     </div>
                     <div id="last" class="col-md-6 mt-2">
-                        <label class="labels" for="lastName">Lastname</label>
+                        <label class="labels" for="lastName" style="color: black;">Lastname</label>
                         <input name="lastName" id="lastName" type="text" class="form-control"
                                value="{{user.lastName}}" placeholder="Lastname">
                     </div>
                     <div id="p" class="col-md-12 mt-2">
-                        <label class="labels" for="password">password</label>
+                        <label class="labels" for="password" style="color: black;">password</label>
                         <input name="password" id="password" type="password" class="form-control"
                                placeholder="password" value="">
                     </div>
                     <div id="pre" class="col-md-12 mt-2">
-                        <label class="labels" for="prePassword">Previous password</label>
+                        <label class="labels" for="prePassword" style="color: black;">Previous password</label>
                         <input name="prePassword" id="prePassword" type="password" class="form-control"
                                placeholder="Previous password" value="">
                     </div>
                     <div id="new" class="col-md-12 mt-2">
-                        <label class="labels" for="newPassword">New password</label>
+                        <label class="labels" for="newPassword" style="color: black;">New password</label>
                         <input name="newPassword" id="newPassword" type="password" class="form-control"
                                placeholder="New password" value="">
                     </div>
                     <div id="confirm2" class="col-md-12 mt-2">
-                        <label class="labels" for="confirmPw">Confirm new password</label>
+                        <label class="labels" for="confirmPw" style="color: black;">Confirm new password</label>
                         <input name="confirmPw" id="confirmPw" type="password" class="form-control"
                                placeholder="Confirm new password password" value="">
                     </div>
