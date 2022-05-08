@@ -14,7 +14,7 @@ Run 'npm install' to install the required dependencies for our project.
 
 Then run 'npm run seed' to run the task of seeding the database.
 
-(The first administrator authority needs to be set in MongoDB's users table.)
+(Initial user: admin, password: 123456)
 
 ## Executing Program
 

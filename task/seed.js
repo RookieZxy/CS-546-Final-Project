@@ -1,6 +1,7 @@
 const mongoConnections = require("../config/mongoCollections");
 const mongoConnection = require("../config/mongoConnection");
 const movieData = require("../data/movie/movie");
+const userData = require("../data/users/users");
 const commentData = require("../data/movie/comment");
 const { ObjectId } = require("mongodb");
 const username = [
@@ -66,41 +67,7 @@ async function main() {
     }
   }
   //user
-  const user1 = {
-    account: "mayuankai",
-    password: "123123",
-    isAdmin: true,
-    firstName: "Yuankai",
-    lastName: "Ma",
-  };
-  const user2 = {
-    account: "zhouxiangyu",
-    password: "123123",
-    isAdmin: true,
-    firstName: "Xiangyu",
-    lastName: "Zhou",
-  };
-  const user3 = {
-    account: "chenjunjie",
-    password: "123123",
-    isAdmin: true,
-    firstName: "Junjie",
-    lastName: "Chen",
-  };
-  const user4 = {
-    account: "sunan",
-    password: "123123",
-    isAdmin: true,
-    firstName: "An",
-    lastName: "Sun",
-  };
-  const user5 = {
-    account: "tangming",
-    password: "123123",
-    isAdmin: true,
-    firstName: "Ming",
-    lastName: "Tang",
-  };
+  await userData.createAdmin("admin", "123456", "Mike", "Lee");
 
   //type
   const types = [
@@ -151,11 +118,6 @@ async function main() {
     },
   ];
 
-  await users.insertOne(user1);
-  await users.insertOne(user2);
-  await users.insertOne(user3);
-  await users.insertOne(user4);
-  await users.insertOne(user5);
   await type.insertMany(types);
 
   await mongoConnection.closeConnection();

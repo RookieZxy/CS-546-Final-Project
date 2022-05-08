@@ -66,6 +66,34 @@ async function createUser(username, password, firstName, lastName) {
   };
 }
 
+//create a new Admin
+async function createAdmin(username, password, firstName, lastName) {
+  errorCheck(username, password, firstName, lastName);
+  let hasPwd = await bcryptjs.hash(password, 10);
+  const userCollection = await users();
+
+  let check = await userCollection.findOne({
+    account: username,
+  });
+  if (check != null) throw `${username} is existed, please change the username`;
+
+  let newuser = {
+    account: username,
+    password: hasPwd,
+    isAdmin: true,
+    firstName: firstName,
+    lastName: lastName,
+  };
+
+  //console.log(newuser);
+
+  const insertInfo = await userCollection.insertOne(newuser);
+  if (insertInfo.insertedCount == 0) throw `Could not add a new user`;
+  return {
+    userInserted: true,
+  };
+}
+
 //find whether the user is in database
 async function checkUser(account, password) {
   account = account.trim();
@@ -124,7 +152,7 @@ async function update(account, password, firstName, lastName) {
     account: account,
   });
 
-  let updatedUser={};
+  let updatedUser = {};
   if (userInfo.password == password) {
     util.checkAccount(account);
     util.checkName(firstName, lastName);
@@ -258,4 +286,5 @@ module.exports = {
   getAll,
   changeName,
   changeAdmin,
+  createAdmin,
 };
