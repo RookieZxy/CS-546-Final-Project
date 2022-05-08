@@ -65,17 +65,6 @@ router.post("/password", async (req, res) => {
     updatedData.password = req.body.password;
 
     const updatedUsers = await usersData.update(req.session.user.account, updatedData.password, updatedData.firstName, updatedData.lastName);
-    // console.log(updatedUsers);
-    // if (updatedUsers) {
-    //   // res.redirect('/users');
-    //   res.status(400).render('users/account', {
-    //     userInfo: 'success',
-    //     user: updatedUsers
-    //   })
-    // } else
-    //   res.status(500).send({
-    //     message: 'Internal Server Error'
-    //   })
 
     res.status(200).send({
       userInfo: 'success',
@@ -83,10 +72,6 @@ router.post("/password", async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    // res.status(400).render('users/account', {
-    //   status: 'HTTP 400',
-    //   error: e
-    // })
     res.status(400).send({
       error: e
     });
@@ -96,62 +81,36 @@ router.post("/password", async (req, res) => {
 router.post("/", async (req, res) => {
   let updatedData = await usersData.get(req.session.user.account);
   updatedData = updatedData[0]
-  // console.log(req.body.password);
-  // console.log(req.body.lastName);
   try {
-    if (!req.body.password)
-      throw 'Missing password';
-    // if (req.body.confirmPw != req.body.password)
-    //   throw `The inputed two passwords are inconsistent`;
+    // if (!req.body.password)
+    //   throw 'Missing password';
+
     if (req.body.firstName)
       updatedData.firstName = req.body.firstName;
     if (req.body.lastName)
       updatedData.lastName = req.body.lastName;
     
-    req.body.password = xss(req.body.password);
+    // req.body.password = xss(req.body.password);
     updatedData.firstName = xss(updatedData.firstName);
     updatedData.lastName = xss(updatedData.lastName);
 
-    checkPassword(req.body.password);
-    // checkPassword(req.body.confirmPw);
-    checkString('password', req.body.password);
-    // checkString('confirmPw', req.body.confirmPw);
+    // checkPassword(req.body.password);
+    // checkString('password', req.body.password);
     checkString('firstName', updatedData.firstName);
     checkString('lastName', updatedData.lastName);
 
-    if (!await bcryptjs.compare(req.body.password, updatedData.password))
-      throw `password is not correct`;
-    updatedData.password = req.body.password;
+    // if (!await bcryptjs.compare(req.body.password, updatedData.password))
+    //   throw `password is not correct`;
+    // updatedData.password = req.body.password;
     const updatedUsers = await usersData.update(req.session.user.account, updatedData.password, updatedData.firstName, updatedData.lastName);
-    // console.log(updatedUsers);
-    // if (updatedUsers) {
-    //   // res.redirect('/users');
-    //   res.status(400).render('users/account', {
-    //     userInfo: 'success',
-    //     user: updatedUsers
-    //   })
-    // }
 
     res.status(200).send({
       userInfo: 'success',
       user: updatedUsers
     })
 
-    
-    // } else
-    //   res.status(500).send({
-    //     message: 'Internal Server Error'
-    //   })
-    // res.render('users/account', {
-    //   user: updatedUsers
-    // })
   } catch (e) {
     console.log(e);
-    // res.status(400).render('users/account', {
-    //   userInfo: 'fail',
-    //   status: 'HTTP 400',
-    //   error: e
-    // })
     res.status(400).send({error:e})
   }
 });

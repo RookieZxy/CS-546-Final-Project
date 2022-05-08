@@ -38,8 +38,7 @@
         return check;
     }
 
-    function checkName(p, firstName, lastName) {
-        var password = p.trim();
+    function checkName( firstName, lastName) {
         var firstName = firstName.trim();
         var lastName = lastName.trim();
         var check = true;
@@ -49,25 +48,14 @@
         } else if (firstName.length == 0 || lastName.length == 0) {
             alert(`firstName and lastName should not be empty spaces`);
             check = false;
-        } else if (typeof password !== 'string') {
-            alert(`${password} is not a string`)
-            check = false;
-        } else if (password.indexOf(" ") != -1) {
-            alert('password should not have spaces')
-            check = false;
-        } else if (password.length < 6) {
-            alert('password should not be empty spaces and should be at least 6 characters')
-            check = false;
-        } else if (password.length > 16) {
-            alert('The length of password should not be more than 16');
-            check = false;
-        }
+        } 
         return check;
     }
     $('#changeInfo').hide();
     $('#pre').hide();
     $('#new').hide();
     $('#confirm2').hide();
+    $('#p').hide();
     // $('#confirm').hide();
     $('#changePassword').click(function () {
         // alert('sdf');
@@ -75,7 +63,6 @@
         $('#changePassword').hide();
         $('#first').hide();
         $('#last').hide();
-        $('#p').hide();
         $('#pre').show();
         $('#new').show();
         $('#confirm2').show();
@@ -85,7 +72,6 @@
         $('#changePassword').show();
         $('#first').show();
         $('#last').show();
-        $('#p').show();
         $('#pre').hide();
         $('#new').hide();
         $('#changeInfo').hide();
@@ -96,13 +82,13 @@
         event.preventDefault();
         if ($('#prePassword').val().length == 0 && $('#newPassword').val().length == 0) {
             // console.log($("#password").val(), $("#firstName").val(), $("#lastName").val())
-            var check = checkName($("#password").val(), $("#firstName").val(), $("#lastName").val());
+            var check = checkName($("#firstName").val(), $("#lastName").val());
             if (check) {
                 $.ajax({
                     method: "POST",
                     url: `/users`,
                     data: {
-                        password: $("#password").val(),
+                        // password: $("#password").val(),
                         firstName: $("#firstName").val(),
                         lastName: $("#lastName").val(),
                     }
