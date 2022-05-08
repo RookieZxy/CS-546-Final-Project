@@ -11,12 +11,12 @@
 	$.ajax(requestAdmin).then((object) => {
 		if (object.isAdmin == true) {
 			$("#userManage").show();
+			$("#invalidList").show();
 		}
 		if (object.username != null) {
 			$("#login").hide();
 			$("#signup").hide();
 			$("#addmovie").show();
-			$("#invalidList").show();
 		} else {
 			$("#logout").hide();
 		}
