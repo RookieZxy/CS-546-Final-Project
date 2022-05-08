@@ -37,6 +37,10 @@ function errorCheck(account, password, firstName, lastName) {
 //create a new account
 async function createUser(username, password, firstName, lastName) {
   errorCheck(username, password, firstName, lastName);
+
+
+  
+  // username = username.toLowerCase();
   let hasPwd = await bcryptjs.hash(password, 10);
   const userCollection = await users();
 
