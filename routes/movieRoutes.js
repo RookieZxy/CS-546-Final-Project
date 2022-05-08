@@ -19,7 +19,7 @@ router.get("/invalidList", async (req, res) => {
     res.status(500).send({ error: error });
   }
 
-  res.render("movie/invalidList", { movies: movies });
+  res.render("movie/invalidList", { title: "To Be Audited", movies: movies });
 });
 
 router.get("/addMovie", (req, res) => {
