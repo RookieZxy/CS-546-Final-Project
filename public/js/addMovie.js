@@ -16,7 +16,8 @@
 
     $.ajax({
       method: "get",
-      url: `http://localhost:3000/movie/imdb/${imdbId}`,
+      // url: `http://localhost:3000/movie/imdb/${imdbId}`,
+      url: `/movie/imdb/${imdbId}`,
     })
       .then((data) => {
         if (data.isExisted) {
@@ -105,7 +106,8 @@
     //ajax
     $.ajax({
       method: "post",
-      url: "http://localhost:3000/movie/addMovie",
+      // url: "http://localhost:3000/movie/addMovie",
+      url: "/movie/addMovie",
       data: movie,
     })
       .then((data) => {

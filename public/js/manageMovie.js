@@ -9,7 +9,8 @@
   //get movie info
   $.ajax({
     method: "get",
-    url: `http://localhost:3000/movie/approveInfo/${_id}`,
+    // url: `http://localhost:3000/movie/approveInfo/${_id}`,
+    url: `/movie/approveInfo/${_id}`,
   })
     .then((data) => {
       let movie = data.movie;
@@ -92,7 +93,8 @@
     //ajax
     $.ajax({
       method: "post",
-      url: "http://localhost:3000/movie/manage",
+      // url: "http://localhost:3000/movie/manage",
+      url: "/movie/manage",
       data: movie,
     })
       .then((data) => {
@@ -119,7 +121,8 @@
 
     $.ajax({
       method: "get",
-      url: `http://localhost:3000/movie/imdb/${imdbId}`,
+      // url: `http://localhost:3000/movie/imdb/${imdbId}`,
+      url: `/movie/imdb/${imdbId}`,
     })
       .then((data) => {
         if (data.isExisted) {
