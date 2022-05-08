@@ -1,39 +1,39 @@
 (function ($) {
-    var movieId = $('#movieId').val();
+  var movieId = $("#movieId").val();
 
-    $("#comment").hide();
-    $("#alert").hide();
-    console.log($("#comment").val())
-    if($("#comment").val() == 1){
-        alert($("#alert").val());
-    }else if($("#comment").val() == 3){
-        confirm('reply successfully');
-    }
+  $("#comment").hide();
+  $("#alert").hide();
+  console.log($("#comment").val());
+  if ($("#comment").val() == 1) {
+    alert($("#alert").val());
+  } else if ($("#comment").val() == 3) {
+    confirm("reply successfully");
+  }
 
-    if (movieId != undefined) {
-        var requestConfig = {
-            url: '/comment/search',
-            method: 'POST',
-            data: {
-                movieId: movieId
-            }
+  if (movieId != undefined) {
+    var requestConfig = {
+      url: "/comment/search",
+      method: "POST",
+      data: {
+        movieId: movieId,
+      },
+    };
+
+    $.ajax(requestConfig).then(function (responseMessage) {
+      var searchList = $(responseMessage);
+      // var num = '1';
+      // var id = $("#movieId").val();
+      var user = $("#userName1").val();
+
+      for (var i = 0; i < searchList.length; i++) {
+        var requestConfig2 = {
+          url: "/comment/searchSub",
+          method: "POST",
+          data: {
+            parentId: searchList[i]._id,
+          },
         };
-
-        $.ajax(requestConfig).then(function (responseMessage) {
-            var searchList = $(responseMessage);
-            // var num = '1';
-            // var id = $("#movieId").val();
-            var user = $("#userName1").val();
-
-            for (var i = 0; i < searchList.length; i++) {
-                var requestConfig2 = {
-                    url: '/comment/searchSub',
-                    method: 'POST',
-                    data: {
-                        parentId: searchList[i]._id
-                    }
-                };
-                var li = `<li class="d-flex flex-start mt-3">
+        var li = `<li class="d-flex flex-start mt-3">
                     <img class="rounded-circle shadow-1-strong me-3"
                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
                          width="65"
@@ -57,16 +57,15 @@
                                 <textarea class="form-control w-75" id="replyMessage" name="replyMessage" placeholder="Reply to this comment"></textarea>
                             </form>
                             <ul id = ${searchList[i]._id}></ul>
-                        </div></div></li>`
+                        </div></div></li>`;
 
-                $('#commentList').append(li);
+        $("#commentList").append(li);
 
-
-                $.ajax(requestConfig2).then(function (responseMessage) {
-                    var replyList = $(responseMessage);
-                    // console.log(replyListName);
-                    for (var i = 0; i < replyList.length; i++) {
-                        var li1 = `<li class="d-flex flex-start mt-3">
+        $.ajax(requestConfig2).then(function (responseMessage) {
+          var replyList = $(responseMessage);
+          // console.log(replyListName);
+          for (var i = 0; i < replyList.length; i++) {
+            var li1 = `<li class="d-flex flex-start mt-3">
                                     <img class="rounded-circle shadow-1-strong"
                                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
                                          alt="avatar"
@@ -83,88 +82,87 @@
                                             </p>
                                         </div>
                                     </div>
-                                </li>`
+                                </li>`;
 
-                        $(`#${replyList[i].parentId}`).append(li1);
-                        // $(`#${replyList[i].parentId}`).append(li2);
-                    }
-                    // $(`#replyList`).show();
-                })
-                // num += 1;
-            }
-            $('#commentList').show();
+            $(`#${replyList[i].parentId}`).append(li1);
+            // $(`#${replyList[i].parentId}`).append(li2);
+          }
+          // $(`#replyList`).show();
         });
-    }
+        // num += 1;
+      }
+      $("#commentList").show();
+    });
+  }
 
-    // $('#replyComment').submit((event) => {
-    //     event.preventDefault();
-    //     console.log(11)
-    //     if($('#replyMessage').val().length != 0){
-    //         var id = $("#movieId").val();
-    //         $.ajax({
-    //             method: "POST",
-    //             url: `http://localhost:3000/movie/comment/reply`,
-    //             data: {
-    //                 userName: $("#userName").val(),
-    //                 parentId: $("#parentId").val(),
-    //                 movieId: id,
-    //                 replyMessage: $("#replyMessage").val(),
-    //             }
-    //         }).then((data) => {
-    //             window.location.replace(`/movie/${id}`);
-    //             confirm("Reply successfully");
-    //         }).fail((error) => {
-    //             console.log(error);
-    //             alert(error.responseJSON.error);
-    //         });
-    //     }else {
-    //         alert('Please input message');
-    //     }
+  // $('#replyComment').submit((event) => {
+  //     event.preventDefault();
+  //     console.log(11)
+  //     if($('#replyMessage').val().length != 0){
+  //         var id = $("#movieId").val();
+  //         $.ajax({
+  //             method: "POST",
+  //             url: `http://localhost:3000/movie/comment/reply`,
+  //             data: {
+  //                 userName: $("#userName").val(),
+  //                 parentId: $("#parentId").val(),
+  //                 movieId: id,
+  //                 replyMessage: $("#replyMessage").val(),
+  //             }
+  //         }).then((data) => {
+  //             window.location.replace(`/movie/${id}`);
+  //             confirm("Reply successfully");
+  //         }).fail((error) => {
+  //             console.log(error);
+  //             alert(error.responseJSON.error);
+  //         });
+  //     }else {
+  //         alert('Please input message');
+  //     }
 
-    // });
+  // });
 
+  $("#addComment").submit((event) => {
+    event.preventDefault();
+    // console.log($("#input-7-sm").val());
+    if ($(`#content`).val().length != 0) {
+      var id = $("#movieId").val();
+      $.ajax({
+        method: "POST",
+        url: `/movie/comment`,
+        data: {
+          userName: $("#userName1").val(),
+          movieId: id,
+          content: $("#content").val(),
+          rate: $("#input-7-sm").val(),
+        },
+      })
+        .then((data) => {
+          $("#commentList").empty();
+          if (movieId != undefined) {
+            var requestConfig = {
+              url: "/comment/search",
+              method: "POST",
+              data: {
+                movieId: movieId,
+              },
+            };
 
+            $.ajax(requestConfig).then(function (responseMessage) {
+              var searchList = $(responseMessage);
+              // var num = '1';
+              // var id = $("#movieId").val();
+              var user = $("#userName1").val();
 
-    $('#addComment').submit((event) => {
-        event.preventDefault();
-        // console.log($("#input-7-sm").val());
-        if ($(`#content`).val().length != 0) {
-            var id = $("#movieId").val();
-            $.ajax({
-                method: "POST",
-                url: `/movie/comment`,
-                data: {
-                    userName: $("#userName1").val(),
-                    movieId: id,
-                    content: $("#content").val(),
-                    rate: $("#input-7-sm").val()
-                }
-            }).then((data) => {
-                $('#commentList').empty();
-                if (movieId != undefined) {
-                    var requestConfig = {
-                        url: '/comment/search',
-                        method: 'POST',
-                        data: {
-                            movieId: movieId
-                        }
-                    };
-            
-                    $.ajax(requestConfig).then(function (responseMessage) {
-                        var searchList = $(responseMessage);
-                        // var num = '1';
-                        // var id = $("#movieId").val();
-                        var user = $("#userName1").val();
-            
-                        for (var i = 0; i < searchList.length; i++) {
-                            var requestConfig2 = {
-                                url: '/comment/searchSub',
-                                method: 'POST',
-                                data: {
-                                    parentId: searchList[i]._id
-                                }
-                            };
-                            var li = `<li class="d-flex flex-start mt-3">
+              for (var i = 0; i < searchList.length; i++) {
+                var requestConfig2 = {
+                  url: "/comment/searchSub",
+                  method: "POST",
+                  data: {
+                    parentId: searchList[i]._id,
+                  },
+                };
+                var li = `<li class="d-flex flex-start mt-3">
                                 <img class="rounded-circle shadow-1-strong me-3"
                                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
                                      width="65"
@@ -188,16 +186,15 @@
                                             <textarea class="form-control w-75" id="replyMessage" name="replyMessage" placeholder="Reply to this comment"></textarea>
                                         </form>
                                         <ul id = ${searchList[i]._id}></ul>
-                                    </div></div></li>`
-            
-                            $('#commentList').append(li);
-            
-            
-                            $.ajax(requestConfig2).then(function (responseMessage) {
-                                var replyList = $(responseMessage);
-                                // console.log(replyListName);
-                                for (var i = 0; i < replyList.length; i++) {
-                                    var li1 = `<li class="d-flex flex-start mt-3">
+                                    </div></div></li>`;
+
+                $("#commentList").append(li);
+
+                $.ajax(requestConfig2).then(function (responseMessage) {
+                  var replyList = $(responseMessage);
+                  // console.log(replyListName);
+                  for (var i = 0; i < replyList.length; i++) {
+                    var li1 = `<li class="d-flex flex-start mt-3">
                                                 <img class="rounded-circle shadow-1-strong"
                                                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp"
                                                      alt="avatar"
@@ -214,29 +211,26 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                            </li>`
-            
-                                    $(`#${replyList[i].parentId}`).append(li1);
-                                    // $(`#${replyList[i].parentId}`).append(li2);
-                                }
-                                // $(`#replyList`).show();
-                            })
-                            // num += 1;
-                        }
-                        $('#commentList').show();
-                    });
-                }
-                confirm("Comment successfully");
-            }).fail((error) => {
-                console.log(error);
-                alert(error.responseJSON.error);
+                                            </li>`;
+
+                    $(`#${replyList[i].parentId}`).append(li1);
+                    // $(`#${replyList[i].parentId}`).append(li2);
+                  }
+                  // $(`#replyList`).show();
+                });
+                // num += 1;
+              }
+              $("#commentList").show();
             });
-        } else {
-            alert('Please input content');
-        }
-
-    })
-
-
-
+          }
+          confirm("Comment successfully");
+        })
+        .fail((error) => {
+          console.log(error);
+          alert(error.responseJSON.error);
+        });
+    } else {
+      alert("Please input content");
+    }
+  });
 })(window.jQuery);

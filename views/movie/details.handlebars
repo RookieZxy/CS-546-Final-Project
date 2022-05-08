@@ -5,6 +5,7 @@
                 <div class="my-1 text-center text-xl-start">
                     <h1 class="fw-bolder text-white mb-2">{{movie.name}}</h1>
                     <label for="rate"></label>
+                    <input id="move_name" value="{{movie.name}}" hidden>
                     <input id="rate" class="rating rating-loading" value="{{movie.rating}}" data-min="0" data-max="10"
                            data-step="1" data-size="sm" data-readonly="true" data-show-clear="false">
                     {{!--<p>{{movie.rate}}</p>
