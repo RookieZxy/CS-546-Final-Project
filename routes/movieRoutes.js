@@ -251,11 +251,6 @@ router.post("/search", async (req, res) => {
     console.log(e);
 
     res.status(400).send({ error: e });
-    // res.status(400).render("home/home", {
-    //   login_flag: "movieSearch",
-    //   status: "HTTP 400",
-    //   error: e,
-    // });
   }
 });
 
@@ -318,6 +313,27 @@ router.post("/comment", async (req, res) => {
     res.status(400).send({
       error: e,
     });
+  }
+});
+
+
+//search movie
+router.post("/rating", async (req, res) => {
+  try {
+    const movieSearch = req.body.move_name;
+    if (!movieSearch) {
+      throw `movie does not exist!`;
+    }
+    const movie = await movieData.getByName(movieSearch);
+    if (movie[0] == undefined) {
+      throw `can not find error`
+    }
+    res.status(200).send({
+      rating: movie[0].rating
+    });
+  } catch (e) {
+    console.log(e);
+    res.status(400).send({ error: e });
   }
 });
 

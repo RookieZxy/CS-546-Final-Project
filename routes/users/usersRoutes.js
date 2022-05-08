@@ -42,6 +42,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/password", async (req, res) => {
+  if (req.session.user == undefined)
+    throw `Please login first`;
   let updatedData = await usersData.get(req.session.user.account);
   updatedData = updatedData[0];
   try {
@@ -79,6 +81,8 @@ router.post("/password", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  if (req.session.user == undefined)
+    throw `Please login first`;
   let updatedData = await usersData.get(req.session.user.account);
   updatedData = updatedData[0]
   try {
