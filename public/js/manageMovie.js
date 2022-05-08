@@ -4,35 +4,22 @@
   $("#posterImg").hide();
   $("#imagesDiv").hide();
   $("#success").hide();
+  let _id = $("#_id").html();
 
-  $("#getImdb").click((e) => {
-    e.preventDefault();
-    let imdbId = $("#imdbId").val();
-
-    if (!isValidString(imdbId)) {
-      alert("Invalid IMDB Id");
-      return;
-    }
-
-    $.ajax({
-      method: "get",
-      url: `http://localhost:3000/movie/imdb/${imdbId}`,
+  //get movie info
+  $.ajax({
+    method: "get",
+    url: `http://localhost:3000/movie/approveInfo/${_id}`,
+  })
+    .then((data) => {
+      let movie = data.movie;
+      autoFill(movie);
     })
-      .then((data) => {
-        if (data.isExisted) {
-          alert(`Movie with IMDB id '${imdbId}' is existed`);
-          window.location.replace(`/movie/${data.id}`);
-        } else {
-          $("#imdbId").attr("disabled", true);
-          $("#getImdb").attr("disabled", true);
-          autoFill(data);
-        }
-      })
-      .fail((error) => {
-        aalert(error.responseJSON.error);
-      });
-  });
+    .fail((error) => {
+      alert(error.responseJSON.error);
+    });
 
+  //submit change
   $("#myForm").submit(function (e) {
     e.preventDefault();
     // Get all the forms elements and their values in one step
@@ -105,20 +92,92 @@
     //ajax
     $.ajax({
       method: "post",
-      url: "http://localhost:3000/movie/addMovie",
+      url: "http://localhost:3000/movie/manage",
       data: movie,
     })
       .then((data) => {
-        $("#addDiv").hide();
-        $("#success").show();
+        alert("Success!");
+        // $("#addDiv").hide();
+        // $("#success").show();
         setTimeout(function () {
-          window.location.replace("/");
-        }, 5000);
+          window.location.replace(`/movie/${movie._id}`);
+        }, 1000);
       })
       .fail((error) => {
         alert(error.responseJSON.error);
       });
   });
+
+  $("#getImdb").click((e) => {
+    e.preventDefault();
+    let imdbId = $("#imdbId").val();
+
+    if (!isValidString(imdbId)) {
+      alert("Invalid IMDB Id");
+      return;
+    }
+
+    $.ajax({
+      method: "get",
+      url: `http://localhost:3000/movie/imdb/${imdbId}`,
+    })
+      .then((data) => {
+        if (data.isExisted) {
+          alert(`Movie with IMDB id '${imdbId}' is existed`);
+          window.location.replace(`/movie/${data.id}`);
+        } else {
+          $("#imdbId").attr("disabled", true);
+          $("#getImdb").attr("disabled", true);
+          autoFill(data);
+        }
+      })
+      .fail((error) => {
+        aalert(error.responseJSON.error);
+      });
+  });
+
+  function autoFill(movie) {
+    if (movie.imdbId) {
+      $("#imdbId").val(movie.imdbId);
+    }
+    $("#name").val(movie.name);
+    $("#countries").val(movie.countries);
+    $("#releaseDate").val(movie.releaseDate);
+    $("#runtime").val(movie.runtime);
+    $("#languages").val(movie.languages);
+    $("#casts").val(movie.casts);
+    $("#directors").val(movie.directors);
+    $("#writers").val(movie.writers);
+    $("#plot").val(movie.plot);
+    $("#trailerLink").val(movie.trailerLink);
+    $("#posterImg").attr("src", movie.poster);
+    $("#posterImg").show();
+
+    //type
+    for (let i = 0; i < movie.typeList.length; i++) {
+      const type = movie.typeList[i];
+      $(`#${type}CheckBox`).attr("checked", true);
+    }
+    //images
+    for (let i = 0; i < movie.images.length; i++) {
+      const image = movie.images[i];
+      $("#imagesDiv").append(
+        `<div class="col-sm-3" id="imagesDiv${i}">
+          <img src="${image.image}" id="img${i}" class="rounded-top" alt="Sample image" width="300" height="300">
+          <button class="w-100 btn btn-danger" id="delBtn${i}" onclick=>Delete</button>
+        </div>`
+      );
+      //add click event
+      const delBtns = $("#imagesDiv button");
+      for (let i = 0; i < delBtns.length; i++) {
+        const delBtn = delBtns[i];
+        $(delBtn).click(function () {
+          $(`#imagesDiv${i}`).remove();
+        });
+      }
+      $("#imagesDiv").show();
+    }
+  }
 
   $("#poster").change(function () {
     const poster = $("#poster").prop("files")[0];
@@ -200,45 +259,5 @@
     }
 
     return url.protocol === "http:" || url.protocol === "https:";
-  }
-
-  function autoFill(movie) {
-    $("#name").val(movie.name);
-    $("#countries").val(movie.countries);
-    $("#releaseDate").val(movie.releaseDate);
-    $("#runtime").val(movie.runtime);
-    $("#languages").val(movie.languages);
-    $("#casts").val(movie.casts);
-    $("#directors").val(movie.directors);
-    $("#writers").val(movie.writers);
-    $("#plot").val(movie.plot);
-    $("#trailerLink").val(movie.trailerLink);
-    $("#posterImg").attr("src", movie.poster);
-    $("#posterImg").show();
-
-    //type
-    for (let i = 0; i < movie.typeList.length; i++) {
-      const type = movie.typeList[i];
-      $(`#${type}CheckBox`).attr("checked", true);
-    }
-    //images
-    for (let i = 0; i < movie.images.length; i++) {
-      const image = movie.images[i];
-      $("#imagesDiv").append(
-        `<div class="col-sm-3" id="imagesDiv${i}">
-          <img src="${image.image}" id="img${i}" class="rounded-top" alt="Sample image" width="300" height="300">
-          <button class="w-100 btn btn-danger" id="delBtn${i}" onclick=>Delete</button>
-        </div>`
-      );
-      //add click event
-      const delBtns = $("#imagesDiv button");
-      for (let i = 0; i < delBtns.length; i++) {
-        const delBtn = delBtns[i];
-        $(delBtn).click(function () {
-          $(`#imagesDiv${i}`).remove();
-        });
-      }
-      $("#imagesDiv").show();
-    }
   }
 })(jQuery);

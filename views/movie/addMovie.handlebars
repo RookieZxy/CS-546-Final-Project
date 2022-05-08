@@ -1,10 +1,15 @@
 <div class="container px-5 my-5">
     <div class="row gx-5" id="addDiv">
-        <h1 class="mb-3">Add New Movie</h1>
+        {{# if _id}}
+            <h1 class="mb-3">Manage Movie</h1>
+        {{else}}
+            <h1 class="mb-3">Add New Movie</h1>
+        {{/if}}
+        
         <form class="needs-validation" id="myForm" >
             <div class="row g-3">
                 {{#if _id}}
-                    <p id="_id">{{_id}}</p>
+                    <p id="_id" hidden>{{_id}}</p>
                 {{/if}}
                 <div class="col-sm-6">
                     <label style="color: black" for="imdbId" class="form-label">IMDB Id</label>
@@ -89,63 +94,63 @@
                     <label style="color: black" class="form-label" for="typeTheck">Type</label>
                     <div id="typeTheck">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Comedy" value="Comedy"></input>
+                            <input class="form-check-input" type="checkbox" id="ComedyCheckBox" value="Comedy"></input>
                             <label class="form-check-label" for="Comedy"><span class="badge bg-success">Comedy</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Sci-Fi" value="Sci-Fi"></input>
+                            <input class="form-check-input" type="checkbox" id="Sci-FiCheckBox" value="Sci-Fi"></input>
                             <label class="form-check-label" for="Sci-Fi"><span class="badge bg-success">Sci-Fi</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Horror" value="Horror"></input>
+                            <input class="form-check-input" type="checkbox" id="HorrorCheckBox" value="Horror"></input>
                             <label class="form-check-label" for="Horror"><span class="badge bg-success">Horror</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Romance" value="Romance"></input>
+                            <input class="form-check-input" type="checkbox" id="RomanceCheckBox" value="Romance"></input>
                             <label class="form-check-label" for="Romance"><span class="badge bg-success">Romance</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Action" value="Action"></input>
+                            <input class="form-check-input" type="checkbox" id="ActionCheckBox" value="Action"></input>
                             <label class="form-check-label" for="Action"><span class="badge bg-success">Action</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Thriller" value="Thriller"></input>
+                            <input class="form-check-input" type="checkbox" id="ThrillerCheckBox" value="Thriller"></input>
                             <label class="form-check-label" for="Thriller"><span class="badge bg-success">Thriller</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Drama" value="Drama"></input>
+                            <input class="form-check-input" type="checkbox" id="DramaCheckBox" value="Drama"></input>
                             <label class="form-check-label" for="Drama"><span class="badge bg-success">Drama</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Mystery" value="Mystery"></input>
+                            <input class="form-check-input" type="checkbox" id="MysteryCheckBox" value="Mystery"></input>
                             <label class="form-check-label" for="Mystery"><span class="badge bg-success">Mystery</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Crime" value="Crime"></input>
+                            <input class="form-check-input" type="checkbox" id="CrimeCheckBox" value="Crime"></input>
                             <label class="form-check-label" for="Crime"><span class="badge bg-success">Crime</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Animation" value="Animation"></input>
+                            <input class="form-check-input" type="checkbox" id="AnimationCheckBox" value="Animation"></input>
                             <label class="form-check-label" for="Animation"><span class="badge bg-success">Animation</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox11" value="Adventure"></input>
+                            <input class="form-check-input" type="checkbox" id="AdventureCheckBox" value="Adventure"></input>
                             <label class="form-check-label" for="inlineCheckbox11"><span class="badge bg-success">Adventure</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Fantasy" value="Fantasy"></input>
+                            <input class="form-check-input" type="checkbox" id="FantasyCheckBox" value="Fantasy"></input>
                             <label class="form-check-label" for="Fantasy"><span class="badge bg-success">Fantasy</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Comedy-Romance" value="Comedy-Romance"></input>
+                            <input class="form-check-input" type="checkbox" id="Comedy-RomanceCheckBox" value="Comedy-Romance"></input>
                             <label class="form-check-label" for="Comedy-Romance"><span class="badge bg-success">Comedy-Romance</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Action-Comedy" value="Action-Comedy"></input>
+                            <input class="form-check-input" type="checkbox" id="Action-ComedyCheckBox" value="Action-Comedy"></input>
                             <label class="form-check-label" for="Action-Comedy"><span class="badge bg-success">Action-Comedy</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Superhero" value="Superhero"></input>
+                            <input class="form-check-input" type="checkbox" id="SuperheroCheckBox" value="Superhero"></input>
                             <label class="form-check-label" for="Superhero"><span class="badge bg-success">Superhero</span></label>
                         </div>
                     </div>

@@ -6,6 +6,22 @@ const util = require("../data/utils/util");
 const movieData = require("../data/movie/movie");
 const commentData = require("../data/movie/comment");
 
+router.get("/invalidList", async (req, res) => {
+  if (!req.session.user || !req.session.user.isAdmin) {
+    res.redirect("/");
+    return;
+  }
+
+  let movies = [];
+  try {
+    movies = await movieData.getInvalid();
+  } catch (error) {
+    res.status(500).send({ error: error });
+  }
+
+  res.render("movie/invalidList", { movies: movies });
+});
+
 router.get("/addMovie", (req, res) => {
   //is Login
   // console.log(req.session.user)
@@ -15,22 +31,95 @@ router.get("/addMovie", (req, res) => {
     res.render("movie/addMovie", {
       title: "Add Movie",
       partial: "addMovie-scripts",
+      JS: "addMovie",
     });
   }
 });
 
-router.get("/approve/:id", (req, res) => {
-  //is admin
-  if (!req.session.user.isAdmin) {
-    res.redirect("/");
-  }
+router.get("/approve/", (req, res) => {
+  res.status(400).send({ error: "Invalid id" });
+});
 
+router.get("/approve/:id", async (req, res) => {
+  //is admin
+  if (!req.session.user || !req.session.user.isAdmin) {
+    res.redirect("/");
+    return;
+  }
   let id = req.params.id;
+  try {
+    id = util.isValidString(id);
+  } catch (error) {
+    res.status(400).send({ error: "Invalid _id" });
+    return;
+  }
   res.render("movie/addMovie", {
-    title: "Add Movie",
+    title: "Manage Movie",
     _id: id,
-    partial: "addMovie-scripts",
+    JS: "manageMovie",
   });
+});
+
+router.get("/approveInfo/", (req, res) => {
+  res.status(400).send({ error: "Invalid id" });
+});
+
+router.get("/approveInfo/:id", async (req, res) => {
+  //is admin
+  if (!req.session.user || !req.session.user.isAdmin) {
+    res.redirect("/");
+    return;
+  }
+  let id = req.params.id;
+  try {
+    id = util.isValidString(id);
+  } catch (error) {
+    res.status(400).send({ error: "Invalid _id" });
+    return;
+  }
+  movie = await movieData.getById(id);
+  // try {
+  //   movie = await movieData.getById(id);
+  // } catch (error) {
+  //   res.status(500).send({ error: error });
+  //   return;
+  // }
+
+  res.send({ movie: movie });
+});
+
+router.post("/manage", async (req, res) => {
+  //is Login is admin
+  if (!req.session.user || !req.session.user.isAdmin) {
+    res.status(401).send({
+      error: "Unauthorized. Please Login",
+    });
+    return;
+  }
+  const movie = req.body;
+  movie.isValid = true;
+
+  try {
+    if (!movie._id) {
+      throw "No movie _id";
+    }
+    util.isValidMovie(movie);
+  } catch (error) {
+    res.status(400).send({
+      error: error,
+    });
+    return;
+  }
+  try {
+    await movieData.modify(movie);
+    res.send({
+      isSuccess: true,
+    });
+  } catch (error) {
+    res.status(500).send({
+      error: error,
+    });
+  }
 });
 router.post("/addMovie", async (req, res) => {
   //is Login
