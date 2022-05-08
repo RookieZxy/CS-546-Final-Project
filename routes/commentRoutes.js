@@ -36,7 +36,7 @@ router.post("/searchSub", async (req, res) => {
             throw `parentId does not exist!`
         }
         const comments = await commentData.getById(parentId);
-        console.log(comments);
+        // console.log(comments);
         res.send(comments);
     } catch (e) {
         console.log(e);
@@ -68,8 +68,6 @@ router.post("/reply", async (req, res) => {
         const rate = -1;
 
         const movie = await movieData.getById(movieId);
-        // console.log(rate);
-
         const comment = await commentData.createReply(replyMessage, userName, movieId, date, rate, parentId);
         if (comment.commentInserted == true) {
             // res.render(`movie/details`, {

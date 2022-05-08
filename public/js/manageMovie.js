@@ -89,7 +89,7 @@
     }
     movie.images = images;
 
-    console.log(movie);
+    // console.log(movie);
     //ajax
     $.ajax({
       method: "post",
