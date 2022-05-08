@@ -9,12 +9,12 @@
         <form class="needs-validation" id="myForm" >
             <div class="row g-3">
                 {{#if _id}}
-                    <p id="_id" hidden>{{_id}}</p>
+                    <p id="_id" style="display:none">{{_id}}</p>
                 {{/if}}
                 <div class="col-sm-6">
                     <label style="color: black" for="imdbId" class="form-label">IMDB Id</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="imdbId" name="imdbId" placeholder="Input the IMDB id of movie"></input>
+                        <input type="text" class="form-control" id="imdbId" name="imdbId" placeholder="Input the IMDB id of movie"/>
                         <button type="button" class="btn btn-warning" id="getImdb" data-bs-toggle="tooltip" data-bs-placement="top" title="Click to auto fill the form with movie info from IMDB">Get Info</button>
                     </div>
                 </div>
@@ -22,14 +22,14 @@
 
                 <div class="col-sm-6">
                     <label style="color: black" for="name" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Input the name of movie" value="" required></input>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Input the name of movie" value="" required/>
                     <div class="invalid-feedback">
                         Movie Title is required.
                     </div>
                 </div>
                 <div class="col-md-6">
                     <label style="color: black" for="countries" class="form-label">Countries</label>
-                    <input type="text" class="form-control" id="countries" name="countries" placeholder="USA/UK/France" value="" required></input>
+                    <input type="text" class="form-control" id="countries" name="countries" placeholder="USA/UK/France" value="" required/>
                     <div class="invalid-feedback">
                         Countries is required.
                     </div>
@@ -37,7 +37,7 @@
 
                 <div class="col-sm-6">
                     <label style="color: black" for="releaseDate" class="form-label">Release Date</label>
-                    <input type="text" class="form-control" id="releaseDate" name="releaseDate" placeholder="YYYY-MM-DD" value="" required></input>
+                    <input type="text" class="form-control" id="releaseDate" name="releaseDate" placeholder="YYYY-MM-DD" value="" required/>
                     <div class="invalid-feedback">
                         Invalid release date.
                     </div>
@@ -45,7 +45,7 @@
                 <div class="col-sm-6">
                     <label style="color: black" for="runtime" class="form-label">Runtime</label>
                     <div class="input-group">
-                        <input type="number" class="form-control" min="0" max="500" id="runtime" name="runtime" placeholder="60" value="" required></input>
+                        <input type="number" class="form-control" min="0" max="500" id="runtime" name="runtime" placeholder="60" value="" required/>
                         <span class="input-group-text">minutes</span>
                     </div>
                     <div class="invalid-feedback">
@@ -55,14 +55,14 @@
 
                 <div class="col-md-6">
                     <label style="color: black" for="languages" class="form-label">Languages</label>
-                    <input type="text" class="form-control" id="languages" name="languages" placeholder="English/Italian/French" value="" required></input>
+                    <input type="text" class="form-control" id="languages" name="languages" placeholder="English/Italian/French" value="" required/>
                     <div class="invalid-feedback">
                         Languages is required.
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label style="color: black" for="casts" class="form-label">Stars</label>
-                    <input type="text" class="form-control" id="casts" name="casts" placeholder="Name of stars" required></input>
+                    <input type="text" class="form-control" id="casts" name="casts" placeholder="Name of stars" required/>
                     <div class="invalid-feedback">
                         Stars release date.
                     </div>
@@ -70,14 +70,14 @@
 
                 <div class="col-md-6">
                     <label style="color: black" for="directors" class="form-label">Directors</label>
-                    <input type="text" class="form-control" id="directors" name="directors" placeholder="Name of directors" value="" required></input>
+                    <input type="text" class="form-control" id="directors" name="directors" placeholder="Name of directors" value="" required/>
                     <div class="invalid-feedback">
                         Directors is required.
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label style="color: black" for="writers" class="form-label">Writers</label>
-                    <input type="text" class="form-control" id="writers" name="writers" placeholder="Name of writers" required></input>
+                    <input type="text" class="form-control" id="writers" name="writers" placeholder="Name of writers" required/>
                     <div class="invalid-feedback">
                         Writers is required.
                     </div>
@@ -91,67 +91,67 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label style="color: black" class="form-label" for="typeTheck">Type</label>
+                    <label style="color: black" class="form-label">Type</label>
                     <div id="typeTheck">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="ComedyCheckBox" value="Comedy"></input>
-                            <label class="form-check-label" for="Comedy"><span class="badge bg-success">Comedy</span></label>
+                            <label class="form-check-label" for="ComedyCheckBox"><span class="badge bg-success">Comedy</span></label>
+                            <input class="form-check-input" type="checkbox" id="ComedyCheckBox" value="Comedy"/>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Sci-FiCheckBox" value="Sci-Fi"></input>
-                            <label class="form-check-label" for="Sci-Fi"><span class="badge bg-success">Sci-Fi</span></label>
+                            <input class="form-check-input" type="checkbox" id="Sci-FiCheckBox" value="Sci-Fi"/>
+                            <label class="form-check-label" for="Sci-FiCheckBox"><span class="badge bg-success">Sci-Fi</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="HorrorCheckBox" value="Horror"></input>
-                            <label class="form-check-label" for="Horror"><span class="badge bg-success">Horror</span></label>
+                            <input class="form-check-input" type="checkbox" id="HorrorCheckBox" value="Horror"/>
+                            <label class="form-check-label" for="HorrorCheckBox"><span class="badge bg-success">Horror</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="RomanceCheckBox" value="Romance"></input>
-                            <label class="form-check-label" for="Romance"><span class="badge bg-success">Romance</span></label>
+                            <input class="form-check-input" type="checkbox" id="RomanceCheckBox" value="Romance"/>
+                            <label class="form-check-label" for="RomanceCheckBox"><span class="badge bg-success">Romance</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="ActionCheckBox" value="Action"></input>
-                            <label class="form-check-label" for="Action"><span class="badge bg-success">Action</span></label>
+                            <input class="form-check-input" type="checkbox" id="ActionCheckBox" value="Action"/>
+                            <label class="form-check-label" for="ActionCheckBox"><span class="badge bg-success">Action</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="ThrillerCheckBox" value="Thriller"></input>
-                            <label class="form-check-label" for="Thriller"><span class="badge bg-success">Thriller</span></label>
+                            <input class="form-check-input" type="checkbox" id="ThrillerCheckBox" value="Thriller"/>
+                            <label class="form-check-label" for="ThrillerCheckBox"><span class="badge bg-success">Thriller</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="DramaCheckBox" value="Drama"></input>
-                            <label class="form-check-label" for="Drama"><span class="badge bg-success">Drama</span></label>
+                            <input class="form-check-input" type="checkbox" id="DramaCheckBox" value="Drama"/>
+                            <label class="form-check-label" for="DramaCheckBox"><span class="badge bg-success">Drama</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="MysteryCheckBox" value="Mystery"></input>
-                            <label class="form-check-label" for="Mystery"><span class="badge bg-success">Mystery</span></label>
+                            <input class="form-check-input" type="checkbox" id="MysteryCheckBox" value="Mystery"/>
+                            <label class="form-check-label" for="MysteryCheckBox"><span class="badge bg-success">Mystery</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="CrimeCheckBox" value="Crime"></input>
-                            <label class="form-check-label" for="Crime"><span class="badge bg-success">Crime</span></label>
+                            <input class="form-check-input" type="checkbox" id="CrimeCheckBox" value="Crime"/>
+                            <label class="form-check-label" for="CrimeCheckBox"><span class="badge bg-success">Crime</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="AnimationCheckBox" value="Animation"></input>
-                            <label class="form-check-label" for="Animation"><span class="badge bg-success">Animation</span></label>
+                            <input class="form-check-input" type="checkbox" id="AnimationCheckBox" value="Animation"/>
+                            <label class="form-check-label" for="AnimationCheckBox"><span class="badge bg-success">Animation</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="AdventureCheckBox" value="Adventure"></input>
-                            <label class="form-check-label" for="inlineCheckbox11"><span class="badge bg-success">Adventure</span></label>
+                            <input class="form-check-input" type="checkbox" id="AdventureCheckBox" value="Adventure"/>
+                            <label class="form-check-label" for="AdventureCheckBox"><span class="badge bg-success">Adventure</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="FantasyCheckBox" value="Fantasy"></input>
-                            <label class="form-check-label" for="Fantasy"><span class="badge bg-success">Fantasy</span></label>
+                            <input class="form-check-input" type="checkbox" id="FantasyCheckBox" value="Fantasy"/>
+                            <label class="form-check-label" for="FantasyCheckBox"><span class="badge bg-success">Fantasy</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Comedy-RomanceCheckBox" value="Comedy-Romance"></input>
-                            <label class="form-check-label" for="Comedy-Romance"><span class="badge bg-success">Comedy-Romance</span></label>
+                            <input class="form-check-input" type="checkbox" id="Comedy-RomanceCheckBox" value="Comedy-Romance"/>
+                            <label class="form-check-label" for="Comedy-RomanceCheckBox"><span class="badge bg-success">Comedy-Romance</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="Action-ComedyCheckBox" value="Action-Comedy"></input>
-                            <label class="form-check-label" for="Action-Comedy"><span class="badge bg-success">Action-Comedy</span></label>
+                            <input class="form-check-input" type="checkbox" id="Action-ComedyCheckBox" value="Action-Comedy"/>
+                            <label class="form-check-label" for="Action-ComedyCheckBox"><span class="badge bg-success">Action-Comedy</span></label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="SuperheroCheckBox" value="Superhero"></input>
-                            <label class="form-check-label" for="Superhero"><span class="badge bg-success">Superhero</span></label>
+                            <input class="form-check-input" type="checkbox" id="SuperheroCheckBox" value="Superhero"/>
+                            <label class="form-check-label" for="SuperheroCheckBox"><span class="badge bg-success">Superhero</span></label>
                         </div>
                     </div>
 
@@ -162,13 +162,13 @@
 
                 <div class="col-sm-6">
                     <label style="color: black" for="trailerLink" class="form-label">Trailer Link</label>
-                    <input type="text" class="form-control" id="trailerLink" name="trailerLink" placeholder="https://www.imdb.com/video/imdb/vi3877612057/imdb/embed" required></input>
+                    <input type="text" class="form-control" id="trailerLink" name="trailerLink" placeholder="https://www.imdb.com/video/imdb/vi3877612057/imdb/embed" required/>
                 </div>
                 <div class="col-sm-6"></div>
 
                 <div class="col-sm-6">
                     <label style="color: black" for="poster" class="form-label">Poster</label>
-                    <input class="form-control" type="file" id="poster" name="poster"></input>
+                    <input class="form-control" type="file" id="poster" name="poster"/>
                     <div class="invalid-feedback">
                         Poster is required.
                     </div>
@@ -180,7 +180,7 @@
                 </div>
                 <div class="col-sm-6">
                     <label style="color: black" for="images" class="form-label">Images</label>
-                    <input class="form-control" type="file" id="images" name="images" multiple></input>
+                    <input class="form-control" type="file" id="images" name="images" multiple/>
                 </div>
                 <div class="col-sm-6"></div>
                 <div class="col-sm-12" >
