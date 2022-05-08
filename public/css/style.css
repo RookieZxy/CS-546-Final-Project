@@ -269,7 +269,7 @@ h1, h2, h3, h4, h5,
 .btn.btn-primary {
     background: #ff9900 !important;
     border: 1px solid #ff9900 !important;
-    color: #fff !important;
+    color: #000000 !important;
 }
 
 .btn.btn-primary:hover {
