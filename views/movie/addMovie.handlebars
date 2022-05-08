@@ -168,7 +168,7 @@
 
                 <div class="col-sm-6">
                     <label style="color: black" for="poster" class="form-label">Poster</label>
-                    <input class="form-control" type="file" id="poster" name="poster"/>
+                    <input class="form-control" type="file" accept="image/*" id="poster" name="poster"/>
                     <div class="invalid-feedback">
                         Poster is required.
                     </div>
@@ -176,11 +176,11 @@
                 <div class="col-sm-6"></div>
                 <div class="col-sm-12">
                     {{!-- poster img --}}
-                    <img src="../../public/images/missing.png" id="posterImg"  class="rounded-top" alt="poster image" width="400" height="400" >
+                    <img src="/public/images/missing.png" id="posterImg" class="rounded-top" alt="poster image" width="400" height="400" >
                 </div>
                 <div class="col-sm-6">
                     <label style="color: black" for="images" class="form-label">Images</label>
-                    <input class="form-control" type="file" id="images" name="images" multiple/>
+                    <input class="form-control" type="file" id="images" name="images" accept="image/*" multiple/>
                 </div>
                 <div class="col-sm-6"></div>
                 <div class="col-sm-12" >
@@ -192,7 +192,7 @@
             <hr class="my-4">
 
             {{#unless _id}}
-            <button class="w-100 btn btn-primary btn-lg" type="submit" id="submitBtn">Subbmit</button>
+            <button class="w-100 btn btn-primary btn-lg" type="submit" id="submitBtn">Submit</button>
             {{/unless}}
             {{#if _id}}
             <button class="w-100 btn btn-success btn-lg" type="submit" id="approveBtn">Approve</button>
@@ -204,7 +204,7 @@
     <div class="px-3" id="success">
         {{!-- Movie uploaded! Adimn will post it after reviewing. --}}
         <h1>You just upload a new movie successfully!</h1>
-        <p class="lead">Our adimn will post it as soon as posible after their review.</p>
+        <p class="lead">Our administer will post it as soon as possible after their review.</p>
         <p>Back to home page in 5 seconds...</p>
     </div>
 </div>
