@@ -5,7 +5,7 @@
   $("#invalidList").hide();
   var requestAdmin = {
     method: "GET",
-    url: "http://localhost:3000/userInfo",
+    url: "/userInfo",
   };
 
   $.ajax(requestAdmin).then((object) => {
