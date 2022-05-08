@@ -20,9 +20,11 @@ Run 'npm run start' to run the application. Then navigate to http://localhost:30
 
 ## How the Application Works
 
-- Upon loading the website, the first page will be the home page.
-- A non-authenticated user will be able to view the list of movies, and the individual page of each movie. Only an authenticated user will be able to upload new movie, view or edit their profile, make comment and rate for movie.
-- In addition, an administrator will be able to manage users and review movies.
+Upon loading the website, the first page will be the home page.
+
+A non-authenticated user will be able to view the list of movies, and the individual page of each movie. Only an authenticated user will be able to upload new movie, view or edit their profile, make comment and rate for movie.
+
+In addition, an administrator will be able to manage users and review movies.
 
 ## Additional Extra Features
 
