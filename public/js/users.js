@@ -67,7 +67,7 @@
     $('#changeInfo').hide();
     $('#pre').hide();
     $('#new').hide();
-    $('#confirm').hide();
+    $('#confirm2').hide();
     // $('#confirm').hide();
     $('#changePassword').click(function () {
         // alert('sdf');
@@ -78,7 +78,7 @@
         $('#p').hide();
         $('#pre').show();
         $('#new').show();
-        $('#confirm').show();
+        $('#confirm2').show();
     });
 
     $('#changeInfo').click(function () {
@@ -89,7 +89,7 @@
         $('#pre').hide();
         $('#new').hide();
         $('#changeInfo').hide();
-        $('#confirm').hide();
+        $('#confirm2').hide();
     });
 
     $('#updateInfo').submit((event) => {
