@@ -84,6 +84,7 @@ router.post("/reply", async (req, res) => {
         console.log(e);
         const movie = await movieData.getById(req.body.movieId);
         if (req.session.user == undefined) {
+            res.redirect(`../movie/${movieId}`)
             res.status(400).render(`movie/details`, {
                 movie: movie,
                 CSS: "detail.css",
@@ -91,6 +92,7 @@ router.post("/reply", async (req, res) => {
                 error: e,
             })
         } else
+            res.redirect(`../movie/${movieId}`)
             res.status(400).render(`movie/details`, {
                 movie: movie,
                 userName: req.session.user.account,
