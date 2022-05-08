@@ -1,9 +1,7 @@
 (function ($){
     $('#type-sort-select').change(function(){
-        //console.log("type ajax is working.")
         var sortBy = $('#type-sort-select').val();
         var type = $('#type-name').text();
-        //console.log(sortBy, type);
         var requestConfig = {
             url : `/types/${type}`,
             method : 'POST',
@@ -13,9 +11,7 @@
         };
 
         $.ajax(requestConfig).then(function(responseMessage){
-            //console.log($('#type-movies').attr('value'));
             $('#type-movies').empty();
-            
             $.each(responseMessage,function(){
                 $('#type-movies').append(`
                 <a href="/movie/${this._id}" id="type-single-movie">
@@ -35,12 +31,10 @@
         })
     })
 
-
-    $('#type-filter-rating li').click(function(event){
-        event.preventDefault();
-        var rating = $(this).attr('rating');
+    $(document).on('change', 'input[type=radio][name=ratingOptions]', function (){
+        var rating = $(this).val();
         $('.type-single-movie').each(function(index, element){
-            if ($(element).attr('rating') >= rating){
+            if ($(element).children('.type-single-movie-rating').text() >= rating){
                 $(element).show();
             }
             else{
@@ -49,11 +43,10 @@
         })
     })
 
-    $('#search-filter-rating li').click(function(event){
-        event.preventDefault();
-        var rating = $(this).attr('rating');
+    $(document).on('change', 'input[type=radio][name=search-ratingOptions]', function (){
+        var rating = $(this).val();
         $('.search-single-movie').each(function(index, element){
-            if ($(element).attr('rating') >= rating){
+            if ($(element).children('.search-single-movie-rating').text() >= rating){
                 $(element).show();
             }
             else{
@@ -62,12 +55,11 @@
         })
     })
 
-    $('#type-filter-runTime li').click(function(event){
-        event.preventDefault();
-        var choice = $(this).attr('runTime');
+    $(document).on('change', 'input[type=radio][name=runTimeOptions]', function (){
+        var choice = $(this).val();
         if (choice == "0"){
             $('.type-single-movie').each(function(index, element){
-                if ($(element).attr('runTime') >= 0){
+                if ($(element).children('.type-single-movie-runTime').text() >= 0){
                     $(element).show();
                 }
                 else{
@@ -76,7 +68,7 @@
             })
         }else if (choice == "1"){
             $('.type-single-movie').each(function(index, element){
-                if ($(element).attr('runTime') <= 90){
+                if ($(element).children('.type-single-movie-runTime').text() <= 90){
                     $(element).show();
                 }
                 else{
@@ -85,7 +77,7 @@
             })
         }else{
             $('.type-single-movie').each(function(index, element){
-                if ($(element).attr('runTime') >= 90){
+                if ($(element).children('.type-single-movie-runTime').text() >= 90){
                     $(element).show();
                 }
                 else{
@@ -95,12 +87,11 @@
         }
     })
 
-    $('#search-filter-runTime li').click(function(event){
-        event.preventDefault();
-        var choice = $(this).attr('runTime');
+    $(document).on('change', 'input[type=radio][name=search-runTimeOptions]', function (){
+        var choice = $(this).val();
         if (choice == "0"){
             $('.search-single-movie').each(function(index, element){
-                if ($(element).attr('runTime') >= 0){
+                if ($(element).children('.search-single-movie-runTime').text() >= 0){
                     $(element).show();
                 }
                 else{
@@ -109,7 +100,7 @@
             })
         }else if (choice == "1"){
             $('.search-single-movie').each(function(index, element){
-                if ($(element).attr('runTime') <= 90){
+                if ($(element).children('.search-single-movie-runTime').text() <= 90){
                     $(element).show();
                 }
                 else{
@@ -118,7 +109,7 @@
             })
         }else{
             $('.search-single-movie').each(function(index, element){
-                if ($(element).attr('runTime') >= 90){
+                if ($(element).children('.search-single-movie-runTime').text() >= 90){
                     $(element).show();
                 }
                 else{
